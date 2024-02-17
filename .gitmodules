@@ -1,0 +1,3 @@
+[submodule "sdk/anymal-research-software"]
+	path = sdk/anymal-research-software
+	url = https://code.anymal.com/anymal-research-software/anymal-research-software.git
