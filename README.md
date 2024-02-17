@@ -6,7 +6,7 @@ anymal_docs_sdk
 ├── README.md
 ├── docker                         # docker files
 ├── docs                           # documents
-├── sdk/anymal-research-software   # 
+├── sdk/anymal-research-software   # anymal research software (only for whom has Anybotics account)
 ```
 
 ## Tutorial list 
