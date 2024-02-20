@@ -9,7 +9,14 @@ anymal_docs_sdk
 ├── sdk/anymal-research-software   # anymal research software (only for whom has Anybotics account)
 ```
 
+
 ## Tutorial list 
+### Development Pipeline
+1. Take the training courses
+2. Explore the usage of anymal software on the public operator PC
+3. Install the operator GUI using the [ANYMal installer](https://anymal-research.docs.anymal.com/user_manual/anymal_d100_operators_manual-workforce_app/release-24.02/html/Operators_Manual/Getting_started/Install_the_operator_GUI_using_the_ANYmal_Installer.htm)
+   - Choose an organization: **anymal-research-software** if you are a research customer (including UCL).
+
 ### Document
 1. Operator manual of Anymal-D: [pdf](docs/anymal_d_operators_manual.pdf) and [online document](https://anymal-research.docs.anymal.com/user_manual/anymal_d100_operators_manual-workforce_app/release-23.12/html/PlaceHolder-Topics/LaunchPage.htm).
 2. Cheat sheet of Anymal-D: [pdf](docs/anymal_d_cheat_sheet.pdf).
