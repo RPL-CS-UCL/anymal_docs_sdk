@@ -52,4 +52,5 @@ anymal_docs_sdk
     	 - [ArtPlanner](https://github.com/leggedrobotics/art_planner?tab=readme-ov-file#anymal-rough-terrain-planner): Sampling based path planning for ANYmal, based on 2.5D height maps using learned motion cost.
   
 ### ANYbotics Contact Person 
-1. [Global Research Community Manager -- Benjamin Mottis](bmottis@anybotics.com)
+1. [Global Research Community Manager -- Benjamin Mottis](mailto:bmottis@anybotics.com)
+
