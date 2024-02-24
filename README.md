@@ -9,13 +9,25 @@ anymal_docs_sdk
 ├── sdk/anymal-research-software   # anymal research software (only for whom has Anybotics account)
 ```
 
-
 ## Tutorial list 
+### Fast Search Document
+1. [Simple Record of Command](docs/simple_record_command.md)
+2. [Hardware Connection](docs/hardware_connection.md)
+
 ### Development Pipeline
 1. Take the training courses
 2. Explore the usage of anymal software on the public operator PC
-3. Install the operator GUI using the [ANYMal installer](https://anymal-research.docs.anymal.com/user_manual/anymal_d100_operators_manual-workforce_app/release-24.02/html/Operators_Manual/Getting_started/Install_the_operator_GUI_using_the_ANYmal_Installer.htm)
+3. Install the operator GUI using the [Anymal installer](https://anymal-research.docs.anymal.com/user_manual/anymal_d100_operators_manual-workforce_app/release-24.02/html/Operators_Manual/Getting_started/Install_the_operator_GUI_using_the_ANYmal_Installer.htm)
    - Choose an organization: **anymal-research-software** if you are a research customer (including UCL).
+   - [Link to updating the release](https://anymal-research.docs.anymal.com/user_manual/anymal_d100_operators_manual-workforce_app/release-23.12/html/Operators_Manual/Service_and_maintenance/Upgrade_the_software_and_firmware_of_the_Robot/Upgrade_the_Robot_software/Upgrade_to_a_new_release.htm):
+		```
+		sudo sh -c 'echo "deb [arch=amd64] https://packages-ros.anybotics.com/ros/release-24.02/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/any-ros.list' &&
+		sudo sh -c 'echo "deb [arch=amd64] https://packages.anybotics.com/anymal-research-software/release-24.02/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/anymal.list'
+		sudo apt update
+		sudo apt upgrade
+		sudo apt autoremove
+		sudo apt autoclean
+		```
 
 ### Document
 1. Operator manual of Anymal-D: [pdf](docs/anymal_d_operators_manual.pdf) and [online document](https://anymal-research.docs.anymal.com/user_manual/anymal_d100_operators_manual-workforce_app/release-23.12/html/PlaceHolder-Topics/LaunchPage.htm).
