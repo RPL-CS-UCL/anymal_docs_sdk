@@ -1,0 +1,67 @@
+reality_capture:
+  data_saving_path: "~/.ros/recap_data"             # Location to write the datasets on disk
+  image_topic: "/theta/image_raw"                   # 360 camera image topic name
+  map_topic: "/slam/global_map"                     # SLAM delivered point cloud
+  pose_topic: "/slam/pose"                          # SLAM tracked pose topic name
+  state_topic: "/reality_capture/state"             # Node state publisher topic
+  capture_rate: 2                                   # Default image capture rate [m]
+  high_resolution: true
+  ortho_scene_builder:
+    image_height: 701                               # Height of the resulting image [pixels]
+    image_width: 801                                # Width of the resulting image [pixels]
+    image_scale: 0.15                               # Scale factor - between 0.1 and 0.15 should be enough for most point clouds
+gui:
+  sensors:
+    reality_capture:
+      dialog_position:
+        x: 1.0
+        y: 0.3
+      label: Reality Capture
+      order: 5
+      type: reality_capture
+      display:
+        size: 120
+      clients:
+        save_recording:
+          service: /reality_capture/save_recording
+        toggle_recording:
+          service: /reality_capture/toggle_recording
+        set_capture_rate:
+          service: /reality_capture/set_capture_rate
+stack_launcher:
+  nodes:
+    reality_capture:
+      roslaunch:
+        name: reality_capture
+        node_type: reality_capture_node
+        output: screen
+        package: reality_capture
+        respawn: true
+    reality_capture_service:
+      roslaunch:
+        name: reality_capture_service
+        node_type: reality_capture_service
+        output: screen
+        package: reality_capture
+        respawn: true
+    mtp_driver:
+      roslaunch:
+        name: mtp_driver
+        node_type: mtp_driver_ros_node
+        output: screen
+        package: mtp_driver
+        respawn: true
+  stacks:
+    npc_drivers:
+      nodes:
+        mtp_driver:
+          enabled: true
+          name: mtp_driver
+    navigation:
+      nodes:
+        reality_capture:
+          enabled: true
+          name: reality_capture
+        reality_capture_service:
+          enabled: true
+          name: reality_capture_service

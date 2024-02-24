@@ -1,0 +1,245 @@
+gui:
+  toolbar_menu:
+    plugins:
+      rqt_gazebo_interface:
+        label: Simulation
+        location: menu_advanced
+        name: GazeboInterfacePlugin
+        object_name: GazeboInterface
+        order: 100
+joint_configurations:
+  abs_joint_position_error_tolerance: 0.005
+  gains:
+    HAA: &sim_gains
+      p: 2000.0
+      i: 2.0
+      d: 4.0
+    HFE: *sim_gains
+    KFE: *sim_gains
+launch:
+  feature_toggles:
+    data_synchronization: enabled
+    environment_config: default
+    environment_data_package: playground_data
+    inspection_payload: enabled
+    point_cloud_odometry: simulated
+    slam: simulated
+    state_estimation: simulated
+load_anymal_description:
+  custom_parameters:
+    gpu_lidar: true
+    simulate_depth_camera: true
+    simulate_lidar: true
+    simulate_thermal_camera: true
+    simulate_wide_angle_camera: true
+    simulate_zoom_camera: true
+    simulation: true
+localization_manager:
+  frame_connectors:
+    difference:
+      enabled: true
+      sim_world_connector:
+        broadcast_zero_init_tf: false
+        ext_frame_id_in: world
+        ext_frame_id_out: world
+        input_msg_type: 2
+        input_topic: /anymal/pose_in_sim_world
+        pose_in_odom_buffer_size: 0.5
+        remap_ext_frame_id: false
+        tracked_frame_id_in_ext: base
+      list:
+        - sim_world_connector
+motion_control_manager:
+  controller:
+    simulation: true
+operational_mode_manager:
+  perception_sensors_silent_start: true
+path_planning_and_following:
+  simulation: true
+pdb_driver:
+  battery_simulator:
+    charging_rate_per_time_step: 0.1
+    charging_threshold: 1.0
+    discharging_rate_per_time_step: 0.0
+    initial_state_of_charge: 1.0
+  compatibility_simulator:
+    compatibility: 0
+    drv_major: 0
+    drv_minor: 0
+    drv_patch: 0
+    fw_major: 0
+    fw_minor: 0
+    fw_patch: 0
+  docking_checker:
+    docking_port_frame_id: docking_station__docking_port_link
+    docking_socket_frame_id: docking_socket
+    max_docking_distance: 0.1
+    max_transform_age: 2.0
+  initial_state_of_operation: true
+  pdb_version:
+    firmware: f8eeab055f4c51a3c8997c277d40d559ec0e6cca
+    hardware: "2.7"
+  servers:
+    request_data:
+      service: /pdb/request_data
+    set_battery_state:
+      service: set_battery_state
+    set_differential_pressure:
+      service: set_differential_pressure
+    set_emergency_stop:
+      service: set_emergency_stop
+    set_operation_state:
+      service: set_operation_state
+    set_status_light:
+      service: set_status_light
+    set_power_line:
+      service: set_power_line
+  time_step: 0.1
+rqt_motion_control:
+  simulation: true
+sentry_relay:
+  relay_host: "localhost"
+  smartly_toggle_uploading: false
+stack_launcher:
+  nodes:
+    depth_camera_front_lower_depth_image_to_point_cloud:
+      roslaunch:
+        camera_info:
+            from: /depth_camera_front_lower/depth/camera_info
+            to: /depth_camera_front_lower/color/camera_info
+        remap_args:
+          image_rect:
+            from: image_rect
+            to: /depth_camera_front_lower/aligned_depth_to_color/image_raw
+    depth_camera_front_upper_depth_image_to_point_cloud:
+      roslaunch:
+        camera_info:
+            from: /depth_camera_front_upper/depth/camera_info
+            to: /depth_camera_front_upper/color/camera_info
+        remap_args:
+          image_rect:
+            from: image_rect
+            to: /depth_camera_front_upper/aligned_depth_to_color/image_raw
+    depth_camera_left_depth_image_to_point_cloud:
+      roslaunch:
+        remap_args:
+          camera_info:
+            from: /depth_camera_left/depth/camera_info
+            to: /depth_camera_left/color/camera_info
+          image_rect:
+            from: image_rect
+            to: /depth_camera_left/aligned_depth_to_color/image_raw
+    depth_camera_rear_lower_depth_image_to_point_cloud:
+      roslaunch:
+        remap_args:
+          camera_info:
+            from: /depth_camera_rear_lower/depth/camera_info
+            to: /depth_camera_rear_lower/color/camera_info
+          image_rect:
+            from: image_rect
+            to: /depth_camera_rear_lower/aligned_depth_to_color/image_raw
+    depth_camera_rear_upper_depth_image_to_point_cloud:
+      roslaunch:
+        remap_args:
+          camera_info:
+            from: /depth_camera_rear_upper/depth/camera_info
+            to: /depth_camera_rear_upper/color/camera_info
+          image_rect:
+            from: image_rect
+            to: /depth_camera_rear_upper/aligned_depth_to_color/image_raw
+    depth_camera_right_depth_image_to_point_cloud:
+      roslaunch:
+        remap_args:
+          camera_info:
+            from: /depth_camera_right/depth/camera_info
+            to: /depth_camera_right/color/camera_info
+          image_rect:
+            from: image_rect
+            to: /depth_camera_right/aligned_depth_to_color/image_raw
+    simulated_depth_camera_$side$_driver:
+      __replacements__: &simulated_depth_angle_camera_position_replacements
+        - $side$: front_lower
+        - $side$: front_upper
+        - $side$: rear_lower
+        - $side$: rear_upper
+        - $side$: left
+        - $side$: right
+      preprocessed_params:
+        behavior:
+          key: /depth_camera_$side$/driver/behavior
+          value: 'nominal'
+      roslaunch:
+        name: driver
+        namespace: depth_camera_$side$
+        node_type: mock_sensor_driver
+        output: screen
+        package: sensor_supervisor
+        respawn: true
+    simulated_lidar_driver: # This contains both lidar and lidar time sync drivers.
+      preprocessed_params:
+        behavior:
+          key: /lidar_nodelet_driver/behavior
+          value: "nominal"
+        lidar_time_sync_node_name:
+          key: /lidar_nodelet_driver/lidar_time_sync_name
+          value: "/lidar_time_synchronizer"
+      roslaunch:
+        name: lidar_nodelet_driver
+        node_type: mock_sensor_driver
+        output: screen
+        package: sensor_supervisor
+        respawn: true
+    simulated_wide_angle_camera_$side$_driver:
+      __replacements__: &simulated_wide_angle_camera_position_replacements
+        - $side$: front
+        - $side$: rear
+      preprocessed_params:
+        behavior:
+          key: /wide_angle_camera_$side$/spinnaker_camera_nodelet/behavior
+          value: 'nominal'
+      roslaunch:
+        name: spinnaker_camera_nodelet
+        namespace: wide_angle_camera_$side$
+        node_type: mock_sensor_driver
+        output: screen
+        package: sensor_supervisor
+        respawn: true
+  stacks:
+    simulated_npc_drivers:
+      nodes:
+        simulated_lidar_driver:
+          enabled: true
+          name: simulated_lidar_driver
+        simulated_wide_angle_camera_$side$_driver:
+          __replacements__: *simulated_wide_angle_camera_position_replacements
+          enabled: true
+          name: simulated_wide_angle_camera_$side$_driver
+        simulated_depth_camera_$side$_driver:
+          __replacements__: *simulated_depth_angle_camera_position_replacements
+          enabled: true
+          name: simulated_depth_camera_$side$_driver
+    sim:
+      stacks:
+        simulated_npc_drivers:
+          enabled: true
+          name: simulated_npc_drivers
+state_estimator:
+  simulation: true
+  tsif:
+    angular_variance_threshold: 0.00015
+system_behavior_plugins:
+  start_up:
+    simulation: true
+use_sim_time: true
+user_interaction_mode_manager:
+  communication_relay_profiles:
+    direct_control:
+      services:
+        anymal_low_level_controller_execute_task:
+          enabled: false
+        set_fan_speed:
+          enabled: false
+    direct_control_rcu:
+      services:
+        anymal_low_level_controller_execute_task:
+          enabled: false

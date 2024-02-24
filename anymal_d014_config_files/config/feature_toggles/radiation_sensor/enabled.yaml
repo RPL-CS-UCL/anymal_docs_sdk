@@ -1,0 +1,149 @@
+radiation_sensor_driver:
+  sensor_topic: state
+  publish_rate: 10
+  serial_port: /dev/ttyUSB0
+  serial_speed: 115200
+environment:
+  object_types:
+    navigation_goal:
+      interactions:
+        11_measure_radiation_concentration:
+          label: Measure Radiation Concentration
+          auto_control_required: true
+          state_name:
+            postfix: ""
+            prefix: MeasureRadiationConcentration
+          state_settings:
+            - name: inspection_modality
+              type: InspectionModality
+              value: "Radiation"
+            - name: navigation_goal
+              type: NavigationGoal
+              value: <object_name>
+          state_type: radiation_inspection_behavior_plugins::InspectAreaFromPose
+radiation_measurement_aggregator: # Cannot be ordered alphabetically because the YAML reference needs to be defined first.
+  actions:
+    measure_concentration: measure_concentration
+  grid:
+    cell_size: 0.5
+    offset:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  aggregation:
+    duration_for_full_confidence: 10.0
+    max_duration_to_aggregate: 60.0
+    interpretation:
+      notification_concentration_threshold: 6.0
+      high_concentration_threshold: 6.0
+      mid_concentration_threshold: 5.0
+      high_confidence_threshold: 0.75
+    unit: mA
+  subscribers:
+    measurement:
+      publish_rate: 2.0
+      queue_size: 3
+      topic: /radiation/state
+  visualization:
+    scale: 0.2
+    thresholds:
+      alpha:
+        max: 1.0
+        min: 0.2
+gui:
+  sensors:
+    radiation:
+      dialog_position:
+        x: 1.0
+        y: 0.3
+      label: Radiation
+      order: 5
+      type: radiation_sensor
+      display:
+        size: 120
+interaction_marker:
+  plugin_setup:
+    plugins:
+      70_measure_radiation_concentration:
+        parameters:
+          auto_control_required: true
+          entry_text: Measure Radiation Concentration
+          environment_object_template:
+            label: Goal
+            name: InteractiveMarkerNavigationGoal
+            pose:
+              tolerance:
+                rotation: 0.16
+                translation: 0.1
+            type: navigation_goal
+          pose_frame_id: map
+          state:
+            name:
+              postfix: ""
+              prefix: MeasureRadiationConcentration
+            settings:
+              - parameter_name: inspection_modality
+                parameter_type: InspectionModality
+                parameter_value: "Radiation"
+              - parameter_name: navigation_goal
+                parameter_type: NavigationGoal
+            type: radiation_inspection_behavior_plugins::InspectAreaFromPose
+        type: interaction_marker_plugin_mission::InteractionMarkerPluginMission
+rqt_state_machine_editor:
+  behavior_plugins:
+    radiation_inspection_behavior_plugins:
+      namespace: radiation_inspection_behavior_plugins
+rqt_task_execution:
+  advanced_tasks:
+    list:
+      80_measure_radiation_concentration_from_here:
+        label: Measure Radiation Concentration From Here
+        state:
+          name:
+            postfix: FromHere
+            prefix: MeasureRadiationConcentration
+          settings:
+            - name: inspection_modality
+              type: InspectionModality
+              value: "Radiation"
+          type: radiation_inspection_behavior_plugins::InspectAreaFromHere
+      81_measure_radiation_concentration:
+        label: Measure Radiation Concentration
+        state:
+          name:
+            postfix: ""
+            prefix: MeasureRadiationConcentration
+          settings:
+            - name: inspection_modality
+              type: InspectionModality
+              value: "Radiation"
+            - name: navigation_goal
+              type: NavigationGoal
+              value: <navigation_goal>
+          type: radiation_inspection_behavior_plugins::InspectAreaFromPose
+stack_launcher:
+  nodes:
+    radiation_measurement_aggregator:
+      roslaunch:
+        name: radiation_measurement_aggregator
+        node_type: radiation_measurement_aggregator_ros_node
+        output: screen
+        package: radiation_measurement_aggregator_ros
+        respawn: true
+    radiation_serial_ros:
+      roslaunch:
+        name: radiation
+        node_type: radiation_serial_ros_node
+        output: screen
+        package: radiation_serial_ros
+  stacks:
+    navigation:
+      nodes:
+        radiation_measurement_aggregator:
+          enabled: true
+          name: radiation_measurement_aggregator
+    npc_drivers:
+      nodes:
+        radiation_serial_ros:
+          enabled: true
+          name: radiation_serial_ros

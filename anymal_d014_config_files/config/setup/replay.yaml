@@ -1,0 +1,34 @@
+gui:
+  control_lease:
+    model: fixed
+stack_launcher:
+  nodes:
+    rqt_console:
+      roslaunch:
+        name: rqt_console
+        node_type: rqt_console
+        package: rqt_console
+        remap_args:
+          rosout:
+            from: /rosout_agg_lite
+            to: rosout_agg
+        respawn: true
+  stacks:
+    replay:
+      nodes:
+        environment_loader:
+          enabled: true
+          name: environment_loader
+        environment_visualizer:
+          enabled: true
+          name: environment_visualizer
+        rqt_console:
+          enabled: true
+          name: rqt_console
+        rviz_world_loader:
+          enabled: true
+          name: rviz_world_loader
+      stacks:
+        user_interface:
+          enabled: true
+          name: user_interface

@@ -1,0 +1,37 @@
+robot_behavior_plugins:
+  robot_behavior:
+    enable_battery_emergency_behavior: false
+    enable_sensor_notifications: true
+    enable_sensor_reactions: true
+    enable_sensor_soft_reactions: true
+sensor_notification_behavior_plugins:
+  supervise_battery_cell_health:
+    component_id: /pdb_driver
+  supervise_battery_combined_temperature:
+    component_id: /pdb_driver
+  supervise_battery_current:
+    component_id: /pdb_driver
+  supervise_battery_humidity:
+    component_id: /pdb_driver
+  supervise_battery_perm_fail:
+    component_id: /pdb_driver
+  supervise_battery_pressure:
+    component_id: /pdb_driver
+  supervise_battery_temperature:
+    component_id: /pdb_driver
+  supervise_body_temp:
+    component_id: /pdb_driver
+  supervise_customer_12v:
+    component_id: /pdb_driver
+  supervise_customer_48v:
+    component_id: /pdb_driver
+  supervise_fan_speed:
+    component_id: /pdb_driver
+  supervise_main_body_humidity:
+    component_id: /pdb_driver
+  supervise_main_body_pressure:
+    component_id: /pdb_driver
+  supervise_robot_sensors:
+    component_id: /pdb_driver
+  supervise_no_battery_state_messages:
+    component_id: /pdb_driver

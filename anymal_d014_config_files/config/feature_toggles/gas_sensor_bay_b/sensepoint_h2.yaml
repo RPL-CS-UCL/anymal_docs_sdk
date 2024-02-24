@@ -1,0 +1,170 @@
+yoctopuce: # May become 'gas_sensor_driver'
+  topic_base: sensor
+  publish_rate: &yoctopuce_publish_rate 2.0
+  sensors:
+    bay_b:
+      name: H2
+      display_name: &display_name "Toxic (H2) (Bay B)"
+      action_server_topic: "/toxic_gas_h2_measurement_aggregator/measure_concentration"
+      range:
+        min: 0.0
+        max: 1000.0
+      unit: ppm
+      conversion: linear
+environment:
+  object_types:
+    navigation_goal:
+      interactions:
+        12_measure_toxic_gas_concentration_h2:
+          label: Measure Toxic Gas Concentration (H2)
+          auto_control_required: true
+          state_name:
+            postfix: ""
+            prefix: MeasureGasConcentration
+          state_settings:
+            - name: inspection_modality
+              type: InspectionModality
+              value: *display_name
+            - name: navigation_goal
+              type: NavigationGoal
+              value: <object_name>
+          state_type: gas_inspection_behavior_plugins::InspectAreaFromPose
+toxic_gas_h2_measurement_aggregator: # Cannot be ordered alphabetically because the YAML reference needs to be defined first.
+  actions:
+    measure_concentration: measure_concentration
+  grid:
+    cell_size: 0.5
+    offset:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  aggregation:
+    duration_for_full_confidence: 10.0
+    max_duration_to_aggregate: 60.0
+    interpretation:
+      notification_concentration_threshold: 60.0
+      high_concentration_threshold: 60.0
+      mid_concentration_threshold: 30.0
+      high_confidence_threshold: 0.75
+    unit: ppm
+  sensor_name: *display_name
+  subscribers:
+    measurement:
+      publish_rate: *yoctopuce_publish_rate
+      queue_size: 3
+      topic: /yoctopuce/sensor1
+  visualization:
+    marker_server_base_namespace: "yoctopuce_bay_b_sensor"
+    scale: 0.2
+    thresholds:
+      alpha:
+        max: 1.0
+        min: 0.2
+gui:
+  sensors:
+    gas:
+      dialog_position:
+        x: 1.0
+        y: 0.3
+      label: Gas
+      order: 5
+      type: gas_sensor
+      display:
+        size: 120
+interaction_marker:
+  plugin_setup:
+    plugins:
+      71_measure_toxic_gas_concentration_h2:
+        parameters:
+          auto_control_required: true
+          entry_text: Measure Toxic Gas Concentration (H2)
+          environment_object_template:
+            label: Goal
+            name: InteractiveMarkerNavigationGoal
+            pose:
+              tolerance:
+                rotation: 0.16
+                translation: 0.1
+            type: navigation_goal
+          pose_frame_id: map
+          state:
+            name:
+              postfix: ""
+              prefix: MeasureToxicGasConcentrationH2
+            settings:
+              - parameter_name: inspection_modality
+                parameter_type: InspectionModality
+                parameter_value: *display_name
+              - parameter_name: navigation_goal
+                parameter_type: NavigationGoal
+            type: gas_inspection_behavior_plugins::InspectAreaFromPose
+        type: interaction_marker_plugin_mission::InteractionMarkerPluginMission
+rqt_state_machine_editor:
+  behavior_plugins:
+    gas_inspection_behavior_plugins:
+      namespace: gas_inspection_behavior_plugins
+rqt_task_execution:
+  advanced_tasks:
+    list:
+      82_measure_toxic_gas_concentration_h2_from_here:
+        label: Measure Toxic Gas Concentration (H2) From Here
+        state:
+          name:
+            postfix: FromHere
+            prefix: MeasureToxicGasConcentrationH2
+          settings:
+            - name: inspection_modality
+              type: InspectionModality
+              value: *display_name
+          type: gas_inspection_behavior_plugins::InspectAreaFromHere
+      83_measure_toxic_gas_concentration_h2:
+        label: Measure Toxic Gas Concentration (H2)
+        state:
+          name:
+            postfix: ""
+            prefix: MeasureToxicGasConcentrationH2
+          settings:
+            - name: inspection_modality
+              type: InspectionModality
+              value: *display_name
+            - name: navigation_goal
+              type: NavigationGoal
+              value: <navigation_goal>
+          type: gas_inspection_behavior_plugins::InspectAreaFromPose
+stack_launcher:
+  nodes:
+    toxic_gas_h2_measurement_aggregator:
+      roslaunch:
+        name: toxic_gas_h2_measurement_aggregator
+        node_type: gas_measurement_aggregator_ros_node
+        output: screen
+        package: gas_measurement_aggregator_ros
+        respawn: true
+    yoctopuce_ros:
+      roslaunch:
+        name: yoctopuce
+        node_type: yoctopuce_ros_node
+        output: screen
+        package: yoctopuce_ros
+    yoctopuce_sim:
+      roslaunch:
+        name: yoctopuce
+        node_type: yoctopuce_sim_node
+        output: screen
+        package: yoctopuce_sim
+  stacks:
+    navigation:
+      nodes:
+        toxic_gas_h2_measurement_aggregator:
+          enabled: true
+          name: toxic_gas_h2_measurement_aggregator
+    npc_drivers:
+      nodes:
+        yoctopuce_ros:
+          enabled: true
+          name: yoctopuce_ros
+    simulation_environment:
+      nodes:
+        yoctopuce_sim:
+          enabled: true
+          name: yoctopuce_sim

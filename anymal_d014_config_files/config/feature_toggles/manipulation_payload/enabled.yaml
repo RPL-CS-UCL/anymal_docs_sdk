@@ -1,0 +1,885 @@
+adroit_control:
+  fake_execution: false
+  robot_name: hdt_arm
+anymal_record:
+  recording_presets:
+    manipulation:
+      record_args:
+        lz4: ""
+      topic_groups:
+        imu: true
+        manipulation_camera: true
+        parameters: true
+        rosout: true
+        tf: true
+  topic_groups:
+    manipulation_camera:
+      - "/depth_camera_pincer/camera_timestamping_info"
+      - "/depth_camera_pincer/color/camera_info"
+      - "/depth_camera_pincer/color/image_raw"
+      - "/depth_camera_pincer/depth/camera_info"
+      - "/depth_camera_pincer/depth/color/points"
+      - "/depth_camera_pincer/depth/image_rect_raw"
+      - "/depth_camera_pincer/infra1/camera_info"
+      - "/depth_camera_pincer/infra1/image_rect_raw"
+      - "/depth_camera_pincer/infra2/camera_info"
+      - "/depth_camera_pincer/infra2/image_rect_raw"
+      - "/depth_camera_pincer/interface_status"
+arm_state_publisher:
+  publish_frequency: 20.0
+  use_tf_static: true
+# change drive set being controlled
+# ds4 controller PS button, button[10]
+# xbox controller Xbox butt, button[8]
+button_map/change_drive_set: {axisA: 8, input: 'buttons', invert: false}
+# toggle between 100% and 20% command velocity
+# ds4 controller share button, button[8]
+# xbox controller back button, button[6]
+button_map/change_speed: {axisA: 6, input: 'buttons', invert: false}
+# toggle collision avoidance on/off
+# ds4 controller options button, button[9]
+# xbox controller start button, button[7]
+button_map/collision_enable: {axisA: 7, input: 'buttons', invert: false}
+# settings used in C++ control program that implements end-point control
+# toggle between joint by joint and end point control
+# ds4 controller square button, button[3]
+# xbox controll X button, button [2]
+button_map/control_mode: {axisA: 2, input: 'buttons', invert: false}
+# cycle through pose list
+# ds4 controller triangle button, button[2]
+# xbox controller Y button, button [3]
+button_map/cycle_control: {axisA: 3, input: 'buttons', invert: false}
+# start joystick control
+# ds4 controller square button, button[3]
+# xbox controll X button, button [2]
+button_map/joystick_control: {axisA: 2, input: 'buttons', invert: false}
+# enable mirrored control of arms?
+# ds4 controller circle button, button[1]
+# xbox controller B button, button [1]
+button_map/mirror_mode: {axisA: 1, input: 'buttons', invert: false}
+# cycle through named poses
+# ds4 controller circle button, button[1]
+# xbox controller B button, button[1]
+button_map/named_cycle: {axisA: 1, input: 'buttons', invert: false}
+# cycle through pose list
+# ds4 controller triangle button, button[2]
+# xbox controller Y button, button[3]
+button_map/named_execute: {axisA: 3, input: 'buttons', invert: false}
+# settings used in python control scripts
+# stop sending commands to drives
+# ds4 controller cross button, button[0]
+# xbox controller A button, button[0]
+button_map/stop_control: {axisA: 0, input: 'buttons', invert: false}
+# all drives go to zero
+# ds4 controller options button, button[9]
+# xbox controll start button, button[7]
+button_map/zero_position: {axisA: 7, input: 'buttons', invert: false}
+depth_camera_template: &depth_camera_minimal_template # We copy the template here to be able to re-use it in this file.
+  driver: &depth_camera_driver_template
+    align_depth: true
+    depth_fps: 15
+    depth_height: 480
+    depth_width: 848
+    device_connection_timeout: 60
+    enable_depth: true
+    enable_infra1: true
+    enable_infra2: true
+    enable_pointcloud: true
+    enable_sync: true
+    filters: pointcloud
+    fixed_time_offset: 0.0
+    frame_id_prefix: depth_camera_template_
+    infra_fps: 15
+    infra_height: 480
+    infra_width: 848
+    initial_reset: false
+    json_file_path: ""
+    pointcloud_texture_stream: RS2_STREAM_ANY
+    reset_device_startup: false
+    reset_sleep_time: 3.0
+    serial_no: "841512070588"
+    timestamping_method: varying_offsets
+  imager_rate: 2.0
+  stereo_module:
+    inter_cam_sync_mode: 0
+depth_camera_pincer:
+  <<: *depth_camera_minimal_template
+  driver:
+    <<: *depth_camera_driver_template
+    enable_color: true
+    frame_id_prefix: depth_camera_pincer_
+    pointcloud_texture_stream: RS2_STREAM_COLOR
+depth_camera_relay_template: &depth_camera_relay_template
+  args: 'input_topic input_topic_relay'
+  name: depth_camera_relay
+  namespace: depth_camera
+  node_type: relay
+  output: screen
+  package: topic_tools
+environment:
+  object_types:
+    manipulable_item:
+      interactions:
+        01_manipulate_item:
+          auto_control_required: true
+          label: Manipulate
+          state_name:
+            postfix: ""
+            prefix: ""
+          state_settings:
+            []
+          state_type: ""
+      name: manipulable_item
+      visualization:
+        color:
+          blue: 0.078125
+          green: 0.4296875
+          red: 0.078125
+        mesh: package://environment_visualizer/meshes/navigation_goals/via_point.dae
+fiducial_detector:
+  apriltag_detector_ros:
+    camera_frame: 'depth_camera_pincer_infra1_optical_frame'
+    max_hamming_dist: 2
+    publish_tag_detections_image: true
+    publish_tf: true
+    standalone_tags: [{id: 10, name: "elevator_button_raw", size: 0.025}]
+    tag_blur: 0.0 #TODO(FGG): tags and bundles should be removed and added into an environment file
+    # Tag bundle is used to provide a coordinate frame with respect to an apriltag detection.
+    tag_bundles: [
+      {layout: [{id: 0, size: 0.05, x: 0, y: 0.11, z: -0.08}], name: 'button_e_stop_raw'}, 
+      {layout: [{id: 1, qw: 0.7071068, qx: 0, qy: 0, qz: 0.7071068, size: 0.05, x: -0.095, y: 0.0, z: -0.113}], name: 'lever_valve_pipe_raw'},
+      {layout: [{id: 2, qw: 0.0, qx: 0, qy: -0.7071068, qz: -0.7071068, size: 0.05, x: 0, y: -0.052, z: 0.105}], name: 'lever_valve_raw'},
+      {layout: [{id: 3, qw: 0.5, qx: -0.5, qy: 0.5, qz: 0.5, size: 0.05, x: -0.05, y: -0.082, z: -0.035}], name: 'lever_valve_bluehandle_raw'},
+      {layout: [{id: 6, size: 0.05, x: 0, y: 0.11, z: -0.08}], name: 'bottle_holder_side_raw'},
+      {layout: [{id: 7, qw: 0.7071068, qx: 0, qy: 0, qz: 0.7071068, size: 0.05, x: -0.095, y: 0.0, z: -0.113}], name: 'bottle_holder_top_raw'},
+      {layout: [{id: 8, qw: 0.5, qx: 0.5, qy: -0.5, qz: -0.5, size: 0.05, x: -0.105, y: 0.0, z: 0.1}], name: 'aira_valve_raw'},
+      {layout: [{id: 9, qw: 0.5, qx: 0.5, qy: -0.5, qz: -0.5, size: 0.05, x: 0.05, y: 0.125, z: 0.0}], name: 'bottle_holder_start_raw'},
+      {layout: [{id: 10, qw: 0.5, qx: 0.5, qy: -0.5, qz: -0.5, size: 0.05, x: 0.05, y: 0.125, z: 0.0}], name: 'bottle_holder_valve_raw'}]
+    tag_debug: 0
+    tag_decimate: 1.0
+    tag_family: 'tagStandard41h12'
+    tag_refine_edges: 1
+    tag_threads: 2
+    transport_hint: "raw"
+generic_joystick:
+  controller_prefix: hdt_arm
+  planner_type: PTP
+  status_message_frame: base_link
+  trajectory_adjustment_timesteps: 0
+  use_spacemouse: false
+hdt_arm:
+  arm_controller:
+    constraints:
+      goal_time: 5.0
+      joint1:
+        goal: 0.0873
+        trajectory: 0.2618
+      joint2:
+        goal: 0.0873
+        trajectory: 0.2618
+      joint3:
+        goal: 0.0873
+        trajectory: 0.2618
+      joint4:
+        goal: 0.0873
+        trajectory: 0.2618
+      joint5:
+        goal: 0.0873
+        trajectory: 0.2618
+      joint6:
+        goal: 0.0873
+        trajectory: 0.2618
+    joints:
+      - joint1
+      - joint2
+      - joint3
+      - joint4
+      - joint5
+      - joint6
+    state_publish_rate: 20
+    type: position_controllers/JointTrajectoryController
+  hardware_interface:
+    joint1:
+      addr: 1
+      inertia: 0.1
+      kmax: 200.0
+      kmin: 100.0
+    joint2:
+      addr: 2
+      inertia: 0.1
+      kmax: 200.0
+      kmin: 100.0
+    joint3:
+      addr: 3
+      inertia: 0.1
+      kmax: 200.0
+      kmin: 100.0
+    joint4:
+      addr: 4
+      inertia: 0.1
+      kmax: 200.0
+      kmin: 100.0
+    joint5:
+      addr: 5
+      inertia: 0.1
+      kmax: 200.0
+      kmin: 100.0
+    joint6:
+      addr: 6
+      inertia: 0.1
+      kmax: 200.0
+      kmin: 100.0
+    joint_pincer:
+      addr: 10
+      inertia: 0.1
+      kmax: 200.0
+      kmin: 100.0
+    joints:
+      - joint1
+      - joint2
+      - joint3
+      - joint4
+      - joint5
+      - joint6
+      - joint_pincer
+    loop_hz: 20
+  joint1_position_controller:
+    joint: joint1
+    type: position_controllers/JointPositionController
+  joint2_position_controller:
+    joint: joint2
+    type: position_controllers/JointPositionController
+  joint3_position_controller:
+    joint: joint3
+    type: position_controllers/JointPositionController
+  joint4_position_controller:
+    joint: joint4
+    type: position_controllers/JointPositionController
+  joint5_position_controller:
+    joint: joint5
+    type: position_controllers/JointPositionController
+  joint6_position_controller:
+    joint: joint6
+    type: position_controllers/JointPositionController
+  joint_pincer_position_controller:
+    joint: joint_pincer
+    type: position_controllers/JointPositionController
+  joint_state_controller:
+    publish_rate: 20
+    type: joint_state_controller/JointStateController
+  pincer_controller:
+    constraints:
+      goal_time: 5.0
+    joints:
+      - joint_pincer
+    state_publish_rate: 20
+    type: position_controllers/JointTrajectoryController
+# define colors to use for joystick feedback, displayed in Rviz
+# format as MODE_NAME: [alpha, red, blue, green]
+joystick_feedback_colors:
+  # pink
+  MODE_DOOR_OPENING: [1.0, 102 / 255.0, 142 / 255.0, 87 / 255.0]
+  # dark blue
+  MODE_ENDPOINT: [1.0, 0.094, 0.663, 0.353]
+  # dark pink
+  MODE_ENDPOINT_EE: [1.0, 0.705, 0.580, 0.255]
+  # dark green
+  MODE_JOINT_POSITION: [1.0, 0.000, 0.282, 0.549]
+  # dark brown, too close to red
+  #MODE_JOINT_VELOCITY: [1.0, 0.635, 0.129, 0.113]
+  # light brown
+  #MODE_JOINT_VELOCITY: [1.0, 0.867, 0.663, 0.725]
+  # dark purple
+  MODE_JOINT_VELOCITY: [1.0, 0.400, 0.569, 0.173]
+  # dark orange
+  MODE_NAMED: [1.0, 0.957, 0.137, 0.490]
+  # light black
+  #MODE_NONE: [1.0, 0.8, 0.8, 0.8]
+  # medium black
+  MODE_NONE: [1.0, 0.451, 0.451, 0.451]
+  # dark red - used for lost communication and highlighting collisions
+  MODE_RESET: [1.0, 0.933, 0.184, 0.180]
+joystick_map/joint1: {axisA: 0, input: 'axes', invert: true}
+joystick_map/joint2: {axisA: 1, input: 'axes', invert: true}
+joystick_map/joint3: {axisA: 3, input: 'axes', invert: true}
+joystick_map/joint4: {axisA: 4, input: 'axes', invert: false}
+joystick_map/joint5: {axisA: 6, input: 'axes', invert: false}
+joystick_map/joint6: {axisA: 7, input: 'axes', invert: true}
+joystick_map/joint_pincer: {axisA: 2, axisB: 5, input: 'axes', invert: false}
+launch:
+  setup:
+    # these parameters overlay the params for the real setup (default one)
+    sim:
+      fiducial_detector:
+        apriltag_detector_ros:
+          camera_frame: 'depth_camera_pincer_depth_optical_frame'
+      joint_effort_pid: # Not directly read by any node, but greatly simplifies this file.
+        high_inertia_joints: &highInertiaPIDGains {d: 5.0, i: 0.0, p: 500.0}
+        low_inertia_joints: &lowInertiaPIDGains {d: 0.1, i: 0.0, p: 100.0}
+      gazebo_ros_control:
+        pid_gains:
+          # the following gains are used by the gazebo_mimic_joint plugin
+          pincerfinger_jointleft:
+            <<: *lowInertiaPIDGains
+            publish_state: true
+          pincerfinger_jointright:
+            <<: *lowInertiaPIDGains
+            publish_state: true
+      hdt_arm:
+        arm_controller:
+          constraints:
+            stopped_velocity_tolerance: 0.1 # Not very realistic, but required due to the noisy velocity in Gazebo.
+          gains: # Required because we're controlling an effort interface
+            joint1: *highInertiaPIDGains
+            joint2: *highInertiaPIDGains
+            joint3: *highInertiaPIDGains
+            joint4: *lowInertiaPIDGains
+            joint5: *lowInertiaPIDGains
+            joint6: *lowInertiaPIDGains
+          joints:
+            - joint1
+            - joint2
+            - joint3
+            - joint4
+            - joint5
+            - joint6
+          state_publish_rate: 400
+          type: effort_controllers/JointTrajectoryController
+        joint1_position_controller:
+          joint: joint1
+          pid: *highInertiaPIDGains
+          type: effort_controllers/JointPositionController
+        joint2_position_controller:
+          joint: joint2
+          pid: *highInertiaPIDGains
+          type: effort_controllers/JointPositionController
+        joint3_position_controller:
+          joint: joint3
+          pid: *highInertiaPIDGains
+          type: effort_controllers/JointPositionController
+        joint4_position_controller:
+          joint: joint4
+          pid: *lowInertiaPIDGains
+          type: effort_controllers/JointPositionController
+        joint5_position_controller:
+          joint: joint5
+          pid: *lowInertiaPIDGains
+          type: effort_controllers/JointPositionController
+        joint6_position_controller:
+          joint: joint6
+          pid: *lowInertiaPIDGains
+          type: effort_controllers/JointPositionController
+        joint_pincer_position_controller:
+          joint: joint_pincer
+          pid: *lowInertiaPIDGains
+          type: effort_controllers/JointPositionController
+        joint_state_controller:
+          publish_rate: 400
+          type: joint_state_controller/JointStateController
+        pincer_controller:
+          gains: # Required because we're controlling an effort interface
+            joint_pincer: *lowInertiaPIDGains
+          joints:
+            - joint_pincer
+          state_publish_rate: 400
+          type: effort_controllers/JointTrajectoryController
+      move_group:
+        joint_state_controller:
+          publish_rate: 400
+load_anymal_description:
+  custom_parameters:
+    enable_manipulation_payload: true
+load_hdt_arm_description:
+  custom_parameters:
+    simulation: true
+  ros_parameter: robot_description
+load_semantic_hdt_arm_description:
+  custom_parameters:
+    simulation: true
+  ros_parameter: robot_description_semantic
+manipulation_behavior_plugins:
+  manipulate_object_from_here:
+    action_server: /manipulate
+  simple_action:
+    action_server: /manipulate
+manipulation_server:
+  manipulation_action_factory:
+    action_types:
+      close_aira_bottle: CloseBottleAction
+      close_gripper: CloseGripperAction
+      close_lever_valve: CloseLeverValveAction
+      go_to_ready: GoToReadyAction
+      go_to_stow: GoToStowAction
+      open_aira_bottle: OpenBottleAction
+      open_gripper: OpenGripperAction
+      open_lever_valve: OpenLeverValveAction
+      pick_bottle_from_stand: PickBottleFromStandAction
+      place_aira_bottle: PlaceBottleAction
+      place_bottle_in_stand: PlaceBottleInStandAction
+      push_valve: PushValveAction
+      remove_aira_bottle: RemoveBottleAction
+move_group:
+  allow_trajectory_execution: true
+  capabilities: ''
+  controller_list:
+    - action_ns: follow_joint_trajectory
+      default: true
+      joints:
+        - joint1
+        - joint2
+        - joint3
+        - joint4
+        - joint5
+        - joint6
+      name: hdt_arm/arm_controller
+      type: FollowJointTrajectory
+    - action_ns: follow_joint_trajectory
+      default: True
+      joints:
+        - joint_pincer
+      name: hdt_arm/pincer_controller
+      type: FollowJointTrajectory
+  default_planning_pipeline: ''
+  disable_capabilities: ''
+  generic_hw_control_loop:
+    cycle_time_error_threshold: 0.01
+    loop_hz: 300
+  hardware_interface:
+    joints:
+      - joint1
+      - joint2
+      - joint3
+      - joint4
+      - joint5
+      - joint6
+      - joint_pincer
+    sim_control_mode: 1
+  jiggle_fraction: 0.05
+  joint_state_controller:
+    publish_rate: 50
+    type: joint_state_controller/JointStateController
+  max_range: 5.0
+  max_safe_path_cost: 1
+  moveit_controller_manager: moveit_simple_controller_manager/MoveItSimpleControllerManager
+  moveit_manage_controllers: true
+  moveit_sim_hw_interface:
+    joint_model_group: arm
+    joint_model_group_pose: ready
+  octomap_resolution: 0.025
+  plan_execution:
+    max_replan_attempts: 5
+    record_trajectory_state_frequency: 0.0
+  planning_plugin: pilz_industrial_motion_planner::CommandPlanner
+  planning_scene_monitor:
+    publish_geometry_updates: true
+    publish_planning_scene: true
+    publish_planning_scene_hz: 4.0
+    publish_state_updates: true
+    publish_transforms_updates: true
+  request_adapters: ''
+  sense_for_plan:
+    discard_overlapping_cost_sources: 0.8
+    max_cost_sources: 100
+    max_look_attempts: 3
+    max_safe_path_cost: 0.01
+  sensors:
+    - {}
+  start_state_max_bounds_error: 0.1
+  trajectory_execution:
+    allowed_execution_duration_scaling: 1.2
+    allowed_goal_duration_margin: 0.5
+    allowed_start_tolerance: 0.01
+    execution_duration_monitoring: true
+    execution_velocity_scaling: 1.0
+    wait_for_trajectory_completion: true
+robot_description_kinematics:
+  arm:
+    kinematics_solver: trac_ik_kinematics_plugin/TRAC_IKKinematicsPlugin
+    kinematics_solver_timeout: 0.05
+    solve_type: Distance
+robot_description_planning:
+  cartesian_limits:
+    #TODO(FGG): Verify this with arm specs
+    max_rot_vel: 0.785
+    max_trans_acc: 3.0
+    max_trans_dec: -20.0
+    max_trans_vel: 0.3
+  # joint_limits.yaml allows the dynamics properties specified in the URDF to be overwritten or augmented as needed
+  # Specific joint properties can be changed with the keys [max_position, min_position, max_velocity, max_acceleration]
+  # Joint limits can be turned off with [has_velocity_limits, has_acceleration_limits]
+  joint_limits:
+    joint1:
+      has_acceleration_limits: true
+      has_velocity_limits: true
+      max_acceleration: 10.0
+      max_velocity: 0.785
+    joint2:
+      has_acceleration_limits: true
+      has_velocity_limits: true
+      max_acceleration: 10.0
+      max_velocity: 0.785
+    joint3:
+      has_acceleration_limits: true
+      has_velocity_limits: true
+      max_acceleration: 10.0
+      max_velocity: 0.785
+    joint4:
+      has_acceleration_limits: true
+      has_velocity_limits: true
+      max_acceleration: 10.0
+      max_velocity: 0.785
+    joint5:
+      has_acceleration_limits: true
+      has_velocity_limits: true
+      max_acceleration: 10.0
+      max_velocity: 0.785
+    joint6:
+      has_acceleration_limits: true
+      has_velocity_limits: true
+      max_acceleration: 10.0
+      max_velocity: 0.785
+    joint_pincer:
+      has_acceleration_limits: true
+      has_velocity_limits: true
+      max_acceleration: 10.0
+      max_velocity: 0.785
+    pincerfinger_jointleft:
+      has_acceleration_limits: true
+      has_velocity_limits: true
+      max_acceleration: 10.0
+      max_velocity: 0.785
+    pincerfinger_jointright:
+      has_acceleration_limits: true
+      has_velocity_limits: true
+      max_acceleration: 10.0
+      max_velocity: 0.785
+rqt_state_machine_editor:
+  behavior_plugins:
+    manipulation_behavior_plugins:
+      actions_namespace: /manipulation_server/manipulation_action_factory/action_types
+      namespace: manipulation_behavior_plugins
+serial_node:
+  udp_client_addr: 192.168.1.42
+  udp_client_port: 11511
+stack_launcher:
+  nodes:
+    adroit_control:
+      roslaunch:
+        name: adroit_control
+        node_type: adroit_control
+        output: screen
+        package: hdt_adroit_control
+        respawn: true
+    arm_state_publisher:
+      roslaunch:
+        name: arm_state_publisher
+        node_type: robot_state_publisher
+        output: screen
+        package: robot_state_publisher
+        respawn: true
+    controller_manager_load:
+      roslaunch:
+        args: load /hdt_arm/joint1_position_controller /hdt_arm/joint2_position_controller /hdt_arm/joint3_position_controller /hdt_arm/joint4_position_controller /hdt_arm/joint5_position_controller /hdt_arm/joint6_position_controller /hdt_arm/joint_pincer_position_controller
+        name: controller_manager_load
+        node_type: controller_manager
+        output: screen
+        package: controller_manager
+        respawn: false
+    controller_manager_spawn:
+      roslaunch:
+        args: spawn /hdt_arm/joint_state_controller /hdt_arm/arm_controller /hdt_arm/pincer_controller
+        name: controller_manager_spawn
+        node_type: controller_manager
+        output: screen
+        package: controller_manager
+        respawn: false
+    depth_camera_depth_aligned_to_color_to_depth_relay_sim_pincer:
+      roslaunch:
+        <<: *depth_camera_relay_template
+        args: 'aligned_depth_to_color/image_raw depth/image_rect_raw'
+        name: depth_camera_depth_aligned_to_color_to_depth_relay
+        namespace: depth_camera_pincer
+    depth_camera_depth_aligned_to_infra1_topic_relay_sim_pincer:
+      roslaunch:
+        <<: *depth_camera_relay_template
+        args: 'depth/image_rect_raw aligned_depth_to_infra1/image_raw'
+        name: depth_camera_depth_aligned_to_infra1_topic_relay_sim
+        namespace: depth_camera_pincer
+    depth_camera_infra1_compressed_topic_relay_sim_pincer:
+      roslaunch:
+        <<: *depth_camera_relay_template
+        args: 'color/image_raw/compressed infra1/image_rect_raw/compressed'
+        name: depth_camera_infra1_compressed_topic_relay_sim
+        namespace: depth_camera_pincer
+    depth_camera_infra1_info_topic_relay_sim_pincer:
+      roslaunch:
+        <<: *depth_camera_relay_template
+        args: 'color/camera_info infra1/camera_info'
+        name: depth_camera_infra1_info_topic_relay_sim
+        namespace: depth_camera_pincer
+    depth_camera_infra1_topic_relay_sim_pincer:
+      roslaunch:
+        <<: *depth_camera_relay_template
+        args: 'color/image_raw infra1/image_rect_raw'
+        name: depth_camera_infra1_topic_relay_sim
+        namespace: depth_camera_pincer
+    depth_camera_pincer_driver:
+      preprocessed_params:
+        json_file_path:
+          key: /depth_camera_pincer/driver/json_file_path
+          value: $(rospack find anymal_realsense)/config/medium_density_preset_projector_off.json
+      roslaunch:
+        # Todo (GZ): this is still the old driver
+        args: load any_realsense2_camera/RealSenseNodeFactory nodelet_manager
+        name: driver
+        namespace: depth_camera_pincer
+        node_type: nodelet
+        output: screen
+        package: nodelet
+        respawn: true
+    depth_camera_pincer_nodelet_manager:
+      roslaunch:
+        args: manager
+        name: nodelet_manager
+        namespace: depth_camera_pincer
+        node_type: nodelet
+        output: screen
+        package: nodelet
+        respawn: true
+    depth_image_camera_info_relay_sim_pincer:
+      roslaunch:
+        <<: *depth_camera_relay_template
+        args: 'aligned_depth_to_color/camera_info depth/camera_info'
+        name: depth_image_camera_info_relay_sim
+        namespace: depth_camera_pincer
+    fiducial_detector:
+      roslaunch:
+        name: apriltag_detector_ros
+        namespace: fiducial_detector
+        node_type: apriltag_ros_continuous_node
+        package: apriltag_ros
+        remap_args:
+          camera_info:
+            from: camera_info
+            to: /depth_camera_pincer/infra1/camera_info
+          image_rect:
+            from: image_rect
+            to: /depth_camera_pincer/infra1/image_rect_raw
+        respawn: true
+    generic_joystick:
+      roslaunch:
+        name: generic_joystick
+        node_type: generic_joystick2
+        output: screen
+        package: hdt_generic_joystick
+        remap_args:
+          guarded_joy:
+            from: /joy
+            to: /guarded_joy
+        respawn: true
+    load_hdt_arm_description:
+      finite: true
+      preprocessed_params:
+        xacro_file:
+          key: /load_hdt_arm_description/xacro_file
+          value: $(rospack find manipulator_6dof_description)/urdf/hdt_arm_standalone.urdf
+      roslaunch:
+        name: load_hdt_arm_description
+        node_type: parameterized_xacro.py
+        output: screen
+        package: parameterized_xacro
+    load_semantic_hdt_arm_description:
+      finite: true
+      preprocessed_params:
+        xacro_file:
+          key: /load_semantic_hdt_arm_description/xacro_file
+          value: $(rospack find manipulator_6dof_moveit)/config/hdt_arm.srdf
+      roslaunch:
+        name: load_semantic_hdt_arm_description
+        node_type: parameterized_xacro.py
+        output: screen
+        package: parameterized_xacro
+    manipulation_server:
+      roslaunch:
+        name: manipulation_server
+        node_type: manipulation_server_node
+        output: screen
+        package: manipulation_actions
+        respawn: true
+    move_group:
+      roslaunch:
+        name: move_group
+        node_type: move_group
+        output: screen
+        package: moveit_ros_move_group
+        respawn: true
+    rosserial_message_info:
+      roslaunch:
+        name: rosserial_message_info
+        node_type: message_info_service.py
+        output: screen
+        package: rosserial_python
+        respawn: true
+    serial_node:
+      roslaunch:
+        args: udp
+        name: serial_node
+        node_type: serial_node.py
+        output: screen
+        package: hdt_rosserial_python
+        respawn: true
+    tf_steady:
+      roslaunch:
+        name: tf_steady
+        node_type: tf_steady_ros_node
+        package: tf_steady_ros
+        respawn: true
+    trigger_guard:
+      roslaunch:
+        name: trigger_guard
+        node_type: trigger_guard
+        output: screen
+        package: hdt_generic_joystick
+        respawn: true
+    xbox_joystick:
+      roslaunch:
+        name: xbox_joystick
+        node_type: joy_node
+        package: joy
+  stacks:
+    lpc:
+      stacks:
+        manipulation_control:
+          enabled: true
+          name: manipulation_control
+        manipulation_lpc_drivers:
+          enabled: true
+          name: manipulation_lpc_drivers
+    manipulation_control:
+      nodes:
+        arm_state_publisher:
+          enabled: true
+          name: arm_state_publisher
+        controller_manager_load:
+          enabled: true
+          name: controller_manager_load
+        controller_manager_spawn:
+          enabled: true
+          name: controller_manager_spawn
+        generic_joystick:
+          enabled: true
+          name: generic_joystick
+        manipulation_server:
+          enabled: true
+          name: manipulation_server
+        move_group:
+          enabled: true
+          name: move_group
+    manipulation_lpc_drivers:
+      nodes:
+        adroit_control:
+          enabled: true
+          name: adroit_control
+        rosserial_message_info:
+          enabled: true
+          name: rosserial_message_info
+        serial_node:
+          enabled: true
+          name: serial_node
+    manipulation_npc_drivers:
+      nodes:
+        depth_camera_pincer_driver:
+          enabled: true
+          name: depth_camera_pincer_driver
+        depth_camera_pincer_nodelet_manager:
+          enabled: true
+          name: depth_camera_pincer_nodelet_manager
+    manipulation_perception:
+      nodes:
+        fiducial_detector:
+          enabled: true
+          name: fiducial_detector
+        tf_steady:
+          enabled: true
+          name: tf_steady
+    manipulation_sim:
+      nodes:
+        depth_camera_depth_aligned_to_color_to_depth_relay_sim_pincer:
+          enabled: true
+          name: depth_camera_depth_aligned_to_color_to_depth_relay_sim_pincer
+        depth_camera_depth_aligned_to_infra1_topic_relay_sim_pincer:
+          enabled: true
+          name: depth_camera_depth_aligned_to_infra1_topic_relay_sim_pincer
+        depth_camera_infra1_compressed_topic_relay_sim_pincer:
+          enabled: true
+          name: depth_camera_infra1_compressed_topic_relay_sim_pincer
+        depth_camera_infra1_info_topic_relay_sim_pincer:
+          enabled: true
+          name: depth_camera_infra1_info_topic_relay_sim_pincer
+        depth_camera_infra1_topic_relay_sim_pincer:
+          enabled: true
+          name: depth_camera_infra1_topic_relay_sim_pincer
+        depth_image_camera_info_relay_sim_pincer:
+          enabled: true
+          name: depth_image_camera_info_relay_sim_pincer
+    manipulation_user_interface: # TODO(FGG): add this to opc, and include second RViz?
+      nodes:
+        trigger_guard:
+          enabled: true
+          name: trigger_guard
+        xbox_joystick:
+          enabled: true
+          name: xbox_joystick
+    npc:
+      stacks:
+        manipulation_npc_drivers:
+          enabled: true
+          name: manipulation_npc_drivers
+        manipulation_perception:
+          enabled: true
+          name: manipulation_perception
+    post_process_config:
+      nodes:
+        load_hdt_arm_description:
+          enabled: true
+          name: load_hdt_arm_description
+        load_semantic_hdt_arm_description:
+          enabled: true
+          name: load_semantic_hdt_arm_description
+    sim:
+      stacks:
+        manipulation_control:
+          enabled: true
+          name: manipulation_control
+        manipulation_perception:
+          enabled: true
+          name: manipulation_perception
+        manipulation_sim:
+          enabled: true
+          name: manipulation_sim
+        manipulation_user_interface:
+          enabled: true
+          name: manipulation_user_interface
+tf_steady:
+  servers:
+    freeze:
+      service: "freeze"
+  timer:
+    callback_frequency: 50
+  transforms:
+    frames_to_freeze: ["lever_valve_raw",
+                       "lever_valve_pipe_raw",
+                       "button_e_stop_raw",
+                       "lever_valve_bluehandle_raw",
+                       "bottle_holder_side_raw",
+                       "bottle_holder_top_raw",
+                       "aira_valve_raw",
+                       "bottle_holder_start_raw",
+                       "bottle_holder_valve_raw"] # frames to be frozen
+    reference_frame: "base" # frozen frames will be in relation to this
+    # suffix to remove from frame id. e.g. if suffix_to_remove: "_raw" the frame "lever_valve_raw" will be republished as "lever_valve".
+    suffix_to_remove: "_raw"
+xbox_joystick:
+  autorepeat_rate: 10.0
+  deadzone: 0.15
+  dev: /dev/input/js0

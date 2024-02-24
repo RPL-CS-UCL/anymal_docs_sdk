@@ -1,0 +1,38 @@
+inputs/noisy_obs:
+  projected_gravity_history:
+    history_stride: 5
+    history_timesteps: 3
+  base_angular_velocity_history:
+    history_stride: 5
+    history_timesteps: 3
+  joint_position_history:
+    history_stride: 5
+    history_timesteps: 3
+  joint_velocity_history:
+    history_stride: 5
+    history_timesteps: 3
+  joint_action_history:
+    history_stride: 5
+    history_timesteps: 3
+  fall_recovery_command: ''
+inputs/tcn_obs:
+  concatenated_observations:
+    history_stride: 1
+    history_timesteps: 20
+    observations:
+      projected_gravity_history:
+        history_stride: 1
+        history_timesteps: 1
+      base_angular_velocity_history:
+        history_stride: 1
+        history_timesteps: 1
+      joint_position_history:
+        history_stride: 1
+        history_timesteps: 1
+      joint_velocity_history:
+        history_stride: 1
+        history_timesteps: 1
+      joint_action_history:
+        history_stride: 1
+        history_timesteps: 1
+      fall_recovery_command: ''

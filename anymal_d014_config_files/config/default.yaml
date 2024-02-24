@@ -1,0 +1,1571 @@
+motion_control_manager:
+  crawling_height: 0.28
+  square_up_width: 0.24
+  walk_to_pose:
+    robot_stopping_criteria_timeout_lower_bound: 3.0
+    robot_stopping_criteria_timeout_upper_bound: 8.0
+    relaxed_tolerances:
+      position: 0.05
+      yaw: 0.1
+    strict_tolerances:
+      position: 0.02
+      yaw: 0.03
+  mission_control:
+    base_velocity_filter:
+      time_constant: 0.3
+      velocity_scaling: 1.0
+    switch_to_stand:
+      start_vel_threshold: 0.07
+      end_vel_threshold: 0.05
+      time_threshold: 0.10
+    switch_direction:
+      start_vel_threshold: 0.020
+      end_vel_threshold: 0.050
+      time_threshold: 0.05
+    balancing:
+      start_vel_threshold: 1.50
+      end_vel_threshold: 0.35
+      time_threshold: 0.80
+      shrink_polygon_factor: 0.1
+  controller:
+    simulation: false
+  available_controllers:
+    controllers:
+      fall_recovery:
+        emergency_controller: emergency_freeze
+        name: fall_recovery
+        parameter_package: anymal_d
+        parameter_path: config/non_ros/motion_control/fall_recovery
+        plugin_name: anymal_ctrl_fall_recovery_ros::FallRecoveryControllerRos
+      freeze:
+        emergency_controller: emergency_freeze
+        name: freeze
+        parameter_package: anymal_d
+        parameter_path: config/non_ros/motion_control
+        plugin_name: anymal_ctrl_freeze::AnymalCtrlFreeze
+      joint_configurations:
+        emergency_controller: emergency_freeze
+        name: joint_configurations
+        parameter_package: anymal_d
+        parameter_path: "" #This controller loads all parameters from the ROS server.
+        plugin_name: anymal_ctrl_joint_configurations_ros::JointConfigurationsControllerRos
+      joint_configurations_contact_maker:
+        emergency_controller: emergency_freeze
+        name: joint_configurations_contact_maker
+        parameter_package: anymal_d
+        parameter_path: "" #This controller loads all parameters from the ROS server.
+        plugin_name: anymal_ctrl_joint_configurations_ros::JointConfigurationsControllerRos
+      optimus_planner_global_twist:
+        emergency_controller: emergency_hybrid_freeze
+        name: optimus_planner_global_twist
+        parameter_package: anymal_d
+        parameter_path: config/non_ros/motion_control/optimus_planner_global_twist
+        plugin_name: anymal_ctrl_optimus_planner_ros::OptimusPlannerGlobalTwistRos
+      optimus_planner_planar_pose:
+        emergency_controller: emergency_hybrid_freeze
+        name: optimus_planner_planar_pose
+        parameter_package: anymal_d
+        parameter_path: config/non_ros/motion_control/optimus_planner_planar_pose
+        plugin_name: anymal_ctrl_optimus_planner_ros::OptimusPlannerPlanarPoseRos
+      pose_action:
+        emergency_controller: emergency_hybrid_freeze
+        name: pose_action
+        parameter_package: anymal_d
+        parameter_path: config/non_ros/motion_control/pose_action
+        plugin_name: anymal_ctrl_pose_action_ros::PoseActionRos
+      torso_control:
+        emergency_controller: emergency_hybrid_freeze
+        name: torso_control
+        parameter_package: anymal_d
+        parameter_path: config/non_ros/motion_control/torso_control
+        plugin_name: anymal_ctrl_torso_control_ros::TorsoControlRos
+      trekker_perceptive_walk:
+        emergency_controller: emergency_hybrid_freeze
+        name: perceptive_walk
+        parameter_package: anymal_d_locomotion_policies
+        parameter_path: policies
+        plugin_name: anymal_ctrl_learned_gaits_ros::LearnedGaitsControllerRos
+      trekker_run:
+        emergency_controller: emergency_hybrid_freeze
+        name: run
+        parameter_package: anymal_d_locomotion_policies
+        parameter_path: policies
+        plugin_name: anymal_ctrl_learned_gaits_ros::LearnedGaitsControllerRos
+      trekker_stair_climbing_lidar_down:
+        emergency_controller: emergency_soft_hybrid_freeze
+        name: stair_climbing_lidar_down
+        parameter_package: anymal_d_locomotion_policies
+        parameter_path: policies
+        plugin_name: anymal_ctrl_learned_gaits_ros::LearnedGaitsControllerRos
+      trekker_stair_climbing_lidar_up:
+        emergency_controller: emergency_soft_hybrid_freeze
+        name: stair_climbing_lidar_up
+        parameter_package: anymal_d_locomotion_policies
+        parameter_path: policies
+        plugin_name: anymal_ctrl_learned_gaits_ros::LearnedGaitsControllerRos
+      trekker_blind_walk:
+        emergency_controller: emergency_hybrid_freeze
+        name: blind_walk
+        parameter_package: anymal_d_locomotion_policies
+        parameter_path: policies
+        plugin_name: anymal_ctrl_learned_gaits_ros::LearnedGaitsControllerRos
+      wait_for_se_freeze:
+        emergency_controller: emergency_freeze
+        name: wait_for_se_freeze
+        parameter_package: anymal_d
+        parameter_path: ''
+        plugin_name: anymal_ctrl_freeze::AnymalCtrlWaitForStateEstimatorFreeze
+    emergency_controllers:
+      freeze_controller:
+        name: emergency_freeze
+        parameter_package: anymal_d
+        parameter_path: config/non_ros/motion_control
+        plugin_name: anymal_ctrl_freeze::AnymalEmergencyCtrlFreeze
+      hybrid_freeze_controller:
+        name: emergency_hybrid_freeze
+        parameter_package: anymal_d
+        parameter_path: config/non_ros/motion_control
+        plugin_name: anymal_ctrl_freeze::AnymalEmergencyCtrlHybridFreeze
+      soft_hybrid_freeze_controller:
+        name: emergency_soft_hybrid_freeze
+        parameter_package: anymal_d
+        parameter_path: config/non_ros/motion_control
+        plugin_name: anymal_ctrl_freeze::AnymalEmergencyCtrlHybridFreeze
+    failproof_controller:
+      name: failproof_freeze
+      parameter_package: anymal_d
+      parameter_path: config/non_ros/motion_control
+      plugin_name: anymal_ctrl_freeze::AnymalFailproofCtrlFreeze
+  description_name: anymal_description
+  logger:
+    config_file: motion_control_manager_logger.yaml
+    enable: true
+    logfile_type: binary
+    sampling_window: 180
+    type: ros
+    update_on_start: true
+  publishers:
+    active_motion:
+      latch: true
+      queue_size: 1
+      topic: active_motion
+    actuator_commands:
+      latch: false
+      queue_size: 10
+      topic: actuator_commands
+    available_motions:
+      latch: true
+      queue_size: 1
+      topic: available_motions
+  servers:
+    clear_protective_stop:
+      persistent: false
+      service: clear_protective_stop
+    protective_stop:
+      persistent: false
+      service: protective_stop
+    execute_motion:
+      persistent: false
+      service: execute_motion
+    failproof_stop:
+      persistent: false
+      service: failproof_stop
+  subscribers:
+    actuator_readings:
+      latch: false
+      queue_size: 10
+      topic: /state_estimator/actuator_readings
+    anymal_state:
+      latch: false
+      queue_size: 10
+      topic: /state_estimator/anymal_state
+    command_pose:
+      latch: false
+      queue_size: 10
+      topic: /motion_reference/command_pose
+    command_twist:
+      latch: false
+      queue_size: 10
+      topic: /motion_reference/command_twist
+    imu:
+      latch: false
+      queue_size: 10
+      topic: /sensors/imu
+  sync_name: anymal_controller_sync
+  time_step: 0.0025
+  wait_for_sync_timeout_ms: 80
+  watchdog:
+    enabled: false
+    timeout_ms: 80
+motion_state_deduction:
+  automatic_motion_state_deduction:
+    trigger_states: ["_fallen", "_stand_three_legs", "_stand_crouched", "_unrecoverable", "rest", "stand"]
+    stationary_robot_velocity_threshold:
+      angular_velocity_norm: 0.05
+      joint_velocity_norm: 0.3
+  clients:
+    execute_motion:
+      persistent: false
+      service: /motion_control_manager/execute_motion
+  motion_transitioner:
+    debug_mode: false
+    initial_motion_state: rest
+    motion_states:
+      _contact_created:
+        direct_transit_state: ""
+      _default_walk:
+        direct_transit_state: ""
+      _dock:
+        direct_transit_state: rest
+      _dock_lower_base:
+        direct_transit_state: ""
+      _dock_prefreeze:
+        direct_transit_state: ""
+      _fallen:
+        direct_transit_state: ""
+      _manual_mode:
+        direct_transit_state: ""
+      _stand_three_legs:
+        direct_transit_state: ""
+      _rest_prefreeze:
+        direct_transit_state: ""
+      _se_active:
+        direct_transit_state: ""
+      _stand_crouched:
+        direct_transit_state: ""
+      _stood_up:
+        direct_transit_state: ""
+      _unrecoverable:
+        direct_transit_state: ""
+      _walk_to_pose:
+        direct_transit_state: ""
+      _wide_square_up:
+        direct_transit_state: ""
+      blind_walk:
+        direct_transit_state: ""
+      crawl:
+        direct_transit_state: ""
+      perceptive_walk:
+        direct_transit_state: ""
+      rest:
+        direct_transit_state: ""
+      run:
+        direct_transit_state: ""
+      square_up:
+        direct_transit_state: ""
+      stair_climbing_lidar_down:
+        direct_transit_state: ""
+      stair_climbing_lidar_up:
+        direct_transit_state: ""
+      stand:
+        direct_transit_state: ""
+      torso_control:
+        direct_transit_state: ""
+    transitions:
+      blind_walk:
+        connections:
+          perceptive_walk: 1.0
+          run: 1.0
+          square_up: 2.5
+          stair_climbing_lidar_down: 1.0
+          stair_climbing_lidar_up: 1.0
+          stand: 2.0
+          torso_control: 2.0
+          _default_walk: 1.0
+          _walk_to_pose: 2.0
+        motion:
+          motion_controller: blind_walk
+          operation_mode: blind_walk
+          reference_type: twist
+        target_state: blind_walk
+      crawl:
+        connections:
+          square_up: 2.0
+          _stand_crouched: 1.0
+          _walk_to_pose: 3.5
+        motion:
+          motion_controller: optimus_planner_global_twist
+          operation_mode: crawl
+          reference_type: twist
+        target_state: crawl
+      dock_connect:
+        connections:
+          _dock_lower_base: 2.0
+        motion:
+          motion_controller: pose_action
+          operation_mode: dock_connect
+          reference_type: action
+        target_state: _dock_prefreeze
+      dock_freeze:
+        connections:
+          _dock_prefreeze: 1.0
+        motion:
+          motion_controller: joint_configurations_contact_maker
+          operation_mode: go_to_rest_docked
+          reference_type: action
+        target_state: _dock
+      dock_lower_base:
+        connections:
+          _wide_square_up: 2.0
+        motion:
+          motion_controller: pose_action
+          operation_mode: dock_lower_base
+          reference_type: action
+        target_state: _dock_lower_base
+      fall_recovery_fall_to_recovery:
+        connections:
+          _fallen: 1.0
+        motion:
+          motion_controller: fall_recovery
+          operation_mode: recovery
+          reference_type: action
+        target_state: _contact_created
+      freeze:
+        connections:
+          blind_walk: 1.0
+          perceptive_walk: 1.0
+          square_up: 1.0
+          torso_control: 1.0
+          crawl: 2.0
+          run: 1.0
+          stair_climbing_lidar_down: 1.0
+          stair_climbing_lidar_up: 1.0
+          _default_walk: 1.0
+          _manual_mode: 1.0
+          _walk_to_pose: 1.0
+          _wide_square_up: 3.0
+        motion:
+          motion_controller: freeze
+          operation_mode: freeze
+          reference_type: action
+        target_state: stand
+      freeze_to_rest:
+        connections:
+          _rest_prefreeze: 1.0
+        motion:
+          motion_controller: joint_configurations_contact_maker
+          operation_mode: go_to_rest
+          reference_type: action
+        target_state: rest
+      lie_down:
+        connections:
+          _wide_square_up: 2.0
+        motion:
+          motion_controller: pose_action
+          operation_mode: lie_down
+          reference_type: action
+        target_state: _rest_prefreeze
+      perceptive_walk:
+        connections:
+          blind_walk: 1.0
+          run: 1.0
+          square_up: 2.5
+          stair_climbing_lidar_down: 1.0
+          stair_climbing_lidar_up: 1.0
+          stand: 2.0
+          torso_control: 2.0
+          _default_walk: 1.0
+          _walk_to_pose: 2.0
+        motion:
+          motion_controller: perceptive_walk
+          operation_mode: perceptive_walk
+          reference_type: twist
+        target_state: perceptive_walk
+      rest_to_contact:
+        connections:
+          rest: 1.0
+        motion:
+          motion_controller: joint_configurations_contact_maker
+          operation_mode: make_contact
+          reference_type: action
+        target_state: _contact_created
+      run:
+        connections:
+          blind_walk: 1.0
+          perceptive_walk: 1.0
+          square_up: 2.5
+          stair_climbing_lidar_down: 1.0
+          stair_climbing_lidar_up: 1.0
+          stand: 2.0
+          torso_control: 2.0
+          _default_walk: 1.0
+          _walk_to_pose: 2.0
+        motion:
+          motion_controller: run
+          operation_mode: run
+          reference_type: twist
+        target_state: run
+      square_up:
+        connections:
+          blind_walk: 1.0
+          crawl: 1.0
+          perceptive_walk: 1.0
+          run: 1.0
+          stand: 1.0
+          stair_climbing_lidar_down: 1.0
+          stair_climbing_lidar_up: 1.0
+          torso_control: 1.0
+          _default_walk: 2.0
+          _stand_three_legs: 1.0
+          _stood_up: 1.0
+          _walk_to_pose: 1.0
+          _wide_square_up: 1.0
+        motion:
+          motion_controller: optimus_planner_planar_pose
+          operation_mode: square_up
+          reference_type: action
+        target_state: square_up
+      stair_climbing_lidar_down:
+        connections:
+          blind_walk: 1.0
+          perceptive_walk: 1.0
+          run: 1.0
+          square_up: 2.5
+          stair_climbing_lidar_up: 1.0
+          stand: 2.0
+          torso_control: 2.0
+          _default_walk: 1.0
+          _walk_to_pose: 2.0
+        motion:
+          motion_controller: stair_climbing_lidar_down
+          operation_mode: stair_climbing_lidar_down
+          reference_type: twist
+        target_state: stair_climbing_lidar_down
+      stair_climbing_lidar_up:
+        connections:
+          blind_walk: 1.0
+          perceptive_walk: 1.0
+          run: 1.0
+          square_up: 2.5
+          stair_climbing_lidar_down: 1.0
+          stand: 2.0
+          torso_control: 2.0
+          _default_walk: 1.0
+          _walk_to_pose: 2.0
+        motion:
+          motion_controller: stair_climbing_lidar_up
+          operation_mode: stair_climbing_lidar_up
+          reference_type: twist
+        target_state: stair_climbing_lidar_up
+      stand_up:
+        connections:
+          _dock_lower_base: 1.0
+          _dock_prefreeze: 1.0
+          _se_active: 2.0
+          _stand_crouched: 1.0
+          _wide_square_up: 1.0
+        motion:
+          motion_controller: pose_action
+          operation_mode: stand_up
+          reference_type: action
+        target_state: _stood_up
+      torso_control:
+        connections:
+          square_up: 1.0
+        motion:
+          motion_controller: torso_control
+          operation_mode: torso_control
+          reference_type: pose
+        target_state: torso_control
+      wait_for_se:
+        connections:
+          _contact_created: 1.0
+        motion:
+          motion_controller: wait_for_se_freeze
+          operation_mode: wait_for_se
+          reference_type: action
+        target_state: _se_active
+      walk:
+        connections:
+          blind_walk: 1.0
+          perceptive_walk: 1.0
+          run: 1.0
+          square_up: 2.5
+          stair_climbing_lidar_down: 1.0
+          stair_climbing_lidar_up: 1.0
+          stand: 2.0
+          torso_control: 2.0
+          _walk_to_pose: 3.0
+        target_state: _default_walk
+      walk_to_pose:
+        connections:
+          blind_walk: 2.0
+          perceptive_walk: 2.0
+          square_up: 1.0
+          stand: 1.0
+          torso_control: 1.0
+          _default_walk: 2.0
+          crawl: 3.0
+        motion:
+          motion_controller: optimus_planner_planar_pose
+          operation_mode: walk
+          reference_type: pose
+        target_state: _walk_to_pose
+      wide_square_up:
+        connections:
+          blind_walk: 1.0
+          perceptive_walk: 1.0
+          run: 1.0
+          square_up: 1.0
+          stair_climbing_lidar_down: 1.0
+          stair_climbing_lidar_up: 1.0
+          stand: 2.0
+          torso_control: 1.0
+          _default_walk: 1.0
+          _stood_up: 2.0
+          _walk_to_pose: 1.0
+        motion:
+          motion_controller: optimus_planner_planar_pose
+          operation_mode: wide_square_up
+          reference_type: action
+        target_state: _wide_square_up
+  publishers:
+    available_motion_states:
+      latch: true
+      queue_size: 1
+      topic: available_motion_states
+    current_motion_state:
+      latch: true
+      queue_size: 1
+      topic: current_motion_state
+  servers:
+    force_motion_execution:
+      persistent: false
+      service: force_motion_execution
+    go_to_motion_state:
+      action: go_to_motion_state_relayed
+    set_current_motion_state:
+      persistent: false
+      service: set_current_motion_state
+  subscribers:
+    notify_control_unit_state:
+      topic: /motion_control_manager/notify_control_unit_state
+  smart_init:
+    max_angle_wrt_gravity:                    # Max angle (in rad) allowed between base -Z and gravity.
+      stairs: 0.785398                        # 45 deg
+      slopes: 0.349066                        # 20 deg
+    min_base_height:
+      stand: 0.42                             # Minimal base height (footprint->base) to deduce 'stand' state (in m).
+      stand_crouched: 0.20                    # Minimal base height (footprint->base) to deduce '_stand_crouched' state (in m).
+    stand_number_contacts: 4                  # Number of contacts required to deduce 'stand' state.
+    joint_limits_fall_recovery:               # (in rad)
+      HAA: 3.141592
+      HFE: 2.827433
+      KFE: 4.712388
+    joint_position_bounds_crawl:              # Check for abs(joint_pos) in [min, max] (in rad)
+      haa: [0.0, 0.55]
+      hfe: [0.8, 2.7]
+    joint_position_bounds_rest:           # Check for abs(joint_pos) in [min, max] (in rad)
+      hfe: [1.0, 2.2]
+    foot_bounds:                              # [x_min, x_max, y_min, y_max] (in m)
+      lie_down: [0.05, 0.3, -0.1, 0.3]
+  time_step: 0.0025
+field_operator:
+  walk_motion_states:
+    crawl: crawl
+    perceptive_walk: perceptive_walk
+    stair_climbing_lidar_down: stair_climbing_lidar_down
+    stair_climbing_lidar_up: stair_climbing_lidar_up
+fall_recovery:
+  flip_over_policy_file: '2021_06_04_14_22_42_500.pb'
+  actuation_model_policy_file: 'anydrive_3_6_20210303.txt'
+interaction_marker:
+  mesh_resource: package://anymal_d/urdf/marker.dae
+joint_configurations: &joint_configurations
+  abs_joint_position_error_tolerance: 0.0025
+  gains:
+    HAA:
+      p: 200.0
+      i: 0.05
+      d: 0.9
+    HFE:
+      p: 200.0
+      i: 0.05
+      d: 0.9
+    KFE:
+      p: 80.0
+      i: 0.05
+      d: 0.4
+  max_abs_joint_position_error: 0.1
+  max_joint_velocity: 0.2
+  named_configurations:
+    default:
+      LF_HAA: -0.1
+      LF_HFE: 0.7
+      LF_KFE: -1.0
+      RF_HAA: 0.1
+      RF_HFE: 0.7
+      RF_KFE: -1.0
+      LH_HAA: -0.1
+      LH_HFE: -0.7
+      LH_KFE: 1.0
+      RH_HAA: 0.1
+      RH_HFE: -0.7
+      RH_KFE: 1.0
+    zero:
+      LF_HAA: 0.0
+      LF_HFE: 0.0
+      LF_KFE: 0.0
+      RF_HAA: 0.0
+      RF_HFE: 0.0
+      RF_KFE: 0.0
+      LH_HAA: 0.0
+      LH_HFE: 0.0
+      LH_KFE: 0.0
+      RH_HAA: 0.0
+      RH_HFE: 0.0
+      RH_KFE: 0.0
+    rest:
+      LF_HAA: -0.05
+      LF_HFE: 1.57
+      LF_KFE: -2.75
+      RF_HAA: 0.05
+      RF_HFE: 1.57
+      RF_KFE: -2.75
+      LH_HAA: -0.05
+      LH_HFE: -1.57
+      LH_KFE: 2.75
+      RH_HAA: 0.05
+      RH_HFE: -1.57
+      RH_KFE: 2.75
+  timeout: 20.0
+joint_configurations_contact_maker:
+  <<: *joint_configurations
+  abs_joint_position_error_tolerance: 1.0
+  gains:
+    HAA: &contact_maker_gains
+      p: 50.0
+      i: 0.0
+      d: 0.3
+    HFE: *contact_maker_gains
+    KFE: *contact_maker_gains
+  max_abs_joint_position_error: 1.0
+  named_configurations:
+    make_contact:
+      LF_HAA: -0.05
+      LF_HFE: 1.4
+      LF_KFE: -2.0
+      RF_HAA: 0.05
+      RF_HFE: 1.4
+      RF_KFE: -2.0
+      LH_HAA: -0.05
+      LH_HFE: -1.4
+      LH_KFE: 2.0
+      RH_HAA: 0.05
+      RH_HFE: -1.4
+      RH_KFE: 2.0
+    go_to_rest:
+      LF_HAA: 0.0
+      LF_HFE: 1.3
+      LF_KFE: -2.5
+      RF_HAA: 0.0
+      RF_HFE: 1.3
+      RF_KFE: -2.5
+      LH_HAA: 0.0
+      LH_HFE: -1.3
+      LH_KFE: 2.5
+      RH_HAA: 0.0
+      RH_HFE: -1.3
+      RH_KFE: 2.5
+    go_to_rest_docked:
+      LF_HAA: 0.0
+      LF_HFE: 1.4
+      LF_KFE: -2.3
+      RF_HAA: 0.0
+      RF_HFE: 1.4
+      RF_KFE: -2.3
+      LH_HAA: 0.0
+      LH_HFE: -1.4
+      LH_KFE: 2.6
+      RH_HAA: 0.0
+      RH_HFE: -1.4
+      RH_KFE: 2.6
+joy_motion_control:
+  clients:
+    execute_motion:
+      service: /rcu/motion_state_deduction/force_motion_execution
+    go_to_motion_state:
+      action: /rcu/motion_state_deduction/go_to_motion_state
+  motion_mapping:
+    battery_swap: ""
+    climb_stairs: stair_climbing_lidar_down
+    crawl: crawl
+    demo_1: ""
+    demo_2: ""
+    demo_3: ""
+    demo_4: ""
+    demo_5: ""
+    motion_1: ""
+    motion_2: ""
+    motion_3: ""
+    motion_4: ""
+    motion_5: ""
+    rest: rest
+    run: run
+    scan_environment: ""
+    stand: stand
+    torso_control: torso_control
+    walk: _default_walk
+load_anymal_description:
+  custom_parameters:
+    # Note: many of the depth_camera* params are common across generations. But we keep them here for clarity.
+    depth_camera_front_lower_pitch: 60.0
+    depth_camera_front_lower_roll: 0.0
+    depth_camera_front_upper_pitch: 15.0
+    depth_camera_front_upper_roll: 0.0
+    depth_camera_left_pitch: 42.0
+    depth_camera_left_roll: 0.0
+    depth_camera_rear_lower_pitch: 60.0
+    depth_camera_rear_lower_roll: 0.0
+    depth_camera_rear_upper_pitch: 15.0
+    depth_camera_rear_upper_roll: 0.0
+    depth_camera_right_pitch: 42.0
+    depth_camera_right_roll: 0.0
+    docking_socket: false
+    foot_version: "3_6_3"
+    inspection_payload_version: P-PTU-VTAL-D
+path_planning_and_following:
+  action_clients:
+    command_pose:
+      server: ""
+  global_replanning:
+    enabled: true
+    max_number_of_replans: 50
+    pose_graph: global_pose_graph_with_obstructions
+    collision_processor:
+      blocked_edge_traversability: 0.0
+      merge_collisions_distance_threshold: 0.15
+      min_length_collision_segment: 0.05
+      tf_timeout: 0.5
+    publishers:
+      collision_edges:
+        latch: true
+        queue_size: 1
+        topic: collision_edges
+      input_pose_graph:
+        latch: true
+        queue_size: 1
+        topic: input_pose_graph
+      enabled:
+        latch: true
+        queue_size: 1
+        topic: enabled
+      obstacle_map:
+        latch: true
+        queue_size: 1
+        topic: obstacle_map
+      output_pose_graph:
+        latch: true
+        queue_size: 1
+        topic: output_pose_graph
+    servers:
+      enable:
+        persistent: false
+        service: enable
+  non_preemptable_motion_states: []
+  recovery_behaviors:
+    global_replanning:
+      plugin: global_replanning_ros/GlobalReplanningRos
+  scenarios:
+    narrow:
+      feasibility_footprint_name: shrunk_multi_circle
+      acc_lim_theta: 0.20
+  strict_path_follower:
+    default: &strict_path_follower_default
+      acc_lim_theta: 0.45
+      acc_lim_theta_rotating_controller: 0.8
+      acc_lim_x: 0.32
+      acc_lim_y: 0.32
+      acceleration_error_multiplier: 2.0
+      allow_init_with_backwards_motion: true
+      cmd_angle_instead_rotvel: false
+      complete_global_plan: true
+      costmap_converter:
+        CostmapToLinesDBSRANSAC:
+          cluster_max_distance: 0.5
+          cluster_max_pts: 30
+          cluster_min_pts: 2
+          convex_hull_min_pt_separation: 0.1
+          ransac_convert_outlier_pts: true
+          ransac_filter_remaining_outlier_pts: false
+          ransac_inlier_distance: 0.2
+          ransac_min_inliers: 10
+          ransac_no_iterations: 1500
+          ransac_remainig_outliers: 3
+      costmap_converter_plugin: costmap_converter::CostmapToLinesDBSRANSAC
+      costmap_converter_rate: 10
+      costmap_converter_spin_thread: true
+      costmap_obstacles_behind_robot_dist: 0.5
+      default_xy_goal_tolerance: 0.2
+      default_yaw_goal_tolerance: 0.17
+      dist_pose_command: 0.5
+      dt_hysteresis: 0.05
+      dt_ref: 0.4
+      dynamic_obstacle_inflation_dist: 0.6
+      enable_multithreading: true
+      exact_arc_length: false
+      feasibility_check_distance: 1.5
+      footprint_models:
+        multi_circle: # Adds some buffer around the robot. Used for optimization.
+          type: "multi_circle"
+          circles:
+            - origin: [0.245, 0.0]
+              radius: 0.32
+            - origin: [0.0, 0.0]
+              radius: 0.32
+            - origin: [-0.245, 0.0]
+              radius: 0.32
+        tight_multi_circle: # Fits tightly around the robot. Used for feasibility checks.
+          type: "multi_circle"
+          circles:
+            - origin: [0.2, 0.0]
+              radius: 0.3
+            - origin: [0.0, 0.0]
+              radius: 0.3
+            - origin: [-0.2, 0.0]
+              radius: 0.3
+        shrunk_multi_circle: # Used for narrow corridors.
+          type: multi_circle
+          circles:
+            - origin: [0.22, 0.0]
+              radius: 0.08
+            - origin: [0.14, 0.0]
+              radius: 0.08
+            - origin: [0.06, 0.0]
+              radius: 0.08
+            - origin: [0.0, 0.0]
+              radius: 0.08
+            - origin: [-0.06, 0.0]
+              radius: 0.08
+            - origin: [-0.14, 0.0]
+              radius: 0.08
+            - origin: [-0.22, 0.0]
+              radius: 0.08
+      optimization_footprint_name: multi_circle
+      feasibility_footprint_name: tight_multi_circle
+      force_reinit_new_goal_dist: 1.0
+      free_goal_vel: false
+      global_plan_overwrite_orientation: false
+      global_plan_prune_distance: 0.2
+      global_plan_viapoint_sep: 0.2
+      h_signature_prescaler: 1.0
+      h_signature_threshold: 0.1
+      include_costmap_obstacles: true
+      include_dynamic_obstacles: false
+      inflation_dist: 0.5
+      interpolate_global_plan: true
+      is_footprint_dynamic: false
+      k_p_theta_rotating_controller: 1.0
+      k_p_x_rotating_controller: 1.0
+      k_p_y_rotating_controller: 1.0
+      legacy_obstacle_association: false
+      transform_wait_timeout: 0.5
+      map_pipeline: elevation_map_lidar_obstacle_pipeline
+      max_dist_global_plan_poses: 0.2
+      max_global_plan_lookahead_dist: 1.5
+      max_number_classes: 5
+      max_vel_theta: 0.9
+      max_vel_x: 0.6
+      max_vel_x_backwards: 0.6
+      max_vel_y: 0.45
+      min_lh_dist_for_turn_before_navigate: 0.5
+      min_obstacle_dist: 0.1
+      min_turning_radius: 0.0
+      min_vel_theta: 0.01
+      min_vel_x: 0.02
+      min_vel_y: 0.02
+      no_inner_iterations: 20
+      no_outer_iterations: 10
+      obstacle_association_cutoff_factor: 40.0
+      obstacle_association_force_inclusion_factor: 10.0
+      obstacle_avoidance_mode: 0
+      obstacle_heading_threshold: 0.45
+      obstacle_layer: obstacle
+      obstacle_poses_affected: 30
+      odom_topic: /state_estimator/anymal_state_throttle
+      optimization_activate: true
+      optimization_verbose: false
+      oscillation_recovery: false
+      penalty_epsilon: 0.09
+      publish_costmap2d: true
+      publish_feedback: false
+      record_costs: false
+      reorient_global_plan: false
+      roadmap_graph_area_length_scale: 1.0
+      roadmap_graph_area_width: 5.0
+      roadmap_graph_no_samples: 15
+      selection_alternative_time_cost: false
+      selection_cost_hysteresis: 1.0
+      selection_obst_cost_scale: 100.0
+      selection_prefer_initial_plan: 0.95
+      selection_viapoint_cost_scale: 1.0
+      separate_segments: true
+      stop_go_behavior_timeout: 20.0
+      switching_blocking_period: 0.0
+      teb_autosize: true
+      turn_before_navigate: false
+      v_x_hyst_rotating_controller: 0.02
+      velocity_error_multiplier: 2.0
+      via_points_ordered: false
+      viapoints_all_candidates: true
+      visualize_hc_graph: false
+      visualize_with_time_as_z_axis_scale: 0.0
+      visualization:
+        feasibility_check:
+          footprint_color: [0.0, 0.0, 1.0, 1.0] # [R,G,B,A]
+      weight_acc_lim_theta: 4
+      weight_acc_lim_x: 4
+      weight_acc_lim_y: 4
+      weight_adapt_factor: 2.0
+      weight_dynamic_obstacle: 50.0
+      weight_dynamic_obstacle_inflation: 0.1
+      weight_inflation: 0.1
+      weight_kinematics_forward_drive: 0.0
+      weight_kinematics_nh: 0.0
+      weight_kinematics_turning_radius: 0.0
+      weight_max_vel_theta: 2
+      weight_max_vel_x: 2
+      weight_max_vel_y: 2
+      weight_obstacle: 50
+      weight_optimal_time: 0.5
+      weight_prefer_rotdir: 50
+      weight_shortest_path: 4.0
+      weight_viapoint_position: 10.0
+      weight_viapoint_orientation: 10.0
+    motion_states:
+      blind_walk: &blind_walk
+        dt_ref: 0.4
+        acc_lim_theta: 0.45
+        max_vel_theta: 0.9
+        max_vel_x: 0.6
+        max_vel_x_backwards: 0.6
+        max_vel_y: 0.45
+        min_vel_theta: 0.01
+        min_vel_x: 0.02
+        min_vel_y: 0.02
+        weight_shortest_path: 4.0
+      perceptive_walk:
+        dt_ref: 0.4
+        acc_lim_theta: 0.35
+        acc_lim_x: 0.35
+        acc_lim_y: 0.35
+        max_vel_theta: 0.9
+        max_vel_x: 0.6
+        max_vel_x_backwards: 0.6
+        max_vel_y: 0.45
+        min_vel_theta: 0.01
+        min_vel_x: 0.02
+        min_vel_y: 0.02
+        weight_shortest_path: 4.0
+      stair_climbing_lidar_down: &stair_climbing
+        dt_ref: 0.4
+        acc_lim_theta: 0.45
+        max_vel_theta: 0.1
+        max_vel_x: 0.25
+        max_vel_x_backwards: 0.25
+        max_vel_y: 0.1
+        min_vel_theta: 0.0
+        min_vel_x: 0.25
+        min_vel_y: 0.0
+        weight_shortest_path: 40.0
+      stair_climbing_lidar_up: *stair_climbing
+      crawl:
+        dt_ref: 1.0
+        acc_lim_theta: 0.35
+        max_vel_theta: 0.5
+        max_vel_x: 0.1
+        max_vel_x_backwards: 0.1
+        max_vel_y: 0.1
+        min_vel_theta: 0.02
+        min_vel_x: 0.02
+        min_vel_y: 0.02
+        weight_shortest_path: 30.0
+      run:
+        acc_lim_theta: 1.0
+        max_vel_x: 1.5
+        max_vel_x_backwards: 1.5
+        min_vel_x: 0.02
+    <<: *strict_path_follower_default
+  control_frequency: 10.0
+  default_global_planner: waypoints_planner
+  default_local_planner: strict_path_follower
+  default_local_planner_mode: stop_and_go
+  elevation_map_canny_pipeline:
+    canny_edge_detector:
+      canny:
+        first_threshold: 100
+        second_threshold: 200
+      input_layer: elevation
+      output_layer: obstacle
+    elevation_map_source:
+      layer: elevation
+      topic: /elevation_mapping/elevation_map_raw
+  elevation_map_gradient_edge_pipeline:
+    gradient_edge_detector:
+      threshold: 1
+      input_layer: elevation
+      output_layer: obstacle
+    elevation_map_source:
+      layer: elevation
+      topic: /elevation_mapping/elevation_map_raw
+  lidar_obstacle_pipeline:
+    threshold_obstacle_detector:
+      threshold: 0.2
+      input_layer: elevation
+      output_layer: obstacle
+    point_cloud_source:
+      layer: elevation
+      size_x: 4.0
+      size_y: 4.0
+      resolution: 0.025
+      ground_frame: footprint
+      topic: /point_cloud_filter/lidar/point_cloud_filtered
+  elevation_map_lidar_obstacle_pipeline: &elevation_map_lidar_obstacle_pipeline
+    ground_frame: footprint
+    publish_output_on_update: true
+    transform_wait_timeout: 0.5
+    point_cloud_source:
+      enabled: true
+      topic: /point_cloud_filter/lidar/point_cloud_filtered
+      filter_configurations:
+        point_cloud_into_grid_map:
+          layer: point_cloud
+        threshold_obstacle_detector:
+          input_layer: point_cloud
+          output_layer: threshold_obstacle
+          threshold: 0.2
+    grid_map_source:
+      topic: /elevation_mapping/elevation_map_raw
+      layer: elevation
+      filter_configurations:
+        grid_map_height_mask:
+          input_layer: elevation
+          output_layer: height_mask
+          height_threshold: 0.1
+          ground_frame: footprint
+        grid_map_height_mask_dilation:
+          input_layer: height_mask
+          output_layer: height_mask
+        grid_map_update_time_mask:
+          input_layer: dynamic_time
+          output_layer: age_mask
+          age_limit: 4.0
+        grid_map_age_mask_closing:
+          input_layer: age_mask
+          output_layer: age_mask
+        elevation_map_gradient_edge_detector:
+          input_layer: elevation
+          output_layer: gradient_obstacle
+          threshold: 0.002
+        update_time_mask_filter:
+          input_layer: gradient_obstacle
+          mask_layer: age_mask
+          output_layer: gradient_obstacle_filtered
+        height_mask_filter:
+          input_layer: gradient_obstacle_filtered
+          mask_layer: height_mask
+          output_layer: gradient_obstacle_filtered
+    layers_to_merge:
+      - threshold_obstacle
+      - gradient_obstacle_filtered
+    output_layer: obstacle
+  elevation_map_lidar_obstacle_pipeline_for_avoidance:
+    <<: *elevation_map_lidar_obstacle_pipeline
+  frames:
+    pose_control: control
+    robot: base
+    twist_control: control
+  global_maps:
+    static_map: global_pose_graph
+    dynamic_map: global_pose_graph_with_obstructions
+    plan_path_map: global_pose_graph_plan_path
+  global_planners:
+    waypoints_planner:
+      planner_frame: map
+      plugin: pose_graph_global_planner_ros/PoseGraphGlobalPlannerRos
+  goal_tolerance_non_continuous:
+    rotation: 0.7853981633974483
+    translation: 0.5
+  goal_tolerance_on_tolerance_continuous:
+    rotation: 0.035
+    translation: 0.02
+  goal_tolerance_z: 0.3
+  initial_robot_pose_lookup_timeout: 0.5
+  robot_stopping_criteria:
+    translational_distance: 0.25
+    rotational_distance: 0.4363
+    timeout: 20.0
+  local_planners: # These parameters are used by the navigation manager to load & initialize local planners.
+    remap_modes:
+      avoid_obstacles: stop_and_go
+    strict_path_follower:
+      planner_frame: point_cloud_odom
+      plugin: anymal_teb_local_planner/AnymalTebLocalPlannerROS
+      modes:
+        blind:
+          planner_mode_name: Blind
+          supported_motion_states:
+            - _default_walk
+            - crawl
+            - stair_climbing_lidar_down
+            - stair_climbing_lidar_up
+            - run
+            - blind_walk
+            - perceptive_walk
+        stop_and_go:
+          planner_mode_name: StopAndGo
+          supported_motion_states:
+            - _default_walk
+            - blind_walk
+            - perceptive_walk
+  locomotion_controller:
+    active_motion_state:
+      topic: /motion_state_deduction/current_motion_state
+    default_controller:
+      motion_parameters: ""
+      motion_state: _default_walk
+    stand:
+      motion_parameters: ""
+      motion_state: stand
+    stand_motion_states:
+      - stand
+      - _stand_crouched
+    switch_locomotion_controller:
+      action: /motion_state_deduction/go_to_motion_state
+  map_pipelines:
+    global:
+      global_waypoints_manager:
+        map: global_pose_graph
+        plugin_name: pose_graph_manager_ros/PoseGraphManagerRos
+      global_waypoints_with_obstructions_manager:
+        map: global_pose_graph_with_obstructions
+        plugin_name: pose_graph_manager/PoseGraphManager
+      global_waypoints_plan_path_manager:
+        map: global_pose_graph_plan_path
+        plugin_name: pose_graph_manager/PoseGraphManager
+    local:
+      elevation_map_canny_pipeline:
+        plugin_name: obstacle_pipelines/ElevationMapCannyPipelineRos
+      elevation_map_gradient_edge_pipeline:
+        plugin_name: obstacle_pipelines/ElevationMapGradientEdgePipelineRos
+      lidar_obstacle_pipeline:
+        plugin_name: obstacle_pipelines/LidarObstaclePipelineRos
+      elevation_map_lidar_obstacle_pipeline:
+        plugin_name: obstacle_pipelines/ElevationMapLidarObstaclePipelineRos
+      elevation_map_lidar_obstacle_pipeline_for_avoidance:
+        plugin_name: obstacle_pipelines/ElevationMapLidarObstaclePipelineRos
+  global_waypoints_manager:
+    publishers:
+      waypoints:
+        latch: true
+        queue_size: 1
+        topic: waypoints
+    servers:
+      reload_waypoints:
+        persistent: false
+        service: reload_waypoints
+      load_waypoints_file:
+        persistent: false
+        service: load_waypoints_file
+    subscribers:
+      updated_waypoints:
+        queue_size: 1
+        topic: /path_planning_and_following/waypoints_tool/updated_waypoints
+  waypoints_planner:
+    planner_settings:
+      connect_node_candidates: 0 # 0 means all candidates are connected.
+      cost_weights:
+        backward_motion: 1.01
+        forward_motion: 1.0
+        sideways_motion: 2.0
+        traversability_upper_limit: 3.0
+        untraversability_threshold: 0.1
+      dimension_scaling:
+        angle: 0.318
+        x: 1.0
+        y: 1.0
+        z: 4.0
+      off_pose_graph_edge:
+        motion_parameters: default
+        motion_state: default
+        traversability: 0.25
+      max_distance_closest_edge_to_start: 0.5
+      search_radius_elongation: 0.1
+      unconnectable_motion_states: []
+    attachment_handler_settings:
+      default:
+        maximum_distance_for_edge_deduction: 0.5
+      stair_climbing:
+        minimal_stair_climbing_angle: 0.175
+        responsible_locomotion_states: [stair_climbing_lidar_down, stair_climbing_lidar_up]
+    publishers:
+      global_plan:
+        latch: true
+        queue_size: 1
+        topic: global_plan
+      planner_pose_graph_before_plan:
+        latch: true
+        queue_size: 1
+        topic: planner_waypoints_before_plan
+      planner_pose_graph_after_plan:
+        latch: true
+        queue_size: 1
+        topic: planner_waypoints_after_plan
+  publishers:
+    active_default_local_planner:
+      latch: true
+      queue_size: 1
+      topic: default_path_follower/active
+    active_default_locomotion_controller:
+      latch: true
+      queue_size: 1
+      topic: default_locomotion_controller/active
+    active_global_planner:
+      latch: true
+      queue_size: 1
+      topic: path_planner/active
+    active_local_planner:
+      latch: true
+      queue_size: 1
+      topic: path_follower/active
+    active_path:
+      latch: true
+      queue_size: 1
+      topic: active_path
+    available_local_planner:
+      latch: true
+      queue_size: 1
+      topic: path_follower/available
+    available_global_planner:
+      latch: true
+      queue_size: 1
+      topic: path_planner/available
+    local_planner_status:
+      latch: true
+      queue_size: 1
+      topic: path_follower/status
+    command_velocity:
+      latch: false
+      queue_size: 10
+      topic: twist
+    planned_path:
+      latch: true
+      queue_size: 1
+      topic: planned_path
+  servers:
+    navigate_to_goal:
+      action: navigate_to_goal
+    plan_path:
+      action: plan_path
+    switch_default_local_planner:
+      service: default_path_follower/switch
+    switch_default_locomotion_controller:
+      service: default_locomotion_controller/switch
+    override_local_planner:
+      service: path_follower/override
+    switch_global_planner:
+      service: path_planner/switch
+  simulation: false
+  subscribers:
+    control_unit_state:
+      queue_size: 10
+      topic: /motion_control_manager/notify_control_unit_state
+    available_motion_states:
+      queue_size: 1
+      topic: /motion_state_deduction/available_motion_states
+operational_mode_manager: #overlay on common parameters.
+  enable_ex_features: false
+pdb_driver:
+  fan_control:
+    desired_minimal_speed: 1.0
+pose_action:
+  centroidal_planner_weights:
+    roll: 50
+    pitch: 100
+    yaw: 500
+    com_x: 500
+    com_y: 500
+    com_z: 100
+    ang_vel_x: 10
+    ang_vel_y: 5
+    ang_vel_z: 1
+    lin_vel_x: 50
+    lin_vel_y: 50
+    lin_vel_z: 10
+    input: 0.0001
+  max_linear_velocity_base:
+    x: 0.15
+    y: 0.15
+    z: 0.3
+  max_angular_velocity_base:
+    x: 0.5
+    y: 0.5
+    z: 0.5
+  named_poses:
+    dock_connect:
+      orientation: # RPY = [0.0, -0.08, 0.0]
+        w: 0.9992001
+        x: 0.0
+        y: -0.0399893
+        z: 0.0
+      position:
+        x: 0.0
+        y: 0.0
+        z: 0.09
+    dock_lower_base:
+      orientation:
+        w: 1.0
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      position:
+        x: 0.0
+        y: 0.0
+        z: 0.15
+    lie_down:
+      orientation:
+        w: 1.0
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      position:
+        x: 0.0
+        y: 0.0
+        z: 0.08
+    stand_up:
+      orientation:
+        w: 1.0
+        x: 0.0
+        y: 0.0
+        z: 0.0
+      position:
+        x: 0.0
+        y: 0.0
+        z: 0.58
+  pose_tracking_gains:
+    position: 5
+    orientation: 10
+  tolerances:
+    position:
+      x: 0.02
+      y: 0.02
+      z: 0.05
+    euler_angles_zyx:
+      yaw: 0.1
+      pitch: 0.1
+      roll: 0.25
+    velocity:
+      linear: 0.01
+      angular: 0.01
+robot_behavior_plugins:
+  enable_ex_features: false
+stack_launcher:
+  nodes:
+    depth_camera_$side$_point_cloud_self_filter:
+      __replacements__: &camera_replacements
+        - $side$: left
+          $self_filter_config$: self_filtering_left_limbs.yaml
+        - $side$: right
+          $self_filter_config$: self_filtering_right_limbs.yaml
+        - $side$: front_upper
+          $self_filter_config$: self_filtering_front_limbs.yaml
+        - $side$: front_lower
+          $self_filter_config$: self_filtering_front_limbs.yaml
+        - $side$: rear_upper
+          $self_filter_config$: self_filtering_hind_limbs.yaml
+        - $side$: rear_lower
+          $self_filter_config$: self_filtering_hind_limbs.yaml
+      preprocessed_params:
+        config_files_folder:
+          key: /depth_camera_$side$/point_cloud_self_filter/config_files_folder
+          value: $(rospack find anymal_d)/config/non_ros/perception/point_cloud_filter
+      roslaunch:
+        name: point_cloud_self_filter
+        namespace: depth_camera_$side$
+        node_type: point_cloud_self_filter_ros_node
+        output: screen
+        package: point_cloud_self_filter_ros
+    load_anymal_description:
+      finite: true
+      preprocessed_params:
+        xacro_file:
+          key: /load_anymal_description/xacro_file
+          value: $(rospack find anymal_d)/urdf/anymal_d.urdf.xacro
+      roslaunch:
+        name: load_anymal_description
+        node_type: parameterized_xacro.py
+        output: screen
+        package: parameterized_xacro
+    point_cloud_filter:
+      preprocessed_params:
+        config_files_folder:
+          key: /point_cloud_filter/filter_and_merger/config_files_folder
+          value: $(rospack find anymal_d)/config/non_ros/perception/point_cloud_filter
+      roslaunch:
+        name: filter_and_merger
+        namespace: point_cloud_filter
+        node_type: point_cloud_processor_node
+        output: screen
+        package: point_cloud_processor
+    report_writer:
+      preprocessed_params:
+        logo_path:
+          key: /report_writer/logo_path
+          value: $(rospack find report_writer)/resources/anybotics_logo.png
+        image_path:
+          key: /report_writer/image_path
+          value: $(rospack find report_writer)/resources/anymal_d_image.png
+        play_icon_path:
+          key: /report_writer/play_icon_path
+          value: $(rospack find report_writer)/resources/play_icon.png
+        stylesheet_path:
+          key: /report_writer/stylesheet_path
+          value: $(rospack find report_writer)/resources/default_stylesheet.xsl
+      roslaunch:
+        name: report_writer
+        node_type: report_writer_node
+        output: screen
+        package: report_writer
+        respawn: true
+    rosbag_record_lpc:
+      roslaunch:
+        args: >
+          record --lz4 --repeat-latched --split --duration=5m -o anymal_lpc -e
+          /anyjoy/rqt
+          /anymal_low_level_controller/actuator_readings_extended_throttled
+          /anymal_low_level_controller/lcsm/state
+          /anymal_test/(.*)
+          /collision_filter/active_mode
+          /collision_filter/footprint
+          /collision_filter/processed_map_throttle
+          /collision_filter/status
+          /collision_filter/trajectory
+          /collision_filter/twist
+          /cpu_monitor_lpc/status
+          /diagnostics_agg
+          /disk_monitor_lpc/status
+          /elevation_mapping/elevation_map_raw_throttle
+          /environment_loader/available_environments
+          /environment_loader/load_environment/(.*)
+          /epson_driver/lcsm/state
+          /inspection_payload/joint_states
+          /inspection_payload/led_intensity
+          /inspection_payload/motor_temperatures
+          /joy_manager/twist
+          /near_field_mapping/metrics/(.*)
+          /memory_monitor_lpc/status
+          /motion_state_deduction/current_motion_state
+          /motion_state_deduction/go_to_motion_state/cancel
+          /motion_state_deduction/go_to_motion_state/feedback
+          /motion_state_deduction/go_to_motion_state/goal
+          /motion_state_deduction/go_to_motion_state/result
+          /motion_state_deduction/go_to_motion_state_relayed/cancel
+          /motion_state_deduction/go_to_motion_state_relayed/feedback
+          /motion_state_deduction/go_to_motion_state_relayed/goal
+          /motion_state_deduction/go_to_motion_state_relayed/result
+          /motion_state_deduction/lcsm/state
+          /motion_control_manager/notify_control_unit_state
+          /motion_control_manager/lcsm/state
+          /motion_reference/command_twist
+          /motion_reference/command_pose
+          /near_field_mapping/map_points
+          /near_field_mapping/profiling/(.*)
+          /near_field_mapping_preset_selector/active_preset
+          /network_monitor_lpc/status
+          /pantilt_head_driver/lcsm/state
+          /pdb/battery_info
+          /pdb/battery_state
+          /pdb/fan_control_state
+          /pdb/ground_state
+          /pdb/intrinsic_state
+          /pdb/module_state
+          /pdb/pin_state
+          /pdb/power_state
+          /pdb_driver/lcsm/state
+          /rosout_agg_lite
+          /state_estimator/anymal_state_throttle
+          /state_estimator/contact_estimation/contactState_(.*)
+          /state_estimator/contact_estimation/isSlipping_(.*)
+          /state_estimator/imu_throttle
+          /system/events
+          /system/events_agg
+          /trekker/terrain_profile
+          /zoom_camera/lcsm/state
+        name: anymal_lpc_logger
+        node_type: record
+        package: rosbag
+    rqt_gui:  # We keep this legacy key for now, to make sure the preprocessed parameters from the environment data packages still function.
+      preprocessed_params:
+        rviz_display_config:
+          key: /gui/rqt_rviz_widget/display_config
+          value: $(rospack find anymal_common)/config/non_ros/user_interface/rviz/config.rviz
+        state_machine_editor_default_path:
+          key: /rqt_state_machine_editor/default_path
+      roslaunch:
+        name: gui
+        node_type: anymal_gui_node
+        output: screen
+        package: anymal_gui
+        respawn: true
+        remap_args:
+          tf:
+            from: /tf
+            to: /tf_opc
+    slam:
+      preprocessed_params:
+        config_files_folder:
+          key: /slam/config_files_folder
+          value: $(rospack find anymal_common)/config/non_ros/perception/slam
+        mapping_load_map_on_launch_file:
+          key: /slam/mapping/load_map_on_launch_file_path
+      roslaunch:
+        name: slam
+        node_type: pharos_node
+        output: screen
+        package: pharos
+    state_estimator:
+      preprocessed_params:
+        parameter_path:
+          key: /state_estimator/parameter_path
+          value: $(rospack find anymal_common)/config/non_ros/perception/state_estimation
+      roslaunch:
+        cpuset: io_prio
+        name: state_estimator
+        node_type: anymal_state_estimator_tsif_node
+        output: screen
+        package: anymal_state_estimator_tsif
+state_estimator: # generation specific overlay
+  tsif:
+    angular_variance_threshold: 0.00014
+trekker:
+  blind_walk:
+    state_checks: &trekker_basic_state_checks
+      legs_crossing_check: false
+      max_initial_linear_velocity: 0.5
+      max_initial_angular_velocity: 2.0
+      max_angle_with_gravity: 1.0471975512
+    policy: '2021-05-26-11-42-52_1000.pb'
+    actuation_model_policy_file: 'anydrive_3_6_20210303.txt'
+    elevation_map_nan_behavior: 'plane_approximation'
+  elevation_map_topic: '/elevation_mapping/elevation_map_raw'
+  perceptive_walk:
+    state_checks: *trekker_basic_state_checks
+    policy: 'perceptive_walk_2022_09_29_08_34_34_1500.pt'
+    actuation_model_policy_file: 'anydrive_3_6_20210303.txt'
+    elevation_map_nan_behavior: 'plane_approximation'
+  run:
+    state_checks:
+      <<: *trekker_basic_state_checks
+      max_angle_with_gravity: 0.78539816339
+    policy: '2021-05-28-16-53-23_300_with_constants.pb'
+    actuation_model_policy_file: 'anydrive_3_6_20210303.txt'
+    elevation_map_nan_behavior: 'plane_approximation'
+  stair_climbing_lidar_down: &stair_climbing_mode
+    state_checks:
+      <<: *trekker_basic_state_checks
+      legs_crossing_check: true
+      max_angle_with_gravity: 1.57079632679
+    policy: 'stair_climbing_2022_05_05_09_35_48_1500.pt'
+    actuation_model_policy_file: 'anydrive_3_6_20210303.txt'
+    elevation_map_nan_behavior: 'plane_approximation'
+  stair_climbing_lidar_up: *stair_climbing_mode

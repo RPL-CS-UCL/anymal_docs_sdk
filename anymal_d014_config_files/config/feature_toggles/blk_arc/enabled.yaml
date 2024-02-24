@@ -1,0 +1,78 @@
+gui:
+  sensors:
+    blk_arc:
+      label: Blk Arc
+      order: 5
+      type: blk_arc
+#  rqt_rviz_widget: # map seems to work better (visual apprearance)
+#    fixed_frame: blk_map
+stack_launcher:
+  nodes:
+    blk_driver:
+      roslaunch:
+        name: blk_driver
+        node_type: blk_provider.py
+        output: screen
+        package: blk_driver
+        respawn: true
+  stacks:
+    npc_drivers:
+      nodes:
+        blk_driver:
+          enabled: true
+          name: blk_driver
+
+blk_driver:
+  supported_fw_revisions:
+    - 3.1.0
+    - 3.2.0
+  disable_powerline_checks: false # set this when debugging the sensor from a local computer, it disables pdb checks.
+  blk_in_base_frame: # specifies the location of the blk in the base frame of the robot.
+    x: 0
+    y: 0
+    z: 0.35
+    yaw_in_deg: 96
+  serial_number: 0 # set on .ros/config.yaml to the serial number on the device
+launch:
+  feature_toggles:
+    blk_arc: enabled # disabled
+
+blk_client:
+  clients:
+    download_recordings:
+      service: "/blk_driver/download_recordings"
+      persistent: false
+    get_free_robot_space:
+      service: "/blk_driver/get_free_robot_space"
+      persistent: false
+    get_free_sensor_space:
+      service: "/blk_driver/get_free_sensor_space"
+      persistent: false
+    get_recording_state:
+      service: "/blk_driver/get_recording_state"
+      persistent: false
+    list_downloaded_recordings:
+      service: "/blk_driver/list_downloaded_recordings"
+      persistent: false
+    list_recordings:
+      service: "/blk_driver/list_recordings"
+      persistent: false
+    remove_recordings:
+      service: "/blk_driver/remove_recordings"
+      persistent: false
+    start:
+      service: "/blk_driver/start"
+      persistent: false
+    stop:
+      service: "/blk_driver/stop"
+      persistent: false
+# Adds the blk behaviors to the supported states in the mission editor.
+rqt_state_machine_editor:
+  behavior_plugins:
+    perception_behavior_plugins:
+      namespace: perception_behavior_plugins
+      plugins:
+        BlkInteraction: BlkInteraction
+perception_behavior_plugins:
+  blk_interaction:
+    init_scan_duration: 10 # in seconds
