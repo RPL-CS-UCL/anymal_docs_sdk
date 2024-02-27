@@ -4,7 +4,7 @@ This document will reocrd commends that are usually be used
 ### Interfaces
 <div align="center">
   <a href="">
-    <img align="center" src="image/anymal_d014_hardware_interface.png" width="60%" alt="anymal_d014_hardware_interface">
+    <img align="center" src="image/anymal_d014_hardware_interface.png" width="50%" alt="anymal_d014_hardware_interface">
   </a> 
 </div>
 
@@ -12,7 +12,23 @@ This document will reocrd commends that are usually be used
 
 <div align="center">
   <a href="">
-    <img align="center" src="image/anymal_d014_network_connection.png" width="60%" alt="anymal_d014_network_connection">
+    <img align="center" src="image/anymal_d014_sensor_overview.png" width="50%" alt="anymal_d014_sensor_overview.png">
+  </a> 
+</div>
+
+</br>
+
+<div align="center">
+  <a href="">
+    <img align="center" src="image/anymal_d014_sensor_network_overview.png" width="50%" alt="anymal_d014_sensor_network_overview.png">
+  </a> 
+</div>
+
+</br>
+
+<div align="center">
+  <a href="">
+    <img align="center" src="image/anymal_d014_network_connection.png" width="50%" alt="anymal_d014_network_connection">
   </a> 
 </div>
 **NOTE:** Connect to the Robot: Green line is connected to the robot. Black line is connected to the PC with internet. 
