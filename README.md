@@ -28,6 +28,7 @@ anymal_docs_sdk
 		sudo apt autoremove
 		sudo apt autoclean
 		```
+		- Install simulation: ```sudo apt install ros-noetic-anymal-d-sim'''
 
 ### Document
 1. Operator manual of Anymal-D: [pdf](docs/anymal_d_operators_manual.pdf) and [online document](https://anymal-research.docs.anymal.com/user_manual/anymal_d100_operators_manual-workforce_app/release-23.12/html/PlaceHolder-Topics/LaunchPage.htm).
