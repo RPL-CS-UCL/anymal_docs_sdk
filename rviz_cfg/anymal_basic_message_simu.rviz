@@ -5,8 +5,6 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Axes1
-        - /Axes1/TF1/Tree1/odom1
-        - /DepthPoint1
       Splitter Ratio: 0.42659759521484375
     Tree Height: 905
   - Class: rviz/Selection
@@ -46,436 +44,12 @@ Visualization Manager:
           Show Trail: false
           Value: true
         - Class: rviz/TF
-          Enabled: true
+          Enabled: false
           Filter (blacklist): ""
           Filter (whitelist): ""
           Frame Timeout: 15
           Frames:
             All Enabled: false
-            LF_FOOT:
-              Value: false
-            LF_HAA_drive:
-              Value: false
-            LF_HFE_drive:
-              Value: false
-            LF_HFE_output:
-              Value: false
-            LF_HIP:
-              Value: false
-            LF_KFE_drive:
-              Value: false
-            LF_SHANK:
-              Value: false
-            LF_THIGH:
-              Value: false
-            LF_hip_fixed:
-              Value: false
-            LF_shank_fixed:
-              Value: false
-            LF_thigh_fixed:
-              Value: false
-            LH_FOOT:
-              Value: false
-            LH_HAA_drive:
-              Value: false
-            LH_HFE_drive:
-              Value: false
-            LH_HFE_output:
-              Value: false
-            LH_HIP:
-              Value: false
-            LH_KFE_drive:
-              Value: false
-            LH_SHANK:
-              Value: false
-            LH_THIGH:
-              Value: false
-            LH_hip_fixed:
-              Value: false
-            LH_shank_fixed:
-              Value: false
-            LH_thigh_fixed:
-              Value: false
-            RF_FOOT:
-              Value: false
-            RF_HAA_drive:
-              Value: false
-            RF_HFE_drive:
-              Value: false
-            RF_HFE_output:
-              Value: false
-            RF_HIP:
-              Value: false
-            RF_KFE_drive:
-              Value: false
-            RF_SHANK:
-              Value: false
-            RF_THIGH:
-              Value: false
-            RF_hip_fixed:
-              Value: false
-            RF_shank_fixed:
-              Value: false
-            RF_thigh_fixed:
-              Value: false
-            RH_FOOT:
-              Value: false
-            RH_HAA_drive:
-              Value: false
-            RH_HFE_drive:
-              Value: false
-            RH_HFE_output:
-              Value: false
-            RH_HIP:
-              Value: false
-            RH_KFE_drive:
-              Value: false
-            RH_SHANK:
-              Value: false
-            RH_THIGH:
-              Value: false
-            RH_hip_fixed:
-              Value: false
-            RH_shank_fixed:
-              Value: false
-            RH_thigh_fixed:
-              Value: false
-            apriltag_0_size_18cm:
-              Value: false
-            apriltag_0_size_18cm__apriltag_0_size_18cm_link:
-              Value: false
-            apriltag_0_size_18cm__apriltag_0_size_18cm_link__visual__apriltag_0_size_18cm_visual:
-              Value: false
-            apriltag_1_size_10cm:
-              Value: false
-            apriltag_1_size_10cm__apriltag_1_size_10cm_link:
-              Value: false
-            apriltag_1_size_10cm__apriltag_1_size_10cm_link__visual__apriltag_1_size_10cm_visual:
-              Value: false
-            base:
-              Value: true
-            base_inertia:
-              Value: false
-            battery:
-              Value: false
-            body_top:
-              Value: false
-            bottom_shell:
-              Value: false
-            control:
-              Value: false
-            depth_camera_front_lower_camera:
-              Value: false
-            depth_camera_front_lower_camera_parent:
-              Value: false
-            depth_camera_front_lower_depth_frame:
-              Value: false
-            depth_camera_front_lower_depth_optical_frame:
-              Value: false
-            depth_camera_front_upper_camera:
-              Value: false
-            depth_camera_front_upper_camera_parent:
-              Value: false
-            depth_camera_front_upper_depth_frame:
-              Value: false
-            depth_camera_front_upper_depth_optical_frame:
-              Value: false
-            depth_camera_left_camera:
-              Value: false
-            depth_camera_left_camera_parent:
-              Value: false
-            depth_camera_left_depth_frame:
-              Value: false
-            depth_camera_left_depth_optical_frame:
-              Value: false
-            depth_camera_rear_lower_camera:
-              Value: false
-            depth_camera_rear_lower_camera_parent:
-              Value: false
-            depth_camera_rear_lower_depth_frame:
-              Value: false
-            depth_camera_rear_lower_depth_optical_frame:
-              Value: false
-            depth_camera_rear_upper_camera:
-              Value: false
-            depth_camera_rear_upper_camera_parent:
-              Value: false
-            depth_camera_rear_upper_depth_frame:
-              Value: false
-            depth_camera_rear_upper_depth_optical_frame:
-              Value: false
-            depth_camera_right_camera:
-              Value: false
-            depth_camera_right_camera_parent:
-              Value: false
-            depth_camera_right_depth_frame:
-              Value: false
-            depth_camera_right_depth_optical_frame:
-              Value: false
-            docking_socket:
-              Value: false
-            docking_station:
-              Value: false
-            docking_station__apriltag36_11_00000_link:
-              Value: false
-            docking_station__apriltag36_11_00000_link__visual__apriltag36_11_00000_visual:
-              Value: false
-            docking_station__apriltag36_11_00001_link:
-              Value: false
-            docking_station__apriltag36_11_00001_link__visual__apriltag36_11_00001_visual:
-              Value: false
-            docking_station__apriltag36_11_00002_link:
-              Value: false
-            docking_station__apriltag36_11_00002_link__visual__apriltag36_11_00002_visual:
-              Value: false
-            docking_station__apriltag36_11_00003_link:
-              Value: false
-            docking_station__apriltag36_11_00003_link__visual__apriltag36_11_00003_visual:
-              Value: false
-            docking_station__docking_port_link:
-              Value: false
-            docking_station__docking_port_link__visual__docking_port_visual:
-              Value: false
-            face_front:
-              Value: false
-            face_rear:
-              Value: false
-            face_shell_front:
-              Value: false
-            face_shell_rear:
-              Value: false
-            feetcenter:
-              Value: false
-            fire_extinguisher_1_ground_floor:
-              Value: false
-            fire_extinguisher_1_ground_floor__fire_extinguisher_1_link:
-              Value: false
-            fire_extinguisher_1_ground_floor__fire_extinguisher_1_link__visual__fire_extinguisher_1_visual:
-              Value: false
-            fire_extinguisher_2_ground_floor:
-              Value: false
-            fire_extinguisher_2_ground_floor__fire_extinguisher_2_link:
-              Value: false
-            fire_extinguisher_2_ground_floor__fire_extinguisher_2_link__visual__fire_extinguisher_2_visual:
-              Value: false
-            footprint:
-              Value: false
-            gauge_ground_floor_1:
-              Value: false
-            gauge_ground_floor_1__pressure_gauge_501_link:
-              Value: false
-            gauge_ground_floor_1__pressure_gauge_501_link__visual__pressure_gauge_501_visual:
-              Value: false
-            gauge_maze_exit:
-              Value: false
-            gauge_maze_exit__pressure_gauge_501_link:
-              Value: false
-            gauge_maze_exit__pressure_gauge_501_link__visual__pressure_gauge_501_visual:
-              Value: false
-            gauge_second_floor_2:
-              Value: false
-            gauge_second_floor_2__pressure_gauge_501_link:
-              Value: false
-            gauge_second_floor_2__pressure_gauge_501_link__visual__pressure_gauge_501_visual:
-              Value: false
-            hbc_receiver:
-              Value: false
-            heat_first_floor_1:
-              Value: false
-            heat_first_floor_1__heat_plate_0.9x0.9_e0.5_link:
-              Value: false
-            heat_first_floor_1__heat_plate_0.9x0.9_e0.5_link__visual__heat_plate_0.9x0.9_e0.5_visual:
-              Value: false
-            heat_first_floor_4:
-              Value: false
-            heat_first_floor_4__heat_plate_0.9x0.9_e0.1_link:
-              Value: false
-            heat_first_floor_4__heat_plate_0.9x0.9_e0.1_link__visual__heat_plate_0.9x0.9_e0.1_visual:
-              Value: false
-            heat_maze_entrance:
-              Value: false
-            heat_maze_entrance__heat_plate_0.15x0.15_e1.0_link:
-              Value: false
-            heat_maze_entrance__heat_plate_0.15x0.15_e1.0_link__visual__heat_plate_0.15x0.15_e1.0_visual:
-              Value: false
-            imu_link:
-              Value: false
-            inspection_payload_camera:
-              Value: false
-            inspection_payload_camera_default:
-              Value: false
-            inspection_payload_head:
-              Value: false
-            inspection_payload_light:
-              Value: false
-            inspection_payload_microphone:
-              Value: false
-            inspection_payload_mount:
-              Value: false
-            inspection_payload_pan:
-              Value: false
-            inspection_payload_thermal_camera:
-              Value: false
-            inspection_payload_tilt:
-              Value: false
-            lidar:
-              Value: true
-            lidar_parent:
-              Value: false
-            linear_gauge_1_ground_floor:
-              Value: false
-            linear_gauge_1_ground_floor__linear_gauge_1_link:
-              Value: false
-            linear_gauge_1_ground_floor__linear_gauge_1_link__visual__linear_gauge_1_visual:
-              Value: false
-            loco_footprint:
-              Value: false
-            map:
-              Value: true
-            odom:
-              Value: true
-            playground:
-              Value: false
-            playground__playground:
-              Value: false
-            playground__playground__collision__collision:
-              Value: false
-            playground__playground__visual__visual:
-              Value: false
-            playground__slippery_area:
-              Value: false
-            playground__slippery_area__collision__collision:
-              Value: false
-            playground__slippery_area__visual__visual:
-              Value: false
-            playground__very_slippery_area:
-              Value: false
-            playground__very_slippery_area__collision__collision:
-              Value: false
-            playground__very_slippery_area__visual__visual:
-              Value: false
-            point_cloud_odom:
-              Value: false
-            round_gauge_1_ground_floor:
-              Value: false
-            round_gauge_1_ground_floor__round_gauge_1_link:
-              Value: false
-            round_gauge_1_ground_floor__round_gauge_1_link__visual__round_gauge_1_visual:
-              Value: false
-            round_gauge_2_ground_floor:
-              Value: false
-            round_gauge_2_ground_floor__round_gauge_2_link:
-              Value: false
-            round_gauge_2_ground_floor__round_gauge_2_link__visual__round_gauge_2_visual:
-              Value: false
-            round_gauge_501_ground_floor:
-              Value: false
-            round_gauge_501_ground_floor__pressure_gauge_501_link:
-              Value: false
-            round_gauge_501_ground_floor__pressure_gauge_501_link__visual__pressure_gauge_501_visual:
-              Value: false
-            safety_helmet_1_ground_floor:
-              Value: false
-            safety_helmet_1_ground_floor__safety_helmet_1_link:
-              Value: false
-            safety_helmet_1_ground_floor__safety_helmet_1_link__visual__safety_helmet_1_visual:
-              Value: false
-            slam_submap_0228d634-9f8b-4b9b-9342-4ee3bebfb86b:
-              Value: false
-            slam_submap_07ea04ad-57f8-4e7c-93ee-9cf9f3b4bba7:
-              Value: false
-            slam_submap_0b57c2e3-d0a2-47f0-8238-7f5b354b3399:
-              Value: false
-            slam_submap_16f6bbf3-d7e7-492a-be6c-53833e776c5b:
-              Value: false
-            slam_submap_211ad498-7c9e-4346-a7fe-282f5ac61fa7:
-              Value: false
-            slam_submap_35e027e2-e262-4ac4-9cb6-51ac742b8d69:
-              Value: false
-            slam_submap_3ae4396c-412f-4402-b565-528e7dd35524:
-              Value: false
-            slam_submap_414feb16-8d1d-44f8-abca-761a574a6eab:
-              Value: false
-            slam_submap_4adf33fa-1e8a-4691-9e27-5be0a0453531:
-              Value: false
-            slam_submap_4b8124e5-f323-4aa8-a86b-a10cdd652164:
-              Value: false
-            slam_submap_4e2b0302-a6ec-4e4f-9b56-915ffb9a45dc:
-              Value: false
-            slam_submap_689ff921-0a40-4fda-95b6-950141aa33bc:
-              Value: false
-            slam_submap_8c155061-238a-48de-b5f9-1db43aad1823:
-              Value: false
-            slam_submap_8cd4fba6-d4e8-480f-b2c9-1661fd13a4b8:
-              Value: false
-            slam_submap_9471ef77-4ecd-4bf6-9cf6-57c2346a8014:
-              Value: false
-            slam_submap_a1d016bb-2c3d-4495-beee-1ce13d3a37fc:
-              Value: false
-            slam_submap_aa7cae19-e180-48b7-9ce0-c067fecc2326:
-              Value: false
-            slam_submap_acc57413-3d95-41e1-9829-4b8f8377ced1:
-              Value: false
-            slam_submap_add9353e-7396-4d36-9214-a670a7bce1e5:
-              Value: false
-            slam_submap_b11bb333-7f2d-488a-bbd5-3fd90de9ca39:
-              Value: false
-            slam_submap_b91d8836-418e-455d-8f26-173b818ff918:
-              Value: false
-            slam_submap_ba0558aa-bd3e-4b23-996f-f5ac68231216:
-              Value: false
-            slam_submap_c5f22ac4-9b9b-449c-9130-0cf2a1616fc7:
-              Value: false
-            slam_submap_c67dce8b-ff9b-479c-9771-d6ac42d2c3b7:
-              Value: false
-            slam_submap_cfbe539d-d387-4ac3-b065-193d584ad6de:
-              Value: false
-            slam_submap_debeb825-deb5-4378-aa8e-3de4df91301d:
-              Value: false
-            slam_submap_e253bd3c-a915-4fd9-bd64-07069ad069e0:
-              Value: false
-            slam_submap_e32aaba5-23b0-4301-9371-19b52ebf54ea:
-              Value: false
-            slam_submap_e3d8bdfb-5701-4fab-b7d2-f528f559b287:
-              Value: false
-            slam_submap_e3fd7f36-7204-4044-bb49-56d3e25f3a00:
-              Value: false
-            slam_submap_e9e24e6e-190b-42e3-895c-762fc02ae048:
-              Value: false
-            slam_submap_eccee932-b69a-411d-8fe5-0e4303a94421:
-              Value: false
-            slam_submap_f1a48c90-8e85-43d4-a7fa-08e1315551bc:
-              Value: false
-            slam_submap_fd18da48-4cc5-43ce-bf98-9ea184d59d18:
-              Value: false
-            slam_submap_fda71475-8abb-4bae-a4c2-e875dc8ac93e:
-              Value: false
-            slam_submap_ff955455-8989-49bb-b071-e10533c19200:
-              Value: false
-            square_gauge_1_ground_floor:
-              Value: false
-            square_gauge_1_ground_floor__square_gauge_1_link:
-              Value: false
-            square_gauge_1_ground_floor__square_gauge_1_link__visual__square_gauge_1_visual:
-              Value: false
-            square_gauge_2_ground_floor:
-              Value: false
-            square_gauge_2_ground_floor__square_gauge_2_link:
-              Value: false
-            square_gauge_2_ground_floor__square_gauge_2_link__visual__square_gauge_2_visual:
-              Value: false
-            top_shell:
-              Value: false
-            wide_angle_camera_front_camera:
-              Value: false
-            wide_angle_camera_front_camera_parent:
-              Value: false
-            wide_angle_camera_rear_camera:
-              Value: false
-            wide_angle_camera_rear_camera_parent:
-              Value: false
-            world:
-              Value: true
           Marker Alpha: 1
           Marker Scale: 3
           Name: TF
@@ -483,318 +57,9 @@ Visualization Manager:
           Show Axes: true
           Show Names: true
           Tree:
-            odom:
-              base:
-                LF_HAA_drive:
-                  LF_HIP:
-                    LF_hip_fixed:
-                      LF_HFE_output:
-                        LF_THIGH:
-                          LF_HFE_drive:
-                            LF_thigh_fixed:
-                              LF_KFE_drive:
-                                LF_SHANK:
-                                  LF_shank_fixed:
-                                    LF_FOOT:
-                                      {}
-                LH_HAA_drive:
-                  LH_HIP:
-                    LH_hip_fixed:
-                      LH_HFE_output:
-                        LH_THIGH:
-                          LH_HFE_drive:
-                            LH_thigh_fixed:
-                              LH_KFE_drive:
-                                LH_SHANK:
-                                  LH_shank_fixed:
-                                    LH_FOOT:
-                                      {}
-                RF_HAA_drive:
-                  RF_HIP:
-                    RF_hip_fixed:
-                      RF_HFE_output:
-                        RF_THIGH:
-                          RF_HFE_drive:
-                            RF_thigh_fixed:
-                              RF_KFE_drive:
-                                RF_SHANK:
-                                  RF_shank_fixed:
-                                    RF_FOOT:
-                                      {}
-                RH_HAA_drive:
-                  RH_HIP:
-                    RH_hip_fixed:
-                      RH_HFE_output:
-                        RH_THIGH:
-                          RH_HFE_drive:
-                            RH_thigh_fixed:
-                              RH_KFE_drive:
-                                RH_SHANK:
-                                  RH_shank_fixed:
-                                    RH_FOOT:
-                                      {}
-                base_inertia:
-                  {}
-                battery:
-                  {}
-                body_top:
-                  {}
-                bottom_shell:
-                  {}
-                depth_camera_left_camera:
-                  depth_camera_left_camera_parent:
-                    depth_camera_left_depth_frame:
-                      depth_camera_left_depth_optical_frame:
-                        {}
-                depth_camera_right_camera:
-                  depth_camera_right_camera_parent:
-                    depth_camera_right_depth_frame:
-                      depth_camera_right_depth_optical_frame:
-                        {}
-                docking_socket:
-                  {}
-                face_front:
-                  depth_camera_front_lower_camera:
-                    depth_camera_front_lower_camera_parent:
-                      depth_camera_front_lower_depth_frame:
-                        depth_camera_front_lower_depth_optical_frame:
-                          {}
-                  depth_camera_front_upper_camera:
-                    depth_camera_front_upper_camera_parent:
-                      depth_camera_front_upper_depth_frame:
-                        depth_camera_front_upper_depth_optical_frame:
-                          {}
-                  face_shell_front:
-                    {}
-                  wide_angle_camera_front_camera:
-                    wide_angle_camera_front_camera_parent:
-                      {}
-                face_rear:
-                  depth_camera_rear_lower_camera:
-                    depth_camera_rear_lower_camera_parent:
-                      depth_camera_rear_lower_depth_frame:
-                        depth_camera_rear_lower_depth_optical_frame:
-                          {}
-                  depth_camera_rear_upper_camera:
-                    depth_camera_rear_upper_camera_parent:
-                      depth_camera_rear_upper_depth_frame:
-                        depth_camera_rear_upper_depth_optical_frame:
-                          {}
-                  face_shell_rear:
-                    {}
-                  wide_angle_camera_rear_camera:
-                    wide_angle_camera_rear_camera_parent:
-                      {}
-                hbc_receiver:
-                  {}
-                imu_link:
-                  {}
-                inspection_payload_mount:
-                  inspection_payload_camera_default:
-                    {}
-                  inspection_payload_pan:
-                    inspection_payload_tilt:
-                      inspection_payload_head:
-                        inspection_payload_camera:
-                          {}
-                        inspection_payload_light:
-                          {}
-                        inspection_payload_microphone:
-                          {}
-                        inspection_payload_thermal_camera:
-                          {}
-                lidar_parent:
-                  lidar:
-                    {}
-                top_shell:
-                  {}
-              control:
-                {}
-              feetcenter:
-                {}
-              footprint:
-                {}
-              loco_footprint:
-                {}
-              map:
-                apriltag_0_size_18cm:
-                  apriltag_0_size_18cm__apriltag_0_size_18cm_link:
-                    apriltag_0_size_18cm__apriltag_0_size_18cm_link__visual__apriltag_0_size_18cm_visual:
-                      {}
-                apriltag_1_size_10cm:
-                  apriltag_1_size_10cm__apriltag_1_size_10cm_link:
-                    apriltag_1_size_10cm__apriltag_1_size_10cm_link__visual__apriltag_1_size_10cm_visual:
-                      {}
-                docking_station:
-                  docking_station__apriltag36_11_00000_link:
-                    docking_station__apriltag36_11_00000_link__visual__apriltag36_11_00000_visual:
-                      {}
-                  docking_station__apriltag36_11_00001_link:
-                    docking_station__apriltag36_11_00001_link__visual__apriltag36_11_00001_visual:
-                      {}
-                  docking_station__apriltag36_11_00002_link:
-                    docking_station__apriltag36_11_00002_link__visual__apriltag36_11_00002_visual:
-                      {}
-                  docking_station__apriltag36_11_00003_link:
-                    docking_station__apriltag36_11_00003_link__visual__apriltag36_11_00003_visual:
-                      {}
-                  docking_station__docking_port_link:
-                    docking_station__docking_port_link__visual__docking_port_visual:
-                      {}
-                fire_extinguisher_1_ground_floor:
-                  fire_extinguisher_1_ground_floor__fire_extinguisher_1_link:
-                    fire_extinguisher_1_ground_floor__fire_extinguisher_1_link__visual__fire_extinguisher_1_visual:
-                      {}
-                fire_extinguisher_2_ground_floor:
-                  fire_extinguisher_2_ground_floor__fire_extinguisher_2_link:
-                    fire_extinguisher_2_ground_floor__fire_extinguisher_2_link__visual__fire_extinguisher_2_visual:
-                      {}
-                gauge_ground_floor_1:
-                  gauge_ground_floor_1__pressure_gauge_501_link:
-                    gauge_ground_floor_1__pressure_gauge_501_link__visual__pressure_gauge_501_visual:
-                      {}
-                gauge_maze_exit:
-                  gauge_maze_exit__pressure_gauge_501_link:
-                    gauge_maze_exit__pressure_gauge_501_link__visual__pressure_gauge_501_visual:
-                      {}
-                gauge_second_floor_2:
-                  gauge_second_floor_2__pressure_gauge_501_link:
-                    gauge_second_floor_2__pressure_gauge_501_link__visual__pressure_gauge_501_visual:
-                      {}
-                heat_first_floor_1:
-                  heat_first_floor_1__heat_plate_0.9x0.9_e0.5_link:
-                    heat_first_floor_1__heat_plate_0.9x0.9_e0.5_link__visual__heat_plate_0.9x0.9_e0.5_visual:
-                      {}
-                heat_first_floor_4:
-                  heat_first_floor_4__heat_plate_0.9x0.9_e0.1_link:
-                    heat_first_floor_4__heat_plate_0.9x0.9_e0.1_link__visual__heat_plate_0.9x0.9_e0.1_visual:
-                      {}
-                heat_maze_entrance:
-                  heat_maze_entrance__heat_plate_0.15x0.15_e1.0_link:
-                    heat_maze_entrance__heat_plate_0.15x0.15_e1.0_link__visual__heat_plate_0.15x0.15_e1.0_visual:
-                      {}
-                linear_gauge_1_ground_floor:
-                  linear_gauge_1_ground_floor__linear_gauge_1_link:
-                    linear_gauge_1_ground_floor__linear_gauge_1_link__visual__linear_gauge_1_visual:
-                      {}
-                playground:
-                  playground__playground:
-                    playground__playground__collision__collision:
-                      {}
-                    playground__playground__visual__visual:
-                      {}
-                  playground__slippery_area:
-                    playground__slippery_area__collision__collision:
-                      {}
-                    playground__slippery_area__visual__visual:
-                      {}
-                  playground__very_slippery_area:
-                    playground__very_slippery_area__collision__collision:
-                      {}
-                    playground__very_slippery_area__visual__visual:
-                      {}
-                round_gauge_1_ground_floor:
-                  round_gauge_1_ground_floor__round_gauge_1_link:
-                    round_gauge_1_ground_floor__round_gauge_1_link__visual__round_gauge_1_visual:
-                      {}
-                round_gauge_2_ground_floor:
-                  round_gauge_2_ground_floor__round_gauge_2_link:
-                    round_gauge_2_ground_floor__round_gauge_2_link__visual__round_gauge_2_visual:
-                      {}
-                round_gauge_501_ground_floor:
-                  round_gauge_501_ground_floor__pressure_gauge_501_link:
-                    round_gauge_501_ground_floor__pressure_gauge_501_link__visual__pressure_gauge_501_visual:
-                      {}
-                safety_helmet_1_ground_floor:
-                  safety_helmet_1_ground_floor__safety_helmet_1_link:
-                    safety_helmet_1_ground_floor__safety_helmet_1_link__visual__safety_helmet_1_visual:
-                      {}
-                slam_submap_0228d634-9f8b-4b9b-9342-4ee3bebfb86b:
-                  {}
-                slam_submap_07ea04ad-57f8-4e7c-93ee-9cf9f3b4bba7:
-                  {}
-                slam_submap_0b57c2e3-d0a2-47f0-8238-7f5b354b3399:
-                  {}
-                slam_submap_16f6bbf3-d7e7-492a-be6c-53833e776c5b:
-                  {}
-                slam_submap_211ad498-7c9e-4346-a7fe-282f5ac61fa7:
-                  {}
-                slam_submap_35e027e2-e262-4ac4-9cb6-51ac742b8d69:
-                  {}
-                slam_submap_3ae4396c-412f-4402-b565-528e7dd35524:
-                  {}
-                slam_submap_414feb16-8d1d-44f8-abca-761a574a6eab:
-                  {}
-                slam_submap_4adf33fa-1e8a-4691-9e27-5be0a0453531:
-                  {}
-                slam_submap_4b8124e5-f323-4aa8-a86b-a10cdd652164:
-                  {}
-                slam_submap_4e2b0302-a6ec-4e4f-9b56-915ffb9a45dc:
-                  {}
-                slam_submap_689ff921-0a40-4fda-95b6-950141aa33bc:
-                  {}
-                slam_submap_8c155061-238a-48de-b5f9-1db43aad1823:
-                  {}
-                slam_submap_8cd4fba6-d4e8-480f-b2c9-1661fd13a4b8:
-                  {}
-                slam_submap_9471ef77-4ecd-4bf6-9cf6-57c2346a8014:
-                  {}
-                slam_submap_a1d016bb-2c3d-4495-beee-1ce13d3a37fc:
-                  {}
-                slam_submap_aa7cae19-e180-48b7-9ce0-c067fecc2326:
-                  {}
-                slam_submap_acc57413-3d95-41e1-9829-4b8f8377ced1:
-                  {}
-                slam_submap_add9353e-7396-4d36-9214-a670a7bce1e5:
-                  {}
-                slam_submap_b11bb333-7f2d-488a-bbd5-3fd90de9ca39:
-                  {}
-                slam_submap_b91d8836-418e-455d-8f26-173b818ff918:
-                  {}
-                slam_submap_ba0558aa-bd3e-4b23-996f-f5ac68231216:
-                  {}
-                slam_submap_c5f22ac4-9b9b-449c-9130-0cf2a1616fc7:
-                  {}
-                slam_submap_c67dce8b-ff9b-479c-9771-d6ac42d2c3b7:
-                  {}
-                slam_submap_cfbe539d-d387-4ac3-b065-193d584ad6de:
-                  {}
-                slam_submap_debeb825-deb5-4378-aa8e-3de4df91301d:
-                  {}
-                slam_submap_e253bd3c-a915-4fd9-bd64-07069ad069e0:
-                  {}
-                slam_submap_e32aaba5-23b0-4301-9371-19b52ebf54ea:
-                  {}
-                slam_submap_e3d8bdfb-5701-4fab-b7d2-f528f559b287:
-                  {}
-                slam_submap_e3fd7f36-7204-4044-bb49-56d3e25f3a00:
-                  {}
-                slam_submap_e9e24e6e-190b-42e3-895c-762fc02ae048:
-                  {}
-                slam_submap_eccee932-b69a-411d-8fe5-0e4303a94421:
-                  {}
-                slam_submap_f1a48c90-8e85-43d4-a7fa-08e1315551bc:
-                  {}
-                slam_submap_fd18da48-4cc5-43ce-bf98-9ea184d59d18:
-                  {}
-                slam_submap_fda71475-8abb-4bae-a4c2-e875dc8ac93e:
-                  {}
-                slam_submap_ff955455-8989-49bb-b071-e10533c19200:
-                  {}
-                square_gauge_1_ground_floor:
-                  square_gauge_1_ground_floor__square_gauge_1_link:
-                    square_gauge_1_ground_floor__square_gauge_1_link__visual__square_gauge_1_visual:
-                      {}
-                square_gauge_2_ground_floor:
-                  square_gauge_2_ground_floor__square_gauge_2_link:
-                    square_gauge_2_ground_floor__square_gauge_2_link__visual__square_gauge_2_visual:
-                      {}
-              point_cloud_odom:
-                {}
-              world:
-                {}
+            {}
           Update Interval: 0
-          Value: true
+          Value: false
         - Attached Body Color: 150; 50; 150
           Class: moveit_rviz_plugin/RobotState
           Collision Enabled: false
@@ -1745,29 +1010,13 @@ Visualization Manager:
       Enabled: true
       Name: DepthPoint
     - Alpha: 1
-      Axes Length: 1
-      Axes Radius: 0.10000000149011612
-      Class: rviz/Pose
-      Color: 255; 25; 0
-      Enabled: false
-      Head Length: 0.30000001192092896
-      Head Radius: 0.10000000149011612
-      Name: Pose
-      Queue Size: 10
-      Shaft Length: 1
-      Shaft Radius: 0.05000000074505806
-      Shape: Axes
-      Topic: /slam/pose
-      Unreliable: false
-      Value: false
-    - Alpha: 1
       Autocompute Intensity Bounds: true
       Class: grid_map_rviz_plugin/GridMap
       Color: 200; 200; 200
       Color Layer: elevation
       Color Transformer: IntensityLayer
       ColorMap: coolwarm
-      Enabled: true
+      Enabled: false
       Grid Cell Decimation: 1
       Grid Line Thickness: 0.10000000149011612
       Height Layer: elevation
@@ -1783,7 +1032,7 @@ Visualization Manager:
       Topic: /elevation_mapping/elevation_map_raw
       Unreliable: false
       Use ColorMap: true
-      Value: true
+      Value: false
     - Class: rviz/Group
       Displays:
         - Alpha: 1
@@ -1814,6 +1063,34 @@ Visualization Manager:
           Use Fixed Frame: true
           Use rainbow: true
           Value: true
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: Intensity
+          Decay Time: 0
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Min Color: 0; 0; 0
+          Name: RegLidarCloud
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 2
+          Size (m): 0.009999999776482582
+          Style: Points
+          Topic: /slam/input_point_cloud_registered
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
         - Alpha: 0.30000001192092896
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -1826,7 +1103,7 @@ Visualization Manager:
           Color: 255; 255; 255
           Color Transformer: Intensity
           Decay Time: 0
-          Enabled: true
+          Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Min Color: 0; 0; 0
@@ -1841,14 +1118,135 @@ Visualization Manager:
           Unreliable: false
           Use Fixed Frame: true
           Use rainbow: true
+          Value: false
+        - Alpha: 0.5
+          Axes Length: 0.5
+          Axes Radius: 0.009999999776482582
+          Class: rviz/Pose
+          Color: 255; 25; 0
+          Enabled: true
+          Head Length: 0.10000000149011612
+          Head Radius: 0.10000000149011612
+          Name: SLAMPose
+          Queue Size: 10
+          Shaft Length: 0.5
+          Shaft Radius: 0.05000000074505806
+          Shape: Arrow
+          Topic: /slam/pose
+          Unreliable: false
           Value: true
       Enabled: true
       Name: SLAM
+    - Class: rviz/Group
+      Displays:
+        - Angle Tolerance: 0.5
+          Class: rviz/Odometry
+          Covariance:
+            Orientation:
+              Alpha: 0.5
+              Color: 255; 255; 127
+              Color Style: Unique
+              Frame: Local
+              Offset: 1
+              Scale: 1
+              Value: true
+            Position:
+              Alpha: 0.30000001192092896
+              Color: 204; 51; 204
+              Scale: 1
+              Value: true
+            Value: true
+          Enabled: false
+          Keep: 100
+          Name: Odometry
+          Position Tolerance: 1
+          Queue Size: 10
+          Shape:
+            Alpha: 1
+            Axes Length: 0.5
+            Axes Radius: 0.05000000074505806
+            Color: 255; 25; 0
+            Head Length: 0.30000001192092896
+            Head Radius: 0.10000000149011612
+            Shaft Length: 1
+            Shaft Radius: 0.05000000074505806
+            Value: Axes
+          Topic: /anymal/pose_in_sim_world
+          Unreliable: false
+          Value: false
+      Enabled: true
+      Name: Gazebo
+    - Alpha: 1
+      Axes Length: 0.5
+      Axes Radius: 0.009999999776482582
+      Class: rviz/PoseWithCovariance
+      Color: 255; 25; 0
+      Covariance:
+        Orientation:
+          Alpha: 0.5
+          Color: 255; 255; 127
+          Color Style: Unique
+          Frame: Local
+          Offset: 1
+          Scale: 1
+          Value: true
+        Position:
+          Alpha: 0.30000001192092896
+          Color: 204; 51; 204
+          Scale: 1
+          Value: true
+        Value: true
+      Enabled: false
+      Head Length: 0.30000001192092896
+      Head Radius: 0.10000000149011612
+      Name: StateEstimatorPoseWithCovariance
+      Queue Size: 10
+      Shaft Length: 0.5
+      Shaft Radius: 0.05000000074505806
+      Shape: Arrow
+      Topic: /state_estimator/pose_in_odom
+      Unreliable: false
+      Value: false
+    - Angle Tolerance: 0.5
+      Class: rviz/Odometry
+      Covariance:
+        Orientation:
+          Alpha: 0.5
+          Color: 255; 255; 127
+          Color Style: Unique
+          Frame: Local
+          Offset: 1
+          Scale: 1
+          Value: true
+        Position:
+          Alpha: 0.30000001192092896
+          Color: 204; 51; 204
+          Scale: 1
+          Value: true
+        Value: true
+      Enabled: true
+      Keep: 100
+      Name: StateEstimatorOdometry
+      Position Tolerance: 1
+      Queue Size: 10
+      Shape:
+        Alpha: 1
+        Axes Length: 0.5
+        Axes Radius: 0.05000000074505806
+        Color: 255; 25; 0
+        Head Length: 0.30000001192092896
+        Head Radius: 0.10000000149011612
+        Shaft Length: 1
+        Shaft Radius: 0.05000000074505806
+        Value: Axes
+      Topic: /state_estimator/odometry
+      Unreliable: false
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
     Default Light: true
-    Fixed Frame: base
+    Fixed Frame: odom
     Frame Rate: 30
   Name: root
   Tools:
@@ -1872,7 +1270,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 4.806573390960693
+      Distance: 12.289325714111328
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -1880,17 +1278,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 0.17150866985321045
-        Y: 0.5848239660263062
-        Z: -0.8462013602256775
+        X: 0.009390954859554768
+        Y: 0.6421211957931519
+        Z: -0.6866018176078796
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.8903982639312744
-      Target Frame: <Fixed Frame>
-      Yaw: 0.7053982615470886
+      Pitch: 0.6603987812995911
+      Target Frame: base
+      Yaw: 0.35539865493774414
     Saved: ~
 Window Geometry:
   Displays:

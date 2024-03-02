@@ -23,8 +23,9 @@
 </div>
 
 ```
-/state_estimator/anymal_state: state of lidar, base, joint
-/state_estimator/pose_in_odom: state of base using results of /slam/pose
+/state_estimator/anymal_state: state of base and joint, using priproc data
+/state_estimator/pose_in_odom: state in the odometry representation
+/slam/pose/pose: state in the point cloud map using lidar
 ```
 
 ### ROS Rqt_graph
