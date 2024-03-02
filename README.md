@@ -28,7 +28,7 @@ anymal_docs_sdk
 		sudo apt autoremove
 		sudo apt autoclean
 		```
-		- Install simulation: ```sudo apt install ros-noetic-anymal-d-sim'''
+		- Install simulation: ```sudo apt install ros-noetic-anymal-d-sim```
 
 ### Document
 1. Operator manual of Anymal-D: [pdf](docs/anymal_d_operators_manual.pdf) and [online document](https://anymal-research.docs.anymal.com/user_manual/anymal_d100_operators_manual-workforce_app/release-23.12/html/PlaceHolder-Topics/LaunchPage.htm).
@@ -56,14 +56,14 @@ anymal_docs_sdk
 1. [Anybotics Anymal Research](https://code.anymal.com/)
 	 - [Anymal research software stack](https://code.anymal.com/anymal-research-software/anymal-research-software)
 	 - [Anymal code examples for industrial applications](https://code.anymal.com/anymal/code_examples)
-	 
+	
 2. [RSL Anymal Research](https://rsl.ethz.ch/publications-sources/publications.html)
 	 - Mapping:
     	 - [Elevation Mapping-Cuda](https://github.com/leggedrobotics/elevation_mapping_cupy)
     	 - [Neural-Based Elevation Mapping](https://github.com/mstoelzle/solving-occlusion#solving-occlusion-in-terrain-mapping-with-neural-networks)
 	 - Planning:
     	 - [ArtPlanner](https://github.com/leggedrobotics/art_planner?tab=readme-ov-file#anymal-rough-terrain-planner): Sampling based path planning for ANYmal, based on 2.5D height maps using learned motion cost.
-  
+
 ### ANYbotics Contact Person 
 1. [Global Research Community Manager -- Benjamin Mottis](mailto:bmottis@anybotics.com)
 
