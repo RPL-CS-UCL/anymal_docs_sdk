@@ -1,0 +1,1928 @@
+Panels:
+  - Class: rviz/Displays
+    Help Height: 0
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Axes1
+        - /Axes1/TF1/Tree1/odom1
+        - /DepthPoint1
+      Splitter Ratio: 0.42659759521484375
+    Tree Height: 905
+  - Class: rviz/Selection
+    Name: Selection
+  - Class: rviz/Tool Properties
+    Expanded:
+      - /2D Pose Estimate1
+      - /2D Nav Goal1
+      - /Publish Point1
+    Name: Tool Properties
+    Splitter Ratio: 0.5886790156364441
+  - Class: rviz/Views
+    Expanded:
+      - /Current View1
+    Name: Views
+    Splitter Ratio: 0.5
+  - Class: rviz/Time
+    Name: Time
+    SyncMode: 0
+    SyncSource: rearWideCam
+Preferences:
+  PromptSaveOnExit: true
+Toolbars:
+  toolButtonStyle: 2
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz/Group
+      Displays:
+        - Alpha: 1
+          Class: rviz/Axes
+          Enabled: true
+          Length: 2
+          Name: Axes
+          Radius: 0.009999999776482582
+          Reference Frame: <Fixed Frame>
+          Show Trail: false
+          Value: true
+        - Class: rviz/TF
+          Enabled: true
+          Filter (blacklist): ""
+          Filter (whitelist): ""
+          Frame Timeout: 15
+          Frames:
+            All Enabled: false
+            LF_FOOT:
+              Value: false
+            LF_HAA_drive:
+              Value: false
+            LF_HFE_drive:
+              Value: false
+            LF_HFE_output:
+              Value: false
+            LF_HIP:
+              Value: false
+            LF_KFE_drive:
+              Value: false
+            LF_SHANK:
+              Value: false
+            LF_THIGH:
+              Value: false
+            LF_hip_fixed:
+              Value: false
+            LF_shank_fixed:
+              Value: false
+            LF_thigh_fixed:
+              Value: false
+            LH_FOOT:
+              Value: false
+            LH_HAA_drive:
+              Value: false
+            LH_HFE_drive:
+              Value: false
+            LH_HFE_output:
+              Value: false
+            LH_HIP:
+              Value: false
+            LH_KFE_drive:
+              Value: false
+            LH_SHANK:
+              Value: false
+            LH_THIGH:
+              Value: false
+            LH_hip_fixed:
+              Value: false
+            LH_shank_fixed:
+              Value: false
+            LH_thigh_fixed:
+              Value: false
+            RF_FOOT:
+              Value: false
+            RF_HAA_drive:
+              Value: false
+            RF_HFE_drive:
+              Value: false
+            RF_HFE_output:
+              Value: false
+            RF_HIP:
+              Value: false
+            RF_KFE_drive:
+              Value: false
+            RF_SHANK:
+              Value: false
+            RF_THIGH:
+              Value: false
+            RF_hip_fixed:
+              Value: false
+            RF_shank_fixed:
+              Value: false
+            RF_thigh_fixed:
+              Value: false
+            RH_FOOT:
+              Value: false
+            RH_HAA_drive:
+              Value: false
+            RH_HFE_drive:
+              Value: false
+            RH_HFE_output:
+              Value: false
+            RH_HIP:
+              Value: false
+            RH_KFE_drive:
+              Value: false
+            RH_SHANK:
+              Value: false
+            RH_THIGH:
+              Value: false
+            RH_hip_fixed:
+              Value: false
+            RH_shank_fixed:
+              Value: false
+            RH_thigh_fixed:
+              Value: false
+            apriltag_0_size_18cm:
+              Value: false
+            apriltag_0_size_18cm__apriltag_0_size_18cm_link:
+              Value: false
+            apriltag_0_size_18cm__apriltag_0_size_18cm_link__visual__apriltag_0_size_18cm_visual:
+              Value: false
+            apriltag_1_size_10cm:
+              Value: false
+            apriltag_1_size_10cm__apriltag_1_size_10cm_link:
+              Value: false
+            apriltag_1_size_10cm__apriltag_1_size_10cm_link__visual__apriltag_1_size_10cm_visual:
+              Value: false
+            base:
+              Value: true
+            base_inertia:
+              Value: false
+            battery:
+              Value: false
+            body_top:
+              Value: false
+            bottom_shell:
+              Value: false
+            control:
+              Value: false
+            depth_camera_front_lower_camera:
+              Value: false
+            depth_camera_front_lower_camera_parent:
+              Value: false
+            depth_camera_front_lower_depth_frame:
+              Value: false
+            depth_camera_front_lower_depth_optical_frame:
+              Value: false
+            depth_camera_front_upper_camera:
+              Value: false
+            depth_camera_front_upper_camera_parent:
+              Value: false
+            depth_camera_front_upper_depth_frame:
+              Value: false
+            depth_camera_front_upper_depth_optical_frame:
+              Value: false
+            depth_camera_left_camera:
+              Value: false
+            depth_camera_left_camera_parent:
+              Value: false
+            depth_camera_left_depth_frame:
+              Value: false
+            depth_camera_left_depth_optical_frame:
+              Value: false
+            depth_camera_rear_lower_camera:
+              Value: false
+            depth_camera_rear_lower_camera_parent:
+              Value: false
+            depth_camera_rear_lower_depth_frame:
+              Value: false
+            depth_camera_rear_lower_depth_optical_frame:
+              Value: false
+            depth_camera_rear_upper_camera:
+              Value: false
+            depth_camera_rear_upper_camera_parent:
+              Value: false
+            depth_camera_rear_upper_depth_frame:
+              Value: false
+            depth_camera_rear_upper_depth_optical_frame:
+              Value: false
+            depth_camera_right_camera:
+              Value: false
+            depth_camera_right_camera_parent:
+              Value: false
+            depth_camera_right_depth_frame:
+              Value: false
+            depth_camera_right_depth_optical_frame:
+              Value: false
+            docking_socket:
+              Value: false
+            docking_station:
+              Value: false
+            docking_station__apriltag36_11_00000_link:
+              Value: false
+            docking_station__apriltag36_11_00000_link__visual__apriltag36_11_00000_visual:
+              Value: false
+            docking_station__apriltag36_11_00001_link:
+              Value: false
+            docking_station__apriltag36_11_00001_link__visual__apriltag36_11_00001_visual:
+              Value: false
+            docking_station__apriltag36_11_00002_link:
+              Value: false
+            docking_station__apriltag36_11_00002_link__visual__apriltag36_11_00002_visual:
+              Value: false
+            docking_station__apriltag36_11_00003_link:
+              Value: false
+            docking_station__apriltag36_11_00003_link__visual__apriltag36_11_00003_visual:
+              Value: false
+            docking_station__docking_port_link:
+              Value: false
+            docking_station__docking_port_link__visual__docking_port_visual:
+              Value: false
+            face_front:
+              Value: false
+            face_rear:
+              Value: false
+            face_shell_front:
+              Value: false
+            face_shell_rear:
+              Value: false
+            feetcenter:
+              Value: false
+            fire_extinguisher_1_ground_floor:
+              Value: false
+            fire_extinguisher_1_ground_floor__fire_extinguisher_1_link:
+              Value: false
+            fire_extinguisher_1_ground_floor__fire_extinguisher_1_link__visual__fire_extinguisher_1_visual:
+              Value: false
+            fire_extinguisher_2_ground_floor:
+              Value: false
+            fire_extinguisher_2_ground_floor__fire_extinguisher_2_link:
+              Value: false
+            fire_extinguisher_2_ground_floor__fire_extinguisher_2_link__visual__fire_extinguisher_2_visual:
+              Value: false
+            footprint:
+              Value: false
+            gauge_ground_floor_1:
+              Value: false
+            gauge_ground_floor_1__pressure_gauge_501_link:
+              Value: false
+            gauge_ground_floor_1__pressure_gauge_501_link__visual__pressure_gauge_501_visual:
+              Value: false
+            gauge_maze_exit:
+              Value: false
+            gauge_maze_exit__pressure_gauge_501_link:
+              Value: false
+            gauge_maze_exit__pressure_gauge_501_link__visual__pressure_gauge_501_visual:
+              Value: false
+            gauge_second_floor_2:
+              Value: false
+            gauge_second_floor_2__pressure_gauge_501_link:
+              Value: false
+            gauge_second_floor_2__pressure_gauge_501_link__visual__pressure_gauge_501_visual:
+              Value: false
+            hbc_receiver:
+              Value: false
+            heat_first_floor_1:
+              Value: false
+            heat_first_floor_1__heat_plate_0.9x0.9_e0.5_link:
+              Value: false
+            heat_first_floor_1__heat_plate_0.9x0.9_e0.5_link__visual__heat_plate_0.9x0.9_e0.5_visual:
+              Value: false
+            heat_first_floor_4:
+              Value: false
+            heat_first_floor_4__heat_plate_0.9x0.9_e0.1_link:
+              Value: false
+            heat_first_floor_4__heat_plate_0.9x0.9_e0.1_link__visual__heat_plate_0.9x0.9_e0.1_visual:
+              Value: false
+            heat_maze_entrance:
+              Value: false
+            heat_maze_entrance__heat_plate_0.15x0.15_e1.0_link:
+              Value: false
+            heat_maze_entrance__heat_plate_0.15x0.15_e1.0_link__visual__heat_plate_0.15x0.15_e1.0_visual:
+              Value: false
+            imu_link:
+              Value: false
+            inspection_payload_camera:
+              Value: false
+            inspection_payload_camera_default:
+              Value: false
+            inspection_payload_head:
+              Value: false
+            inspection_payload_light:
+              Value: false
+            inspection_payload_microphone:
+              Value: false
+            inspection_payload_mount:
+              Value: false
+            inspection_payload_pan:
+              Value: false
+            inspection_payload_thermal_camera:
+              Value: false
+            inspection_payload_tilt:
+              Value: false
+            lidar:
+              Value: true
+            lidar_parent:
+              Value: false
+            linear_gauge_1_ground_floor:
+              Value: false
+            linear_gauge_1_ground_floor__linear_gauge_1_link:
+              Value: false
+            linear_gauge_1_ground_floor__linear_gauge_1_link__visual__linear_gauge_1_visual:
+              Value: false
+            loco_footprint:
+              Value: false
+            map:
+              Value: true
+            odom:
+              Value: true
+            playground:
+              Value: false
+            playground__playground:
+              Value: false
+            playground__playground__collision__collision:
+              Value: false
+            playground__playground__visual__visual:
+              Value: false
+            playground__slippery_area:
+              Value: false
+            playground__slippery_area__collision__collision:
+              Value: false
+            playground__slippery_area__visual__visual:
+              Value: false
+            playground__very_slippery_area:
+              Value: false
+            playground__very_slippery_area__collision__collision:
+              Value: false
+            playground__very_slippery_area__visual__visual:
+              Value: false
+            point_cloud_odom:
+              Value: false
+            round_gauge_1_ground_floor:
+              Value: false
+            round_gauge_1_ground_floor__round_gauge_1_link:
+              Value: false
+            round_gauge_1_ground_floor__round_gauge_1_link__visual__round_gauge_1_visual:
+              Value: false
+            round_gauge_2_ground_floor:
+              Value: false
+            round_gauge_2_ground_floor__round_gauge_2_link:
+              Value: false
+            round_gauge_2_ground_floor__round_gauge_2_link__visual__round_gauge_2_visual:
+              Value: false
+            round_gauge_501_ground_floor:
+              Value: false
+            round_gauge_501_ground_floor__pressure_gauge_501_link:
+              Value: false
+            round_gauge_501_ground_floor__pressure_gauge_501_link__visual__pressure_gauge_501_visual:
+              Value: false
+            safety_helmet_1_ground_floor:
+              Value: false
+            safety_helmet_1_ground_floor__safety_helmet_1_link:
+              Value: false
+            safety_helmet_1_ground_floor__safety_helmet_1_link__visual__safety_helmet_1_visual:
+              Value: false
+            slam_submap_0228d634-9f8b-4b9b-9342-4ee3bebfb86b:
+              Value: false
+            slam_submap_07ea04ad-57f8-4e7c-93ee-9cf9f3b4bba7:
+              Value: false
+            slam_submap_0b57c2e3-d0a2-47f0-8238-7f5b354b3399:
+              Value: false
+            slam_submap_16f6bbf3-d7e7-492a-be6c-53833e776c5b:
+              Value: false
+            slam_submap_211ad498-7c9e-4346-a7fe-282f5ac61fa7:
+              Value: false
+            slam_submap_35e027e2-e262-4ac4-9cb6-51ac742b8d69:
+              Value: false
+            slam_submap_3ae4396c-412f-4402-b565-528e7dd35524:
+              Value: false
+            slam_submap_414feb16-8d1d-44f8-abca-761a574a6eab:
+              Value: false
+            slam_submap_4adf33fa-1e8a-4691-9e27-5be0a0453531:
+              Value: false
+            slam_submap_4b8124e5-f323-4aa8-a86b-a10cdd652164:
+              Value: false
+            slam_submap_4e2b0302-a6ec-4e4f-9b56-915ffb9a45dc:
+              Value: false
+            slam_submap_689ff921-0a40-4fda-95b6-950141aa33bc:
+              Value: false
+            slam_submap_8c155061-238a-48de-b5f9-1db43aad1823:
+              Value: false
+            slam_submap_8cd4fba6-d4e8-480f-b2c9-1661fd13a4b8:
+              Value: false
+            slam_submap_9471ef77-4ecd-4bf6-9cf6-57c2346a8014:
+              Value: false
+            slam_submap_a1d016bb-2c3d-4495-beee-1ce13d3a37fc:
+              Value: false
+            slam_submap_aa7cae19-e180-48b7-9ce0-c067fecc2326:
+              Value: false
+            slam_submap_acc57413-3d95-41e1-9829-4b8f8377ced1:
+              Value: false
+            slam_submap_add9353e-7396-4d36-9214-a670a7bce1e5:
+              Value: false
+            slam_submap_b11bb333-7f2d-488a-bbd5-3fd90de9ca39:
+              Value: false
+            slam_submap_b91d8836-418e-455d-8f26-173b818ff918:
+              Value: false
+            slam_submap_ba0558aa-bd3e-4b23-996f-f5ac68231216:
+              Value: false
+            slam_submap_c5f22ac4-9b9b-449c-9130-0cf2a1616fc7:
+              Value: false
+            slam_submap_c67dce8b-ff9b-479c-9771-d6ac42d2c3b7:
+              Value: false
+            slam_submap_cfbe539d-d387-4ac3-b065-193d584ad6de:
+              Value: false
+            slam_submap_debeb825-deb5-4378-aa8e-3de4df91301d:
+              Value: false
+            slam_submap_e253bd3c-a915-4fd9-bd64-07069ad069e0:
+              Value: false
+            slam_submap_e32aaba5-23b0-4301-9371-19b52ebf54ea:
+              Value: false
+            slam_submap_e3d8bdfb-5701-4fab-b7d2-f528f559b287:
+              Value: false
+            slam_submap_e3fd7f36-7204-4044-bb49-56d3e25f3a00:
+              Value: false
+            slam_submap_e9e24e6e-190b-42e3-895c-762fc02ae048:
+              Value: false
+            slam_submap_eccee932-b69a-411d-8fe5-0e4303a94421:
+              Value: false
+            slam_submap_f1a48c90-8e85-43d4-a7fa-08e1315551bc:
+              Value: false
+            slam_submap_fd18da48-4cc5-43ce-bf98-9ea184d59d18:
+              Value: false
+            slam_submap_fda71475-8abb-4bae-a4c2-e875dc8ac93e:
+              Value: false
+            slam_submap_ff955455-8989-49bb-b071-e10533c19200:
+              Value: false
+            square_gauge_1_ground_floor:
+              Value: false
+            square_gauge_1_ground_floor__square_gauge_1_link:
+              Value: false
+            square_gauge_1_ground_floor__square_gauge_1_link__visual__square_gauge_1_visual:
+              Value: false
+            square_gauge_2_ground_floor:
+              Value: false
+            square_gauge_2_ground_floor__square_gauge_2_link:
+              Value: false
+            square_gauge_2_ground_floor__square_gauge_2_link__visual__square_gauge_2_visual:
+              Value: false
+            top_shell:
+              Value: false
+            wide_angle_camera_front_camera:
+              Value: false
+            wide_angle_camera_front_camera_parent:
+              Value: false
+            wide_angle_camera_rear_camera:
+              Value: false
+            wide_angle_camera_rear_camera_parent:
+              Value: false
+            world:
+              Value: true
+          Marker Alpha: 1
+          Marker Scale: 3
+          Name: TF
+          Show Arrows: true
+          Show Axes: true
+          Show Names: true
+          Tree:
+            odom:
+              base:
+                LF_HAA_drive:
+                  LF_HIP:
+                    LF_hip_fixed:
+                      LF_HFE_output:
+                        LF_THIGH:
+                          LF_HFE_drive:
+                            LF_thigh_fixed:
+                              LF_KFE_drive:
+                                LF_SHANK:
+                                  LF_shank_fixed:
+                                    LF_FOOT:
+                                      {}
+                LH_HAA_drive:
+                  LH_HIP:
+                    LH_hip_fixed:
+                      LH_HFE_output:
+                        LH_THIGH:
+                          LH_HFE_drive:
+                            LH_thigh_fixed:
+                              LH_KFE_drive:
+                                LH_SHANK:
+                                  LH_shank_fixed:
+                                    LH_FOOT:
+                                      {}
+                RF_HAA_drive:
+                  RF_HIP:
+                    RF_hip_fixed:
+                      RF_HFE_output:
+                        RF_THIGH:
+                          RF_HFE_drive:
+                            RF_thigh_fixed:
+                              RF_KFE_drive:
+                                RF_SHANK:
+                                  RF_shank_fixed:
+                                    RF_FOOT:
+                                      {}
+                RH_HAA_drive:
+                  RH_HIP:
+                    RH_hip_fixed:
+                      RH_HFE_output:
+                        RH_THIGH:
+                          RH_HFE_drive:
+                            RH_thigh_fixed:
+                              RH_KFE_drive:
+                                RH_SHANK:
+                                  RH_shank_fixed:
+                                    RH_FOOT:
+                                      {}
+                base_inertia:
+                  {}
+                battery:
+                  {}
+                body_top:
+                  {}
+                bottom_shell:
+                  {}
+                depth_camera_left_camera:
+                  depth_camera_left_camera_parent:
+                    depth_camera_left_depth_frame:
+                      depth_camera_left_depth_optical_frame:
+                        {}
+                depth_camera_right_camera:
+                  depth_camera_right_camera_parent:
+                    depth_camera_right_depth_frame:
+                      depth_camera_right_depth_optical_frame:
+                        {}
+                docking_socket:
+                  {}
+                face_front:
+                  depth_camera_front_lower_camera:
+                    depth_camera_front_lower_camera_parent:
+                      depth_camera_front_lower_depth_frame:
+                        depth_camera_front_lower_depth_optical_frame:
+                          {}
+                  depth_camera_front_upper_camera:
+                    depth_camera_front_upper_camera_parent:
+                      depth_camera_front_upper_depth_frame:
+                        depth_camera_front_upper_depth_optical_frame:
+                          {}
+                  face_shell_front:
+                    {}
+                  wide_angle_camera_front_camera:
+                    wide_angle_camera_front_camera_parent:
+                      {}
+                face_rear:
+                  depth_camera_rear_lower_camera:
+                    depth_camera_rear_lower_camera_parent:
+                      depth_camera_rear_lower_depth_frame:
+                        depth_camera_rear_lower_depth_optical_frame:
+                          {}
+                  depth_camera_rear_upper_camera:
+                    depth_camera_rear_upper_camera_parent:
+                      depth_camera_rear_upper_depth_frame:
+                        depth_camera_rear_upper_depth_optical_frame:
+                          {}
+                  face_shell_rear:
+                    {}
+                  wide_angle_camera_rear_camera:
+                    wide_angle_camera_rear_camera_parent:
+                      {}
+                hbc_receiver:
+                  {}
+                imu_link:
+                  {}
+                inspection_payload_mount:
+                  inspection_payload_camera_default:
+                    {}
+                  inspection_payload_pan:
+                    inspection_payload_tilt:
+                      inspection_payload_head:
+                        inspection_payload_camera:
+                          {}
+                        inspection_payload_light:
+                          {}
+                        inspection_payload_microphone:
+                          {}
+                        inspection_payload_thermal_camera:
+                          {}
+                lidar_parent:
+                  lidar:
+                    {}
+                top_shell:
+                  {}
+              control:
+                {}
+              feetcenter:
+                {}
+              footprint:
+                {}
+              loco_footprint:
+                {}
+              map:
+                apriltag_0_size_18cm:
+                  apriltag_0_size_18cm__apriltag_0_size_18cm_link:
+                    apriltag_0_size_18cm__apriltag_0_size_18cm_link__visual__apriltag_0_size_18cm_visual:
+                      {}
+                apriltag_1_size_10cm:
+                  apriltag_1_size_10cm__apriltag_1_size_10cm_link:
+                    apriltag_1_size_10cm__apriltag_1_size_10cm_link__visual__apriltag_1_size_10cm_visual:
+                      {}
+                docking_station:
+                  docking_station__apriltag36_11_00000_link:
+                    docking_station__apriltag36_11_00000_link__visual__apriltag36_11_00000_visual:
+                      {}
+                  docking_station__apriltag36_11_00001_link:
+                    docking_station__apriltag36_11_00001_link__visual__apriltag36_11_00001_visual:
+                      {}
+                  docking_station__apriltag36_11_00002_link:
+                    docking_station__apriltag36_11_00002_link__visual__apriltag36_11_00002_visual:
+                      {}
+                  docking_station__apriltag36_11_00003_link:
+                    docking_station__apriltag36_11_00003_link__visual__apriltag36_11_00003_visual:
+                      {}
+                  docking_station__docking_port_link:
+                    docking_station__docking_port_link__visual__docking_port_visual:
+                      {}
+                fire_extinguisher_1_ground_floor:
+                  fire_extinguisher_1_ground_floor__fire_extinguisher_1_link:
+                    fire_extinguisher_1_ground_floor__fire_extinguisher_1_link__visual__fire_extinguisher_1_visual:
+                      {}
+                fire_extinguisher_2_ground_floor:
+                  fire_extinguisher_2_ground_floor__fire_extinguisher_2_link:
+                    fire_extinguisher_2_ground_floor__fire_extinguisher_2_link__visual__fire_extinguisher_2_visual:
+                      {}
+                gauge_ground_floor_1:
+                  gauge_ground_floor_1__pressure_gauge_501_link:
+                    gauge_ground_floor_1__pressure_gauge_501_link__visual__pressure_gauge_501_visual:
+                      {}
+                gauge_maze_exit:
+                  gauge_maze_exit__pressure_gauge_501_link:
+                    gauge_maze_exit__pressure_gauge_501_link__visual__pressure_gauge_501_visual:
+                      {}
+                gauge_second_floor_2:
+                  gauge_second_floor_2__pressure_gauge_501_link:
+                    gauge_second_floor_2__pressure_gauge_501_link__visual__pressure_gauge_501_visual:
+                      {}
+                heat_first_floor_1:
+                  heat_first_floor_1__heat_plate_0.9x0.9_e0.5_link:
+                    heat_first_floor_1__heat_plate_0.9x0.9_e0.5_link__visual__heat_plate_0.9x0.9_e0.5_visual:
+                      {}
+                heat_first_floor_4:
+                  heat_first_floor_4__heat_plate_0.9x0.9_e0.1_link:
+                    heat_first_floor_4__heat_plate_0.9x0.9_e0.1_link__visual__heat_plate_0.9x0.9_e0.1_visual:
+                      {}
+                heat_maze_entrance:
+                  heat_maze_entrance__heat_plate_0.15x0.15_e1.0_link:
+                    heat_maze_entrance__heat_plate_0.15x0.15_e1.0_link__visual__heat_plate_0.15x0.15_e1.0_visual:
+                      {}
+                linear_gauge_1_ground_floor:
+                  linear_gauge_1_ground_floor__linear_gauge_1_link:
+                    linear_gauge_1_ground_floor__linear_gauge_1_link__visual__linear_gauge_1_visual:
+                      {}
+                playground:
+                  playground__playground:
+                    playground__playground__collision__collision:
+                      {}
+                    playground__playground__visual__visual:
+                      {}
+                  playground__slippery_area:
+                    playground__slippery_area__collision__collision:
+                      {}
+                    playground__slippery_area__visual__visual:
+                      {}
+                  playground__very_slippery_area:
+                    playground__very_slippery_area__collision__collision:
+                      {}
+                    playground__very_slippery_area__visual__visual:
+                      {}
+                round_gauge_1_ground_floor:
+                  round_gauge_1_ground_floor__round_gauge_1_link:
+                    round_gauge_1_ground_floor__round_gauge_1_link__visual__round_gauge_1_visual:
+                      {}
+                round_gauge_2_ground_floor:
+                  round_gauge_2_ground_floor__round_gauge_2_link:
+                    round_gauge_2_ground_floor__round_gauge_2_link__visual__round_gauge_2_visual:
+                      {}
+                round_gauge_501_ground_floor:
+                  round_gauge_501_ground_floor__pressure_gauge_501_link:
+                    round_gauge_501_ground_floor__pressure_gauge_501_link__visual__pressure_gauge_501_visual:
+                      {}
+                safety_helmet_1_ground_floor:
+                  safety_helmet_1_ground_floor__safety_helmet_1_link:
+                    safety_helmet_1_ground_floor__safety_helmet_1_link__visual__safety_helmet_1_visual:
+                      {}
+                slam_submap_0228d634-9f8b-4b9b-9342-4ee3bebfb86b:
+                  {}
+                slam_submap_07ea04ad-57f8-4e7c-93ee-9cf9f3b4bba7:
+                  {}
+                slam_submap_0b57c2e3-d0a2-47f0-8238-7f5b354b3399:
+                  {}
+                slam_submap_16f6bbf3-d7e7-492a-be6c-53833e776c5b:
+                  {}
+                slam_submap_211ad498-7c9e-4346-a7fe-282f5ac61fa7:
+                  {}
+                slam_submap_35e027e2-e262-4ac4-9cb6-51ac742b8d69:
+                  {}
+                slam_submap_3ae4396c-412f-4402-b565-528e7dd35524:
+                  {}
+                slam_submap_414feb16-8d1d-44f8-abca-761a574a6eab:
+                  {}
+                slam_submap_4adf33fa-1e8a-4691-9e27-5be0a0453531:
+                  {}
+                slam_submap_4b8124e5-f323-4aa8-a86b-a10cdd652164:
+                  {}
+                slam_submap_4e2b0302-a6ec-4e4f-9b56-915ffb9a45dc:
+                  {}
+                slam_submap_689ff921-0a40-4fda-95b6-950141aa33bc:
+                  {}
+                slam_submap_8c155061-238a-48de-b5f9-1db43aad1823:
+                  {}
+                slam_submap_8cd4fba6-d4e8-480f-b2c9-1661fd13a4b8:
+                  {}
+                slam_submap_9471ef77-4ecd-4bf6-9cf6-57c2346a8014:
+                  {}
+                slam_submap_a1d016bb-2c3d-4495-beee-1ce13d3a37fc:
+                  {}
+                slam_submap_aa7cae19-e180-48b7-9ce0-c067fecc2326:
+                  {}
+                slam_submap_acc57413-3d95-41e1-9829-4b8f8377ced1:
+                  {}
+                slam_submap_add9353e-7396-4d36-9214-a670a7bce1e5:
+                  {}
+                slam_submap_b11bb333-7f2d-488a-bbd5-3fd90de9ca39:
+                  {}
+                slam_submap_b91d8836-418e-455d-8f26-173b818ff918:
+                  {}
+                slam_submap_ba0558aa-bd3e-4b23-996f-f5ac68231216:
+                  {}
+                slam_submap_c5f22ac4-9b9b-449c-9130-0cf2a1616fc7:
+                  {}
+                slam_submap_c67dce8b-ff9b-479c-9771-d6ac42d2c3b7:
+                  {}
+                slam_submap_cfbe539d-d387-4ac3-b065-193d584ad6de:
+                  {}
+                slam_submap_debeb825-deb5-4378-aa8e-3de4df91301d:
+                  {}
+                slam_submap_e253bd3c-a915-4fd9-bd64-07069ad069e0:
+                  {}
+                slam_submap_e32aaba5-23b0-4301-9371-19b52ebf54ea:
+                  {}
+                slam_submap_e3d8bdfb-5701-4fab-b7d2-f528f559b287:
+                  {}
+                slam_submap_e3fd7f36-7204-4044-bb49-56d3e25f3a00:
+                  {}
+                slam_submap_e9e24e6e-190b-42e3-895c-762fc02ae048:
+                  {}
+                slam_submap_eccee932-b69a-411d-8fe5-0e4303a94421:
+                  {}
+                slam_submap_f1a48c90-8e85-43d4-a7fa-08e1315551bc:
+                  {}
+                slam_submap_fd18da48-4cc5-43ce-bf98-9ea184d59d18:
+                  {}
+                slam_submap_fda71475-8abb-4bae-a4c2-e875dc8ac93e:
+                  {}
+                slam_submap_ff955455-8989-49bb-b071-e10533c19200:
+                  {}
+                square_gauge_1_ground_floor:
+                  square_gauge_1_ground_floor__square_gauge_1_link:
+                    square_gauge_1_ground_floor__square_gauge_1_link__visual__square_gauge_1_visual:
+                      {}
+                square_gauge_2_ground_floor:
+                  square_gauge_2_ground_floor__square_gauge_2_link:
+                    square_gauge_2_ground_floor__square_gauge_2_link__visual__square_gauge_2_visual:
+                      {}
+              point_cloud_odom:
+                {}
+              world:
+                {}
+          Update Interval: 0
+          Value: true
+        - Attached Body Color: 150; 50; 150
+          Class: moveit_rviz_plugin/RobotState
+          Collision Enabled: false
+          Enabled: true
+          Links:
+            All Links Enabled: true
+            Expand Joint Details: false
+            Expand Link Details: false
+            Expand Tree: false
+            LF_FOOT:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            LF_HAA_drive:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            LF_HFE_drive:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            LF_HFE_output:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            LF_HIP:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            LF_KFE_drive:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            LF_SHANK:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            LF_THIGH:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            LF_hip_fixed:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            LF_shank_fixed:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            LF_thigh_fixed:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            LH_FOOT:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            LH_HAA_drive:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            LH_HFE_drive:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            LH_HFE_output:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            LH_HIP:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            LH_KFE_drive:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            LH_SHANK:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            LH_THIGH:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            LH_hip_fixed:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            LH_shank_fixed:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            LH_thigh_fixed:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            Link Tree Style: ""
+            RF_FOOT:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            RF_HAA_drive:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            RF_HFE_drive:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            RF_HFE_output:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            RF_HIP:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            RF_KFE_drive:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            RF_SHANK:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            RF_THIGH:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            RF_hip_fixed:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            RF_shank_fixed:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            RF_thigh_fixed:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            RH_FOOT:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            RH_HAA_drive:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            RH_HFE_drive:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            RH_HFE_output:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            RH_HIP:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            RH_KFE_drive:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            RH_SHANK:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            RH_THIGH:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            RH_hip_fixed:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            RH_shank_fixed:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            RH_thigh_fixed:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            base:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            base_inertia:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            battery:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            body_top:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            bottom_shell:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            depth_camera_front_lower_camera:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            depth_camera_front_lower_camera_parent:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            depth_camera_front_lower_depth_frame:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            depth_camera_front_lower_depth_optical_frame:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            depth_camera_front_upper_camera:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            depth_camera_front_upper_camera_parent:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            depth_camera_front_upper_depth_frame:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            depth_camera_front_upper_depth_optical_frame:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            depth_camera_left_camera:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            depth_camera_left_camera_parent:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            depth_camera_left_depth_frame:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            depth_camera_left_depth_optical_frame:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            depth_camera_rear_lower_camera:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            depth_camera_rear_lower_camera_parent:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            depth_camera_rear_lower_depth_frame:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            depth_camera_rear_lower_depth_optical_frame:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            depth_camera_rear_upper_camera:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            depth_camera_rear_upper_camera_parent:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            depth_camera_rear_upper_depth_frame:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            depth_camera_rear_upper_depth_optical_frame:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            depth_camera_right_camera:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            depth_camera_right_camera_parent:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            depth_camera_right_depth_frame:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            depth_camera_right_depth_optical_frame:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            docking_socket:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            face_front:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            face_rear:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            face_shell_front:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            face_shell_rear:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            hbc_receiver:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            imu_link:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            inspection_payload_camera:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            inspection_payload_camera_default:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            inspection_payload_head:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            inspection_payload_light:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            inspection_payload_microphone:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            inspection_payload_mount:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            inspection_payload_pan:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            inspection_payload_thermal_camera:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            inspection_payload_tilt:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            lidar:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            lidar_parent:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            top_shell:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            wide_angle_camera_front_camera:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            wide_angle_camera_front_camera_parent:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            wide_angle_camera_rear_camera:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            wide_angle_camera_rear_camera_parent:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+          Name: RobotState
+          Robot Alpha: 1
+          Robot Description: anymal_description
+          Robot State Topic: display_robot_state
+          Show All Links: true
+          Show Highlights: true
+          Value: true
+          Visual Enabled: true
+        - Alpha: 0.5
+          Cell Size: 1
+          Class: rviz/Grid
+          Color: 160; 160; 164
+          Enabled: true
+          Line Style:
+            Line Width: 0.029999999329447746
+            Value: Lines
+          Name: Grid
+          Normal Cell Count: 0
+          Offset:
+            X: 0
+            Y: 0
+            Z: -0.5
+          Plane: XY
+          Plane Cell Count: 10
+          Reference Frame: <Fixed Frame>
+          Value: true
+      Enabled: true
+      Name: Axes
+    - Class: rviz/Group
+      Displays:
+        - Class: rviz/Image
+          Enabled: true
+          Image Topic: /wide_angle_camera_front/image_color_rect
+          Max Value: 1
+          Median window: 5
+          Min Value: 0
+          Name: frontWideCam
+          Normalize Range: true
+          Queue Size: 2
+          Transport Hint: compressed
+          Unreliable: false
+          Value: true
+        - Class: rviz/Image
+          Enabled: true
+          Image Topic: /wide_angle_camera_rear/image_color_rect
+          Max Value: 1
+          Median window: 5
+          Min Value: 0
+          Name: rearWideCam
+          Normalize Range: true
+          Queue Size: 2
+          Transport Hint: compressed
+          Unreliable: false
+          Value: true
+        - Class: rviz/Image
+          Enabled: false
+          Image Topic: /depth_camera_front_lower/infra1/image_rect_raw
+          Max Value: 1
+          Median window: 5
+          Min Value: 0
+          Name: frontLowerDepCam
+          Normalize Range: true
+          Queue Size: 2
+          Transport Hint: compressed
+          Unreliable: false
+          Value: false
+        - Class: rviz/Image
+          Enabled: false
+          Image Topic: /depth_camera_front_upper/infra1/image_rect_raw
+          Max Value: 1
+          Median window: 5
+          Min Value: 0
+          Name: frontUpperDepCam
+          Normalize Range: true
+          Queue Size: 2
+          Transport Hint: compressed
+          Unreliable: false
+          Value: false
+        - Class: rviz/Image
+          Enabled: false
+          Image Topic: /depth_camera_rear_lower/infra1/image_rect_raw
+          Max Value: 1
+          Median window: 5
+          Min Value: 0
+          Name: rearLowerDepCam
+          Normalize Range: true
+          Queue Size: 2
+          Transport Hint: compressed
+          Unreliable: false
+          Value: false
+        - Class: rviz/Image
+          Enabled: false
+          Image Topic: /depth_camera_rear_upper/infra1/image_rect_raw
+          Max Value: 1
+          Median window: 5
+          Min Value: 0
+          Name: rearUpperDepCam
+          Normalize Range: true
+          Queue Size: 2
+          Transport Hint: compressed
+          Unreliable: false
+          Value: false
+        - Class: rviz/Image
+          Enabled: false
+          Image Topic: /depth_camera_right/infra1/image_rect_raw
+          Max Value: 1
+          Median window: 5
+          Min Value: 0
+          Name: rightDepCam
+          Normalize Range: true
+          Queue Size: 2
+          Transport Hint: compressed
+          Unreliable: false
+          Value: false
+        - Class: rviz/Image
+          Enabled: false
+          Image Topic: /depth_camera_left/infra1/image_rect_raw
+          Max Value: 1
+          Median window: 5
+          Min Value: 0
+          Name: leftDepCam
+          Normalize Range: true
+          Queue Size: 2
+          Transport Hint: compressed
+          Unreliable: false
+          Value: false
+      Enabled: true
+      Name: Image
+    - Class: rviz/Group
+      Displays:
+        - Alpha: 1
+          Auto Size:
+            Auto Size Factor: 1
+            Value: true
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/DepthCloud
+          Color: 255; 255; 255
+          Color Image Topic: ""
+          Color Transformer: FlatColor
+          Color Transport Hint: raw
+          Decay Time: 0
+          Depth Map Topic: /depth_camera_front_upper/aligned_depth_to_infra1/image_raw
+          Depth Map Transport Hint: raw
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Min Color: 0; 0; 0
+          Name: frontUpperDepthCloud
+          Occlusion Compensation:
+            Occlusion Time-Out: 30
+            Value: false
+          Position Transformer: XYZ
+          Queue Size: 1
+          Selectable: true
+          Size (Pixels): 1.5
+          Style: Points
+          Topic Filter: true
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+        - Alpha: 1
+          Auto Size:
+            Auto Size Factor: 1
+            Value: true
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/DepthCloud
+          Color: 255; 255; 255
+          Color Image Topic: ""
+          Color Transformer: FlatColor
+          Color Transport Hint: raw
+          Decay Time: 0
+          Depth Map Topic: /depth_camera_front_lower/depth/resized/image_rect
+          Depth Map Transport Hint: raw
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Min Color: 0; 0; 0
+          Name: frontLowerDepthCloud
+          Occlusion Compensation:
+            Occlusion Time-Out: 30
+            Value: false
+          Position Transformer: XYZ
+          Queue Size: 1
+          Selectable: true
+          Size (Pixels): 1.5
+          Style: Points
+          Topic Filter: true
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+        - Alpha: 1
+          Auto Size:
+            Auto Size Factor: 1
+            Value: true
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/DepthCloud
+          Color: 255; 255; 255
+          Color Image Topic: ""
+          Color Transformer: RGB8
+          Color Transport Hint: raw
+          Decay Time: 0
+          Depth Map Topic: /depth_camera_rear_upper/depth/resized/image_rect
+          Depth Map Transport Hint: raw
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Min Color: 0; 0; 0
+          Name: rearUpperDepthCloud
+          Occlusion Compensation:
+            Occlusion Time-Out: 30
+            Value: false
+          Position Transformer: XYZ
+          Queue Size: 1
+          Selectable: true
+          Size (Pixels): 1.5
+          Style: Points
+          Topic Filter: true
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+        - Alpha: 1
+          Auto Size:
+            Auto Size Factor: 1
+            Value: true
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/DepthCloud
+          Color: 255; 255; 255
+          Color Image Topic: ""
+          Color Transformer: FlatColor
+          Color Transport Hint: raw
+          Decay Time: 0
+          Depth Map Topic: /depth_camera_rear_lower/depth/resized/image_rect
+          Depth Map Transport Hint: raw
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Min Color: 0; 0; 0
+          Name: rearLowerDepthCloud
+          Occlusion Compensation:
+            Occlusion Time-Out: 30
+            Value: false
+          Position Transformer: XYZ
+          Queue Size: 1
+          Selectable: true
+          Size (Pixels): 1.5
+          Style: Points
+          Topic Filter: true
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+        - Alpha: 1
+          Auto Size:
+            Auto Size Factor: 1
+            Value: true
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/DepthCloud
+          Color: 255; 255; 255
+          Color Image Topic: ""
+          Color Transformer: FlatColor
+          Color Transport Hint: raw
+          Decay Time: 0
+          Depth Map Topic: /depth_camera_left/depth/resized/image_rect
+          Depth Map Transport Hint: raw
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Min Color: 0; 0; 0
+          Name: leftDepthCloud
+          Occlusion Compensation:
+            Occlusion Time-Out: 30
+            Value: false
+          Position Transformer: XYZ
+          Queue Size: 1
+          Selectable: true
+          Size (Pixels): 1.5
+          Style: Points
+          Topic Filter: true
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+        - Alpha: 1
+          Auto Size:
+            Auto Size Factor: 1
+            Value: true
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/DepthCloud
+          Color: 255; 255; 255
+          Color Image Topic: ""
+          Color Transformer: FlatColor
+          Color Transport Hint: raw
+          Decay Time: 0
+          Depth Map Topic: /depth_camera_right/depth/resized/image_rect
+          Depth Map Transport Hint: raw
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Min Color: 0; 0; 0
+          Name: rightDepthCloud
+          Occlusion Compensation:
+            Occlusion Time-Out: 30
+            Value: false
+          Position Transformer: XYZ
+          Queue Size: 1
+          Selectable: true
+          Size (Pixels): 1.5
+          Style: Points
+          Topic Filter: true
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: confidence_ratio
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Min Color: 0; 0; 0
+          Name: frontUpperPointCloud2
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 1.5
+          Size (m): 0.009999999776482582
+          Style: Points
+          Topic: /depth_camera_front_upper/pointcloud_with_confidence
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: confidence_ratio
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Min Color: 0; 0; 0
+          Name: frontLowerPointCloud2
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 1.5
+          Size (m): 0.009999999776482582
+          Style: Points
+          Topic: /depth_camera_front_lower/pointcloud_with_confidence
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: confidence_ratio
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Min Color: 0; 0; 0
+          Name: rearLowerPointCloud2
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 1.5
+          Size (m): 0.009999999776482582
+          Style: Points
+          Topic: /depth_camera_rear_lower/pointcloud_with_confidence
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: confidence_ratio
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Min Color: 0; 0; 0
+          Name: rearUpperPointCloud2
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 1.5
+          Size (m): 0.009999999776482582
+          Style: Points
+          Topic: /depth_camera_rear_upper/pointcloud_with_confidence
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: confidence_ratio
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Min Color: 0; 0; 0
+          Name: leftPointCloud2
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 1.5
+          Size (m): 0.009999999776482582
+          Style: Points
+          Topic: /depth_camera_left/pointcloud_with_confidence
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: confidence_ratio
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Min Color: 0; 0; 0
+          Name: rightPointCloud2
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 1.5
+          Size (m): 0.009999999776482582
+          Style: Points
+          Topic: /depth_camera_right/depth/color/points_empty
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+      Enabled: true
+      Name: DepthPoint
+    - Alpha: 1
+      Axes Length: 1
+      Axes Radius: 0.10000000149011612
+      Class: rviz/Pose
+      Color: 255; 25; 0
+      Enabled: false
+      Head Length: 0.30000001192092896
+      Head Radius: 0.10000000149011612
+      Name: Pose
+      Queue Size: 10
+      Shaft Length: 1
+      Shaft Radius: 0.05000000074505806
+      Shape: Axes
+      Topic: /slam/pose
+      Unreliable: false
+      Value: false
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Class: grid_map_rviz_plugin/GridMap
+      Color: 200; 200; 200
+      Color Layer: elevation
+      Color Transformer: IntensityLayer
+      ColorMap: coolwarm
+      Enabled: true
+      Grid Cell Decimation: 1
+      Grid Line Thickness: 0.10000000149011612
+      Height Layer: elevation
+      Height Transformer: Layer
+      History Length: 1
+      Invert ColorMap: false
+      Max Color: 255; 255; 255
+      Max Intensity: 10
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: ElevationMap
+      Show Grid Lines: true
+      Topic: /elevation_mapping/elevation_map_raw
+      Unreliable: false
+      Use ColorMap: true
+      Value: true
+    - Class: rviz/Group
+      Displays:
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: Intensity
+          Decay Time: 0
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Min Color: 0; 0; 0
+          Name: LidarCloud
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 2
+          Size (m): 0.009999999776482582
+          Style: Points
+          Topic: /lidar/point_cloud
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
+        - Alpha: 0.30000001192092896
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: Intensity
+          Decay Time: 0
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Min Color: 0; 0; 0
+          Name: MapCloud
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 1.5
+          Size (m): 0.009999999776482582
+          Style: Points
+          Topic: /slam/map_static
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
+      Enabled: true
+      Name: SLAM
+  Enabled: true
+  Global Options:
+    Background Color: 48; 48; 48
+    Default Light: true
+    Fixed Frame: base
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz/Interact
+      Hide Inactive Objects: true
+    - Class: rviz/MoveCamera
+    - Class: rviz/Select
+    - Class: rviz/FocusCamera
+    - Class: rviz/Measure
+    - Class: rviz/SetInitialPose
+      Theta std deviation: 0.2617993950843811
+      Topic: /initialpose
+      X std deviation: 0.5
+      Y std deviation: 0.5
+    - Class: rviz/SetGoal
+      Topic: /move_base_simple/goal
+    - Class: rviz/PublishPoint
+      Single click: true
+      Topic: /clicked_point
+  Value: true
+  Views:
+    Current:
+      Class: rviz/Orbit
+      Distance: 4.806573390960693
+      Enable Stereo Rendering:
+        Stereo Eye Separation: 0.05999999865889549
+        Stereo Focal Distance: 1
+        Swap Stereo Eyes: false
+        Value: false
+      Field of View: 0.7853981852531433
+      Focal Point:
+        X: 0.17150866985321045
+        Y: 0.5848239660263062
+        Z: -0.8462013602256775
+      Focal Shape Fixed Size: false
+      Focal Shape Size: 0.05000000074505806
+      Invert Z Axis: false
+      Name: Current View
+      Near Clip Distance: 0.009999999776482582
+      Pitch: 0.8903982639312744
+      Target Frame: <Fixed Frame>
+      Yaw: 0.7053982615470886
+    Saved: ~
+Window Geometry:
+  Displays:
+    collapsed: false
+  Height: 1391
+  Hide Left Dock: false
+  Hide Right Dock: true
+  QMainWindow State: 000000ff00000000fd000000040000000000000245000003c6fc020000000dfb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000018c000003c6000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000002000660072006f006e0074004c006f00770065007200440065007000430061006d000000047a000000c90000001600fffffffb0000001e00720065006100720055007000700065007200440065007000430061006d0000000471000000d20000001600fffffffb0000001e0072006500610072004c006f00770065007200440065007000430061006d0000000471000000d20000001600fffffffb00000014006c00650066007400440065007000430061006d0000000471000000d20000001600fffffffb000000160072006900670068007400440065007000430061006d0000000471000000d20000001600ffffff000000010000010f000003c6fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000018c000003c6000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b2000000000000000000000002000006a10000015ffc0100000005fb0000001800660072006f006e0074005700690064006500430061006d0100000000000002eb0000009800fffffffb0000001800660072006f006e0074005700690064006500430061006d01000000000000029e0000000000000000fb000000160072006500610072005700690064006500430061006d01000002f1000003b00000009100fffffffb0000002000660072006f006e00740055007000700065007200440065007000430061006d00000003ab000002e9000000bc00fffffffb0000000a00560069006500770073030000004e00000080000002e10000019700000003000006940000003efc0100000002fb0000000800540069006d00650000000000000006940000041800fffffffb0000000800540069006d0065010000000000000450000000000000000000000456000003c600000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Selection:
+    collapsed: false
+  Time:
+    collapsed: false
+  Tool Properties:
+    collapsed: false
+  Views:
+    collapsed: true
+  Width: 1697
+  X: 1741
+  Y: 37
+  frontLowerDepCam:
+    collapsed: false
+  frontUpperDepCam:
+    collapsed: false
+  frontWideCam:
+    collapsed: false
+  leftDepCam:
+    collapsed: false
+  rearLowerDepCam:
+    collapsed: false
+  rearUpperDepCam:
+    collapsed: false
+  rearWideCam:
+    collapsed: false
+  rightDepCam:
+    collapsed: false

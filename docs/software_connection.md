@@ -22,6 +22,11 @@
   </a> 
 </div>
 
+```
+/state_estimator/anymal_state: state of lidar, base, joint
+/state_estimator/pose_in_odom: state of base using results of /slam/pose
+```
+
 ### ROS Rqt_graph
 ##### state_estimator
 <div align="center">
