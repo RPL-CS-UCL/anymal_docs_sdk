@@ -21,8 +21,9 @@ def main():
 		
 	if anybotics_pkg_found: # NOTE(gogojjh): default: False
 		launch_sim("d", {**get_anymal_d_feature_toggle_descriptions(),
-						 **get_anymal_d_anybotics_feature_toggle_descriptions()}, ros_launch=ros_launch)
+										 **get_anymal_d_anybotics_feature_toggle_descriptions()}, ros_launch=ros_launch)
 	else:
+		print(f"***** DEBUG: Get description: {get_anymal_d_feature_toggle_descriptions()}")
 		launch_sim("d", get_anymal_d_feature_toggle_descriptions(), ros_launch=ros_launch)
 
 

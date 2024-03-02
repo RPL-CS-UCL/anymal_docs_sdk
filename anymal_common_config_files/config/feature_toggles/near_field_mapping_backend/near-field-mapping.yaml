@@ -1,0 +1,500 @@
+stack_launcher:
+  nodes:
+    elevation_map_throttle:
+      roslaunch:
+        args: messages /elevation_mapping/elevation_map_raw 1 /elevation_mapping/elevation_map_raw_throttle
+        name: elevation_map_throttle
+        node_type: throttle
+        output: screen
+        package: topic_tools
+    near_field_mapping:
+      preprocessed_params:
+        launch_prefix:
+          key: /stack_launcher/nodes/near_field_mapping/roslaunch/launch_prefix
+          value: '$(rospack find near_field_mapping_environment)/venv/bin/python3 '
+      roslaunch:
+        env_args:
+          pythonmalloc: # [required] Name of this environment argument (for reference, e.g. in overlays).
+            key: PYTHONMALLOC                                         # [required] Key of the environment variable.
+            value: pymalloc
+          omp_num_threads:
+            key: OMP_NUM_THREADS
+            value: 1
+          malloc_arena_max:
+            key: MALLOC_ARENA_MAX
+            value: 1
+        name: near_field_mapping
+        node_type: near_field_mapping
+        output: screen
+        package: near_field_mapping
+        respawn: true
+    near_field_mapping_health_checker:
+      preprocessed_params:
+        launch_prefix:
+          key: /stack_launcher/nodes/near_field_mapping_health_checker/roslaunch/launch_prefix
+          value: '$(rospack find near_field_mapping_environment)/venv/bin/python3 '
+      roslaunch:
+        name: near_field_mapping_health_checker
+        node_type: health_checker
+        output: screen
+        package: near_field_mapping
+        respawn: true
+  stacks:
+    locomotion:
+      nodes:
+        elevation_map_throttle:
+          enabled: true
+          name: elevation_map_throttle
+        near_field_mapping:
+          enabled: true
+          name: near_field_mapping
+        near_field_mapping_health_checker:
+          enabled: true
+          name: near_field_mapping_health_checker
+    terrain_mapping:
+      nodes:
+        near_field_mapping:
+          enabled: true
+          name: near_field_mapping
+        near_field_mapping_health_checker:
+          enabled: true
+          name: near_field_mapping_health_checker
+anymal_record:
+  topic_groups:
+    elevation_mapping:
+      - /elevation_mapping/status
+      - /motion_control_manager/active_motion
+near_field_mapping_preset_selector: # specific presets, e.g. for stair climbing
+  default_compatible_presets: [default, grated_surfaces_l0, grated_surfaces_l1, ] # used if not specified by compatible_preset_per_motion_state
+  compatible_presets_per_motion_state: # first is default
+    stair_climbing_lidar_down: [stairs_l0, open_stairs_lidar_down,]
+    stair_climbing_lidar_up: [stairs_l0, open_stairs_lidar_up,]
+  presets:
+    grated_surfaces_l0:
+      near_field_mapping:
+        execute_at_stage: 0
+        parameters:
+          active_preset: grated_surfaces_l0
+          addons:
+            sphere_projection:
+              iteration_based_projection:
+                sphere_num_pixels_pitch: 90 # 90 is better than 180 for grated surfaces
+                num_observation_sphere_dilations: 3 # make sure this parameter is set, although it is the default.
+          map:
+            map_dim_z: 20 # [cells] we don't need to see that far down.
+            occupancy:
+              missed_points_likelihood: 0.25 # increase the occupancy likelihood of points that are missed by visibility cleanup, it is less reliable on grated surfaces.
+              probabilistic_cleanup_threshold: 0.2 # we tend to accumulate lots of low confidence points on grated surfaces.
+          input:
+            input_sources:
+              input_front_lower:
+                every_nth: 3 # decrease the input rate on the downward facing cameras.
+              input_front_upper:
+                every_nth: 1
+              input_left:
+                every_nth: 1
+              input_rear_lower:
+                every_nth: 3 # decrease the input rate on the downward facing cameras.
+              input_rear_upper:
+                every_nth: 1
+              input_right:
+                every_nth: 1
+          output:
+            grid_map:
+              num_closing_iterations: 4 # do more closing than usual on grated surfaces
+              clip_all_below_base: -1.5 # we want to see only down on what we can reach.
+    grated_surfaces_l1:
+      near_field_mapping:
+        execute_at_stage: 1
+        parameters:
+          active_preset: grated_surfaces_l1
+          addons:
+            sphere_projection:
+              iteration_based_projection:
+                sphere_num_pixels_pitch: 90 # 90 is better than 180 for grated surfaces
+                num_observation_sphere_dilations: 3 # make sure this parameter is set, although it is the default.
+          map:
+            map_dim_xy: 160 # [cells] we want to see more around us to start occupancy mapping earlier and reach higher confidence.
+            map_dim_z: 20 # [cells] we don't need to see that far down.
+            occupancy:
+              non_planar_points_likelihood: 0.75 # increase the occupancy likelihood of points that are non-planar to reach higher confidence earlier.
+              missed_points_likelihood: 0.3 # increase the occupancy likelihood of points that are missed by visibility cleanup, it is less reliable on grated surfaces.
+              probabilistic_cleanup_threshold: 0.2 # we tend to accumulate lots of low confidence points on grated surfaces.
+          input:
+            input_sources:
+              input_front_lower:
+                every_nth: 3 # decrease the input rate on the downward facing cameras.
+              input_front_upper:
+                every_nth: 1
+              input_left:
+                every_nth: 1
+              input_rear_lower:
+                every_nth: 3 # decrease the input rate on the downward facing cameras.
+              input_rear_upper:
+                every_nth: 1
+              input_right:
+                every_nth: 1
+          output:
+            grid_map:
+              num_closing_iterations: 5 # do more closing than usual on grated surfaces
+              clip_all_below_base: -0.8 # we want to see only down on what we can reach.
+    stairs_l0: &stairs_l0
+      clear_elevation_mapping_client:
+        execute_at_stage: 1
+        clear_elevation_map_on_enable: false
+        clear_elevation_map_on_disable: false
+        clear_hallucinated_points_on_enable: true
+        clear_hallucinated_points_on_disable: false
+      depth_image_filters: &depth_image_filters_stairclimbing_preset_l0
+        execute_at_stage: 0
+        parameters:
+          - cameras: [ front_lower, front_upper, rear_lower, rear_upper ]
+            parameters:
+              max_depth_threshold_in_m: 1e3
+              low_confidence_value: 0.0
+              medium_confidence_value: 0.014
+              high_confidence_value: 1.0
+              confidence_value: 0.01
+      health_checker_client: # check health after all other clients have been called.
+        execute_at_stage: 2
+        check_health_on_enable: true
+        check_health_on_disable: false
+      near_field_mapping: &near_field_mapping_stairclimbing_preset_l0
+        execute_at_stage: 0
+        parameters:
+          active_preset: stair_climbing
+          input:
+            input_sources:
+              hallucinated_input_left: # they are just wasting compute on stairs, disabling them to process the relevant points faster.
+                enabled: false
+              hallucinated_input_right: # they are just wasting compute on stairs, disabling them to process the relevant points faster.
+                enabled: false
+          map:
+            map_dim_xy: 100 # we dont need to see far, this decreases latency
+            map_dim_z: 40 # but we want to see up and down.
+            occupancy:
+              non_planar_points_likelihood: 0.70 # slight increase above default. similar to grating presets.
+              missed_points_likelihood: 0.15 # similar to grating presets.
+              probabilistic_cleanup_threshold: 0.2 # similar to grating presets.
+          output:
+            grid_map:
+              num_closing_iterations: 4
+              confidence_threshold: 0.6
+              max_height_above_base: 0.6
+              clip_all_below_base: -1.5
+              clip_all_above_base: 0.6
+              use_adaptive_geometric_projection_constraint: True
+      realsense_presets: &stair_climbing_realsense_preset
+        execute_at_stage: 0
+        parameters:
+          - cameras: [ front_lower, front_upper, rear_lower, rear_upper ]
+            preset_json_file_path: package://anymal_realsense/config/stair_climbing_preset.json
+    open_stairs_lidar_down: #legacy preset.
+      <<: *stairs_l0
+    open_stairs_lidar_up: # legacy preset. the new near field mapping does not care about the direction.
+      <<: *stairs_l0
+  clients:
+    clear_elevation_mapping_client:
+      enabled: true
+      time_delay_to_clear: 0.0 # in s
+    depth_image_filters:
+      enabled: true
+      reconfigure_service_format_string: /depth_camera_$camera/depth_image_filter_pipeline/parameter_handler_ros
+    health_checker_client:
+      enabled: true
+    near_field_mapping:
+      enabled: true
+      namespace: /near_field_mapping
+    realsense_presets:
+      default_json_path_format_string: /depth_camera_$camera/driver/json_file_path
+      enabled: true
+      reconfigure_service_format_string: /depth_camera_$camera/loadJsonFile
+  services:
+    change_preset_service_topic: /near_field_mapping_preset_selector/change_preset
+near_field_mapping:
+  active_preset: default
+  input: # relates to geometric input, i.e. point clouds
+    input_sources:
+      input_front_lower: &point_cloud_input_source
+        enabled: true
+        every_nth: 1
+        type: point_cloud
+        topic: /depth_camera_front_lower/point_cloud_self_filtered
+        queue_size: 1
+        tcp_nodelay: true
+        metadata:
+          point_type: 'regular'
+          enable_visibility_cleanup: True
+      input_front_upper:
+        <<: *point_cloud_input_source
+        enabled: true
+        every_nth: 1
+        topic: /depth_camera_front_upper/point_cloud_self_filtered
+      input_left:
+        <<: *point_cloud_input_source
+        enabled: true
+        every_nth: 4
+        topic: /depth_camera_left/point_cloud_self_filtered
+      input_rear_lower:
+        <<: *point_cloud_input_source
+        enabled: true
+        every_nth: 1
+        topic: /depth_camera_rear_lower/point_cloud_self_filtered
+      input_rear_upper:
+        <<: *point_cloud_input_source
+        enabled: true
+        every_nth: 1
+        topic: /depth_camera_rear_upper/point_cloud_self_filtered
+      input_right:
+        <<: *point_cloud_input_source
+        enabled: true
+        every_nth: 4
+        topic: /depth_camera_right/point_cloud_self_filtered
+      lidar:
+        <<: *point_cloud_input_source
+        enabled: false
+        every_nth: 1
+        topic: "/point_cloud_filter/lidar/point_cloud_filtered"
+      hallucinated_input_front_lower: &hallucinated_input_source # introduce default disabled hallucinated points, enable on demand for specialized presets.
+        <<: *point_cloud_input_source
+        enabled: true
+        every_nth: 6
+        metadata:
+          point_type: hallucinated
+          enable_visibility_cleanup: False
+        topic: /depth_camera_front_lower/hallucinated_points
+      hallucinated_input_front_upper:
+        <<: *hallucinated_input_source
+        topic: /depth_camera_front_upper/hallucinated_points
+      hallucinated_input_left:
+        <<: *hallucinated_input_source
+        topic: /depth_camera_left/hallucinated_points
+      hallucinated_input_rear_lower:
+        <<: *hallucinated_input_source
+        topic: /depth_camera_rear_lower/hallucinated_points
+      hallucinated_input_rear_upper:
+        <<: *hallucinated_input_source
+        topic: /depth_camera_rear_upper/hallucinated_points
+      hallucinated_input_right:
+        <<: *hallucinated_input_source
+        topic: /depth_camera_right/hallucinated_points
+    input_data_buffer:
+      flush_strategy:
+        name: flush_every_nth_input
+        flush_every_nth: 4
+      buffer_storage:
+        name: dict
+    processing_pipe:
+      queue_size: 1
+  odometry_source: # tf subscription
+    world_frame_id: "point_cloud_odom"
+    robot_base_frame_id: base
+    tcp_nodelay: true
+  map:
+    map_dim_xy: 140 # [cells]
+    map_dim_z: 30 # [cells]
+    map_resolution: 0.03 # [m/cell]
+    z_scaling: 3.0 # scaling / compression of the space along z. A scaling of 5 scales the voxel size along z by 5 / compresses the space by 0.2 along z.
+    point_subsampling: 5  # subsamples every point in the input before integration, 10 means every 10th point
+    occupancy:
+      confidence_prior: 0.1 # [0, 1] prior confidence of a point being occupied.
+      planar_points_likelihood: 0.95 # [0, 1] likelihood of a point being occupied if it is planar.
+      non_planar_points_likelihood: 0.65 # [0, 1] likelihood of a point being occupied if it is non-planar.
+      missed_points_likelihood: 0.07 # [0, 1] likelihood of a point being occupied if it is actively 'missed' by visibility cleanup.
+      min_occupancy_likelihood: 0.01 # Lower bound to clip the occupancy likelihood to.
+      max_occupancy_likelihood: 0.998 # Upper bound to clip the occupancy likelihood to.
+      probabilistic_cleanup_enabled: True # Enables probabilistic cleanup of the map.
+      probabilistic_cleanup_threshold: 0.1 # Threshold for probabilistic cleanup. If the occupancy likelihood is below this threshold, the point is removed.
+  addons:
+    geometrics_projection_constraint:
+      box_width: 10.0  # [m]
+      aligned_box_length: 3.0  # [m]
+      aligned_box_height: 1.5  # [m]
+      distance_between_swivel_points: 0.74  # [m]
+      aligned_box_z_offset_from_base: -0.45  # [m]
+      swivel_box_length: 1.0  # [m]
+      swivel_box_height: 0.6  # [m]
+      swivel_box_center_offset_from_rotation_center_x: 0.5  # [m]
+      swivel_box_center_offset_from_rotation_center_z: -0.4  # [m]
+    sphere_projection:
+      enabled: True
+      strategy: "point_space_projection" # point_space_projection or iteration_based_projection
+      max_workers: 6
+      debug_publishers:
+        enabled: False
+      iteration_based_projection:
+        sphere_num_pixels_pitch: 180
+        truncation_distance: -0.05
+        num_observation_sphere_dilations: 3
+        clip_lower_hemisphere_up_to_row: 0
+        lower_hemisphere_clip_distance: 1.0
+        num_spherical_cleanup_iterations: 1
+      point_space_projection:
+        sphere_num_pixels_pitch: 90
+        truncation_distance: -0.03
+        num_observation_sphere_dilations: 0
+        clip_lower_hemisphere_up_to_row: 30
+        lower_hemisphere_clip_distance: 1.0
+    outlier_removal:
+      enabled: True
+      min_num_neighbours: 1.5
+      neighbours_kernel_size: [7, 7, 3] # int / List[int, int, int] width in number of voxels of the kernel along x to count neighbours in x, y, z. Consider z scaling!
+      clean_every_nth_iteration: 1
+    online_data_recorder:
+      enabled: False
+      file_path: ""
+  output:
+    base_publishing_frequency: 15
+    grid_map:
+      enabled: True
+      upsampling_factor: 1.5 # Scaling factor for the grid map resolution. E.g upsampling factor 2, map resolution 0.02m, will result in a 0.01m resolution grid map.
+      size: 200 # [cells] per dimension
+      num_closing_iterations: 2 # 0: no closing, the higher, the more small holes are filled.
+      confidence_threshold: 0.4 # 0.0: all points are considered for projection. (0, 1): if set higher, only the more confident points are projected.
+      height_filtering_mode: 'hallucinated_or_old'
+      max_height_above_base: -0.3 # [m] Removes points according to the 'height_filtering_mode' that are above the given threshold. -0.3: roughly 0.25m above ground.
+      clip_all_below_base: -3.0 # [m] Applies to all points. Points of all sort below this threshold will not get projected.
+      clip_all_above_base: 0.4 # [m] Applies to all points. Points of all sort above this threshold will not get projected.
+      use_adaptive_geometric_projection_constraint: False # Disabled for now
+    point_cloud: # Streaming as point_cloud_2. Outputs the internal representation of the sparse tensor as a point cloud.
+      enabled: True
+      publisher_config:
+        topic: ~map_points
+        queue_size: 1
+        tcp_nodelay: true
+        latch: false
+      bounds: [ 40, 40, 300 ]
+      point_subsampling: 10
+      publish_every_nth: 4
+      fields: # Allows to select which fields of the map to publish. Allows to save bandwidth by disabling fields.
+        coordinates:
+          enabled: True
+        confidence:
+          enabled: False
+        time:
+          enabled: False
+  services: # put all advertised services under /elevation_mapping namespace for now to keep the changes to the configuration minimal and compatible.
+    clear_map:
+      name: /elevation_mapping/clear_map
+    clear_hallucinated_points:
+      name: /elevation_mapping/clear_hallucinated_points
+    disable_updates:
+      name: /elevation_mapping/disable_updates
+    enable_updates:
+      name: /elevation_mapping/enable_updates
+    load_map:
+      name: /elevation_mapping/load_map
+    save_map:
+      name: /elevation_mapping/save_map
+    reload_parameters:
+      name: /elevation_mapping/reload_parameters
+    dump_current_state:
+      name: /elevation_mapping/dump_current_state
+  logging:
+    smoothing_alpha: 0.99 # Exponential decay parameter to smooth published scalar values (0 no smoothing - 0.99 lots of smoothing)
+  torch_settings: # see official torch documentation at https://pytorch.org/docs/stable/torch.html
+    num_threads: 1 # explicitly setting this number prevents using all available threads.
+    num_interop_threads: 1
+    device: cpu # https://pytorch.org/docs/stable/tensor_attributes.html#torch.device
+  minkowski_settings: # see official minkowski documentation at https://nvidia.github.io/MinkowskiEngine/
+    num_threads: 1
+    algorithm: speed_optimized
+    gpu: False
+  metrics:
+    enabled: true
+    health:
+      enabled: true
+    active_preset:
+      enabled: true
+    histograms:
+      enabled: false
+      num_neighbours:
+        enabled: true
+      num_neighbours_ratio:
+        enabled: true
+      num_neighbours_xy:
+        enabled: true
+    latencies:
+      enabled: true
+      internal:
+        enabled: true
+        add_points:
+          enabled: true
+        bound_range:
+          enabled: true
+        outlier_removal:
+          enabled: true
+        project_and_publish_height_map:
+          enabled: true
+        publish_get_pose:
+          enabled: true
+        remove_points:
+          enabled: true
+        retrieve_robot_pose:
+          enabled: true
+        sphere_projection:
+          enabled: true
+        transform_pointclouds_to_world_frame:
+          enabled: true
+        compute_health_values:
+          enabled: true
+      pre_compute:
+        enabled: true
+      pre_nfm:
+        enabled: true
+      till_published:
+        enabled: true
+      till_removed:
+        enabled: true
+    point_stats:
+      enabled: true
+      added:
+        enabled: true
+      change:
+        enabled: true
+      count:
+        enabled: true
+      missed:
+        enabled: true
+      new:
+        enabled: true
+      removed:
+        enabled: true
+      removed_bounds:
+        enabled: true
+      removed_outliers:
+        enabled: true
+      removed_visibility_cleanup:
+        enabled: true
+    events:
+      enabled: true
+      missed_inputs:
+        enabled: true
+    elevation_map:
+      enabled: true
+      height_entropy:
+        enabled: false
+      height:
+        enabled: false
+      filling_ratio:
+        enabled: true
+near_field_mapping_health_checker:
+  default: # If the preset is not specified here, the default preset is used.
+    health_criteria: # generic health criteria, this list all the health keys
+      filling_ratio: 0.05
+      input_latency: 0.05
+      number_of_map_points_too_high: 0.05
+      number_of_map_points_too_low: 0.05
+      output_latency: 0.05
+  # the health criteria depends on the NFM preset.
+  stairs_l0: &stairs_l0_health_check
+    health_criteria: # health criteria
+      # filling_ratio: 0.05  # comment it out since it can jump to zero during operation
+      number_of_map_points_too_high: 0.05
+      number_of_map_points_too_low: 0.05
+      output_latency: 0.05
+  open_stairs_lidar_down: #legacy preset.
+    <<: *stairs_l0_health_check
+  open_stairs_lidar_up: # legacy preset. the new near field mapping does not care about the direction.
+    <<: *stairs_l0_health_check
+

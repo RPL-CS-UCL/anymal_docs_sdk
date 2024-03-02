@@ -48,3 +48,7 @@
     <img align="center" src="image/screenshot_anymald_topic_path_planning.png" width="50%" alt="screenshot_anymald_topic_path_planning">
   </a> 
 </div>
+
+### Disable ROS-specific node
+1. (Not recommended) Modify the parameter and change ```enabled: true``` as ```enabled: false``` (like search ```joy_manager```) in 
+```/home/jjiao/robohike_ws/src/RPL-RoboHike/robot_docs_sdk/anymal_docs_sdk/anymal_common_config_files/config/default.yaml```

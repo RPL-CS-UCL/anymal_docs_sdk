@@ -1,0 +1,258 @@
+visual_inspection_video_recording_behavior_plugins:
+  inspect_from_here:
+    inspection_manager_plugin_name: visual_inspection_video_recording_plugin/VisualInspectionVideoRecordingPlugin
+  inspect_from_pose:
+    move_main_body: false
+environment:
+  object_types:
+    visual_inspection_video_recording:
+      interactions:
+        01_record_video_from_here:
+          label: Record Static Video From Here
+          auto_control_required: true
+          state_name:
+            postfix: FromHere
+            prefix: RecordVideoOf
+          state_settings:
+            - name: inspectable_item
+              type: InspectableItem
+              value: <object_name>
+          state_type: visual_inspection_video_recording_behavior_plugins::InspectFromHere
+        02_take_video_recording:
+          label: Record Static Video
+          auto_control_required: true
+          state_name:
+            postfix: ""
+            prefix: RecordVideoOf
+          state_settings:
+            - name: inspectable_item
+              type: InspectableItem
+              value: <object_name>
+          state_type: visual_inspection_video_recording_behavior_plugins::Inspect
+      name: visual_inspection_video_recording
+      visualization:
+        color:
+          blue: 0.1171875
+          green: 0.1953125
+          red: 0.703125
+        mesh: package://environment_visualizer/meshes/inspectable_items/video_recording_inspection_point.dae
+inspection_manager_ros:
+  plugins:
+    visual_inspection_video_recording:
+      action: inspect_visual_item/video_recording
+      allow_multiple_instances: false
+      label: Visual Inspection Static Video Recording
+      name: visual_inspection_video_recording_plugin/VisualInspectionVideoRecordingPlugin
+      type: visual
+  visual_inspection_video_recording_plugin:
+    scale_factor: 5.0
+    visual_servoing:
+      clients:
+        do_visual_servoing:
+          topic: /inspection_payload/visual_servoing/do_visual_servoing
+    wait_before_recording: 1.25
+    thermal_camera:
+      recording:
+        audio_source: /audio/resampled/audio_raw
+        video_encoding: ""
+        video_fps: 9
+        video_source: /thermal_camera/color/large/scale/image_raw
+        service: /inspection_recording_manager_lpc/record_video
+    thermal_camera_raw:
+      recording:
+        audio_source: /audio/resampled/audio_raw
+        video_encoding: ""
+        video_fps: 9
+        video_source: /thermal_camera/raw/thermal_image
+        service: /inspection_recording_manager_lpc/record_video
+    zoom_camera:
+      recording:
+        audio_source: /audio/resampled/audio_raw
+        video_encoding: h265
+        video_fps: 15
+        video_source: rtsp://192.168.1.120:554/z3-1.sdp
+        service: /inspection_recording_manager_lpc/record_video
+    wide_angle_camera_front:
+      recording:
+        audio_source: /audio/resampled/audio_raw
+        video_encoding: ""
+        video_fps: 20
+        video_source: /wide_angle_camera_front/image_color_rect
+        service: /inspection_recording_manager_npc/record_video
+    wide_angle_camera_rear:
+      recording:
+        audio_source: /audio/resampled/audio_raw
+        video_encoding: ""
+        video_fps: 20
+        video_source: /wide_angle_camera_rear/image_color_rect
+        service: /inspection_recording_manager_npc/record_video
+interaction_marker:
+  plugin_setup:
+    plugins:
+      90_take_video:
+        parameters:
+          auto_control_required: true
+          entry_text: Record Zoom Camera Video (10s)
+          environment_object_template:
+            camera_type: normal
+            label: Interactive Marker Inspectable Item
+            min_pixel_size:
+              detecting: 0
+              reading: 350
+            name: InteractiveMarkerInspectableItem
+            record_audio: true
+            recording_duration: 10.0
+            size:
+              height: 0.25
+              width: 0.25
+            template_id: 0
+            type: visual_inspection_video_recording
+          pose_frame_id: map
+          state:
+            name:
+              postfix: FromHere
+              prefix: Inspect
+            settings:
+              parameter_name: inspectable_item
+              parameter_type: InspectableItem
+            type: visual_inspection_video_recording_behavior_plugins::InspectFromHere
+        type: interaction_marker_plugin_mission::InteractionMarkerPluginMission
+      91_take_thermal_video:
+        parameters:
+          auto_control_required: true
+          entry_text: Record Thermal Camera Video (10s)
+          environment_object_template:
+            camera_type: thermal
+            label: Interactive Marker Inspectable Item
+            min_pixel_size:
+              detecting: 0
+              reading: 350
+            name: InteractiveMarkerInspectableItem
+            record_audio: true
+            recording_duration: 10.0
+            size:
+              height: 0.25
+              width: 0.25
+            template_id: 0
+            type: visual_inspection_video_recording
+          pose_frame_id: map
+          state:
+            name:
+              postfix: FromHere
+              prefix: Inspect
+            settings:
+              parameter_name: inspectable_item
+              parameter_type: InspectableItem
+            type: visual_inspection_video_recording_behavior_plugins::InspectFromHere
+        type: interaction_marker_plugin_mission::InteractionMarkerPluginMission
+      92_take_wac_front_video:
+        parameters:
+          auto_control_required: true
+          entry_text: Record Wide-Angle Front Camera Video (10s)
+          environment_object_template:
+            camera_type: wac_front
+            label: Interactive Marker Inspectable Item
+            min_pixel_size:
+              detecting: 0
+              reading: 350
+            name: InteractiveMarkerInspectableItem
+            record_audio: true
+            recording_duration: 10.0
+            size:
+              height: 0.25
+              width: 0.25
+            template_id: 0
+            type: visual_inspection_video_recording
+          pose_frame_id: map
+          state:
+            name:
+              postfix: FromHere
+              prefix: Inspect
+            settings:
+              parameter_name: inspectable_item
+              parameter_type: InspectableItem
+            type: visual_inspection_video_recording_behavior_plugins::InspectFromHere
+        type: interaction_marker_plugin_mission::InteractionMarkerPluginMission
+      93_take_wac_rear_video:
+        parameters:
+          auto_control_required: true
+          entry_text: Record Wide-Angle Rear Camera Video (10s)
+          environment_object_template:
+            camera_type: wac_rear
+            label: Interactive Marker Inspectable Item
+            min_pixel_size:
+              detecting: 0
+              reading: 350
+            name: InteractiveMarkerInspectableItem
+            record_audio: true
+            recording_duration: 10.0
+            size:
+              height: 0.25
+              width: 0.25
+            template_id: 0
+            type: visual_inspection_video_recording
+          pose_frame_id: map
+          state:
+            name:
+              postfix: FromHere
+              prefix: Inspect
+            settings:
+              parameter_name: inspectable_item
+              parameter_type: InspectableItem
+            type: visual_inspection_video_recording_behavior_plugins::InspectFromHere
+        type: interaction_marker_plugin_mission::InteractionMarkerPluginMission
+inspection_recording_manager_lpc:
+  sensors:
+    thermal_camera_raw:
+      max_sensing_temperature: 550
+      min_sensing_temperature: -40
+launch:
+  setup:
+    sim:
+      inspection_manager_ros:
+        visual_inspection_video_recording_plugin:
+          zoom_camera:
+            recording:
+              video_encoding: "h265"
+              video_source: rtsp://127.0.0.1:8554/zoom_camera
+rqt_task_execution:
+  advanced_tasks:
+    list:
+      90_visual_inspection_video_recording_from_here:
+        label: Record Static Video From Here
+        state:
+          name:
+            postfix: FromHere
+            prefix: RecordVideoOf
+          settings:
+            - name: inspectable_item
+              type: InspectableItem
+              value: <visual_inspection_video_recording>
+          type: visual_inspection_video_recording_behavior_plugins::InspectFromHere
+      91_visual_inspection_video_recording:
+        label: Record Static Video
+        state:
+          name:
+            postfix: ""
+            prefix: RecordVideoOf
+          settings:
+            - name: inspectable_item
+              type: InspectableItem
+              value: <visual_inspection_video_recording>
+          type: visual_inspection_video_recording_behavior_plugins::Inspect
+rqt_environment_editor:
+  plugins:
+    visual_inspection_video_recording:
+      label: Visual Inspection Static Video Recording
+      name: visual_inspection_video_recording_qt_plugin/VisualInspectionVideoRecordingQtPlugin
+rqt_state_machine_editor:
+  behavior_plugins:
+    visual_inspection_video_recording_behavior_plugins:
+      namespace: visual_inspection_video_recording_behavior_plugins
+stack_launcher:
+  nodes:
+    inspection_manager:
+      preprocessed_params:
+        visual_inspection_video_recording_template_path:
+          key: /inspection_manager_ros/visual_inspection_video_recording/template_path
+          value: $(rospack find inspection_data)/inspection/visual_inspection/video_recording/image_templates

@@ -1,0 +1,314 @@
+stack_launcher:
+  nodes:
+    elevation_mapping:
+      roslaunch:
+        name: elevation_mapping
+        node_type: elevation_mapping
+        output: screen
+        package: elevation_mapping
+  stacks:
+    locomotion:
+      nodes:
+        elevation_mapping:
+          enabled: true
+          name: elevation_mapping
+    terrain_mapping:
+      nodes:
+        elevation_mapping:
+          enabled: true
+          name: elevation_mapping
+anymal_record:
+  topic_groups:
+    elevation_mapping:
+      - "/elevation_mapping/status"
+      - "/motion_control_manager/active_motion"
+elevation_mapping:
+  enable_visibility_cleanup: true
+  fused_map_publishing_rate: 0.5
+  increase_height_alpha: 0.0
+  init_submap_height_offset: 0.01
+  init_submap_variance: 0.001
+  initialization_method: 0
+  initialize_elevation_map: true
+  input_sources:
+    input_$side$:
+      __replacements__: &camera_replacements
+        - $side$: front_lower
+          $publish_on_update$: true
+        - $side$: front_upper
+          $publish_on_update$: false
+        - $side$: left
+          $publish_on_update$: false
+        - $side$: rear_upper
+          $publish_on_update$: false
+        - $side$: rear_lower
+          $publish_on_update$: false
+        - $side$: right
+          $publish_on_update$: false
+      enabled: true
+      type: pointcloud
+      topic: /depth_camera_$side$/point_cloud_self_filtered
+      queue_size: 1
+      publish_on_update: $publish_on_update$
+      sensor_processor: &realsense_processor
+        ignore_points_above: .inf
+        ignore_points_below: -.inf
+        type: structured_light
+        cutoff_min_depth: 0.1
+        cutoff_max_depth: 1.5
+        normal_factor_a: 0.001063
+        normal_factor_b:  0.003949
+        normal_factor_c: 0.0
+        normal_factor_d: 0.0008278
+        normal_factor_e: 1
+        lateral_factor: 0.01576 # approx 1 deg
+    hallucinated_input_$side$: &hallucinated_points_input
+      __replacements__: *camera_replacements
+      enabled: true
+      type: pointcloud
+      topic: /depth_camera_$side$/hallucinated_points
+      queue_size: 1
+      publish_on_update: false
+      sensor_processor: *realsense_processor
+  length_in_x: 4.0
+  length_in_x_init_submap: 1.0
+  length_in_y: 4.0
+  length_in_y_init_submap: 1.0
+  mahalanobis_distance_threshold: 3.0
+  map_frame_id: point_cloud_odom
+  max_variance: 0.04          # 20 cm std_dev
+  min_update_rate: 2.0        # Controls the minimum time between robot motion updates.
+  min_variance: 0.0001        # 1 cm std_dev
+  multi_height_noise: 0.00003 # Added to the variance whenever new points are outside of the mahalanobis distance for points that are older than scanning duration.
+  num_callback_threads: 4
+  position_x: 0.0
+  position_y: 0.0
+  postprocessor_num_threads: 2
+  postprocessor_pipeline_name: postprocessor_pipeline
+  postprocessor_pipeline:
+    - name: delete_layers_1 # Deleted unnecessary layers before publishing to reduce bandwidth
+      type: gridMapFilters/DeletionFilter
+      params:
+        layers:
+          - color
+          - horizontal_variance_x
+          - horizontal_variance_xy
+          - horizontal_variance_y
+          - lowest_scan_point
+          - sensor_x_at_lowest_scan
+          - sensor_y_at_lowest_scan
+          - sensor_z_at_lowest_scan
+    - name: variance_threshold # Filter elevation layer by variance.
+      type: gridMapFilters/ThresholdFilter
+      params:
+        condition_layer: variance
+        output_layer: elevation
+        upper_threshold: 0.0049 # alternative: lower_threshold
+        set_to: .nan # # Other uses: .nan, .inf
+    - &median_fill_filter_iteration_template
+      name: median_fill_filter_iteration_1 # Median fill the elevation layer.
+      type: gridMapFilters/MedianFillFilter
+      params: &median_fill_filter_iteration_params_template
+        input_layer: elevation
+        output_layer: elevation
+        fill_hole_radius: 0.05
+        filter_existing_values: true
+        existing_value_radius: 0.03
+        fill_mask_layer: fill_mask
+        debug: false
+        debug_infill_mask_layer: intermediate_mask
+        num_erode_dilation_iterations: 4
+    - <<: *median_fill_filter_iteration_template
+      name: median_fill_filter_iteration_2 # 2nd pass
+      params:
+        <<: *median_fill_filter_iteration_params_template
+        fill_hole_radius: 0.03
+        filter_existing_values: false
+    - <<: *median_fill_filter_iteration_template
+      name: median_fill_filter_iteration_3
+      params:
+        <<: *median_fill_filter_iteration_params_template
+        fill_hole_radius: 0.03
+        filter_existing_values: false
+    - name: publish_status
+      type: elevation_mapping_status/ElevationMappingStatus
+      params:
+        metrics: [ "filling_ratio", "mean_height", "min_height", "max_height" ]
+        status_topic: "/elevation_mapping/status"
+    - name: delete_layers_2 # Deleted unnecessary layers before publishing to reduce bandwidth
+      type: gridMapFilters/DeletionFilter
+      params:
+        layers: [fill_mask, time, variance]
+  resolution: 0.02
+  robot_base_frame_id: base
+  robot_motion_map_update:
+    covariance_scale: 0.01
+  robot_pose_cache_size: 1
+  robot_pose_with_covariance_topic: ""  # Disable robot covariance updates.
+  scanning_duration: 2.0      # parameter for multi height discard, a high value is better for discarding outliers outside of the mahalanobis distance.
+  surface_normal_positive_axis: z
+  target_frame_init_submap: /footprint
+  time_offset_for_point_cloud: 0.0
+  time_tolerance: 1.0
+  track_point_frame_id: base
+  track_point_x: 0.0
+  track_point_y: 0.0
+  track_point_z: 0.0
+  visibility_cleanup_rate: 1.0
+near_field_mapping_preset_selector:
+  hooks:
+    open_stairs_lidar_down:
+      stair_climbing_modes: "undefined" # we don't have a way to disambiguate the direction for stair climbing automatically, thus these are undefined to avoid a race condition.
+    open_stairs_lidar_up:
+      stair_climbing_modes: "undefined" # we don't have a way to disambiguate the direction for stair climbing automatically, thus these are undefined to avoid a race condition.
+  presets:
+    open_stairs_lidar_down:
+      clear_elevation_mapping_client:
+        execute_at_stage: 1
+        clear_elevation_map_on_enable: true
+        clear_elevation_map_on_disable: false
+      depth_image_filters:
+        execute_at_stage: 0
+        parameters:
+          - cameras: [ "front_lower" ]
+            parameters:
+              max_depth_threshold_in_m: 0.60
+              low_confidence_value: 0.0
+              medium_confidence_value: 0.014
+              high_confidence_value: 1.0
+              confidence_value: 0.01
+          - cameras: [ "front_upper" ]
+            parameters:
+              max_depth_threshold_in_m: 0.60
+              low_confidence_value: 0.0
+              medium_confidence_value: 0.014
+              high_confidence_value: 1.0
+              confidence_value: 0.01
+          - cameras: [ "rear_lower" ]
+            parameters:
+              max_depth_threshold_in_m: 1e3
+              low_confidence_value: 0.0
+              medium_confidence_value: 0.03
+              high_confidence_value: 1.0
+              confidence_value: 0.03
+          - cameras: [ "rear_upper" ]
+            parameters:
+              max_depth_threshold_in_m: 1e3
+              low_confidence_value: 0.0
+              medium_confidence_value: 0.03
+              high_confidence_value: 1.0
+              confidence_value: 0.03
+      elevation_mapping:
+        execute_at_stage: 0
+        parameters:
+          increase_height_alpha: 0.98
+          max_variance: 0.04
+          min_variance: 0.0009
+          multi_height_noise: 0.00001
+          input_sources:
+            hallucinated_input_front_lower:
+              enabled: false
+            hallucinated_input_front_upper:
+              enabled: false
+            hallucinated_input_left:
+              enabled: false
+            hallucinated_input_rear_lower:
+              enabled: true
+            hallucinated_input_rear_upper:
+              enabled: true
+            hallucinated_input_right:
+              enabled: false
+          postprocessor_pipeline:
+            - __list_item_key__: "name"
+              __list_item_id__: "variance_threshold"
+              params:
+                upper_threshold: 0.0049
+          scanning_duration: 0.1
+      realsense_presets:
+        execute_at_stage: 0
+        parameters:
+          - cameras: [ "front_lower", "front_upper", "rear_lower", "rear_upper" ]
+            preset_json_file_path: package://anymal_realsense/config/stair_climbing_preset.json
+    open_stairs_lidar_up:
+      clear_elevation_mapping_client:
+        execute_at_stage: 1
+        clear_elevation_map_on_enable: true
+        clear_elevation_map_on_disable: false
+      depth_image_filters:
+        execute_at_stage: 0
+        parameters:
+          - cameras: [ "rear_lower"]
+            parameters:
+              max_depth_threshold_in_m: 0.60
+              low_confidence_value: 0.0
+              medium_confidence_value: 0.014
+              high_confidence_value: 1.0
+              confidence_value: 0.01
+          - cameras: [ "rear_upper" ]
+            parameters:
+              max_depth_threshold_in_m: 0.60
+              low_confidence_value: 0.0
+              medium_confidence_value: 0.014
+              high_confidence_value: 1.0
+              confidence_value: 0.01
+          - cameras: [ "front_lower" ]
+            parameters:
+              max_depth_threshold_in_m: 4.0
+              low_confidence_value: 0.0
+              medium_confidence_value: 0.03
+              high_confidence_value: 1.0
+              confidence_value: 0.03
+          - cameras: [ "front_upper" ]
+            parameters:
+              max_depth_threshold_in_m: 4.0
+              low_confidence_value: 0.0
+              medium_confidence_value: 0.03
+              high_confidence_value: 1.0
+              confidence_value: 0.03
+      elevation_mapping:
+        execute_at_stage: 0
+        parameters:
+          increase_height_alpha: 0.98
+          max_variance: 0.04
+          min_variance: 0.0009
+          multi_height_noise: 0.00001
+          input_sources:
+            hallucinated_input_rear_lower:
+              enabled: false
+            hallucinated_input_rear_upper:
+              enabled: false
+            hallucinated_input_left:
+              enabled: false
+            hallucinated_input_front_lower:
+              enabled: true
+            hallucinated_input_front_upper:
+              enabled: true
+            hallucinated_input_right:
+              enabled: false
+          postprocessor_pipeline:
+            - __list_item_key__: "name"
+              __list_item_id__: "variance_threshold"
+              params:
+                upper_threshold: 0.0049
+          scanning_duration: 0.1
+      realsense_presets:
+        execute_at_stage: 0
+        parameters:
+          - cameras: [ "front_lower", "front_upper", "rear_lower", "rear_upper" ]
+            preset_json_file_path: package://anymal_realsense/config/stair_climbing_preset.json
+  clients:
+    elevation_mapping:
+      enabled: true
+      namespace: "/elevation_mapping"
+    depth_image_filters:
+      enabled: true
+      reconfigure_service_format_string: "/depth_camera_$camera/depth_image_filter_pipeline/parameter_handler_ros"
+    clear_elevation_mapping_client:
+      enabled: true
+      time_delay_to_clear: 0.0 # in s
+    realsense_presets:
+      default_json_path_format_string: "/depth_camera_$camera/driver/json_file_path"
+      enabled: true
+      reconfigure_service_format_string: "/depth_camera_$camera/loadJsonFile"
+  services:
+    change_preset_service_topic: "/near_field_mapping_preset_selector/change_preset"

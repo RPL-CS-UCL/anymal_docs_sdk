@@ -1,0 +1,58 @@
+anymal_state_presenter_web:
+  continuous_publishing_auto_enable: true
+  continuous_publishing_auto_enable_rate: 60
+  max_allowed_tf_age: 1.0
+  publish_event_topic: "anymal_state_event"
+  subscribers:
+    actuator_state_topic: "/state_estimator/anymal_state_throttle"
+    inspection_payload_state_topic: "/inspection_payload/joint_states"
+stack_launcher:
+  nodes:
+    anymal_nginx:
+      roslaunch:
+        name: anymal_nginx
+        args: "'nginx -c /usr/share/anymal_nginx/configuration/etc/nginx/nginx.conf'"
+        node_type: aliencontrol
+        package: aliencontrol
+        respawn: true
+    anymal_grpc_web_proxy:
+      roslaunch:
+        name: grpc_web_proxy
+        args: "'grpc-web-proxy
+                --server_http_max_write_timeout=0
+                --server_http_debug_port=9091
+                --backend_addr=localhost:11314
+                --run_tls_server=false
+                --use_websockets
+                --allow_all_origins'"
+        node_type: aliencontrol
+        package: aliencontrol
+        respawn: true
+    anymal_state_presenter_web:
+      roslaunch:
+        name: anymal_state_presenter_web
+        node_type: anymal_state_presentation_node
+        output: screen
+        package: anymal_state_presentation
+  stacks:
+    npc_background:
+      nodes:
+        anymal_nginx:
+          enabled: true
+          name: anymal_nginx
+        anymal_grpc_web_proxy:
+          enabled: true
+          name: anymal_grpc_web_proxy
+    navigation:
+      nodes:
+        anymal_state_presenter_web:
+          enabled: true
+          name: anymal_state_presenter_web
+    simulation_environment:
+      nodes:
+        anymal_nginx:
+          enabled: true
+          name: anymal_nginx
+        anymal_grpc_web_proxy:
+          enabled: true
+          name: anymal_grpc_web_proxy

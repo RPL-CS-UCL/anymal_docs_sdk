@@ -1,0 +1,59 @@
+anymal_record:
+  snapshotter:
+    snapshotter_handler_config:
+      trigger_buffer_duration: 5
+    snapshotter_config:
+      duration: 25
+      size: 250
+      count: -1
+      output_path: "./snapshots"
+      min_disk_space_gb: 5
+      regex: ""
+      compression: "lz4"
+rosbag_snapshot_trigger_manager:
+  trigger_manager_configurations:
+    general_severity_level: 2
+    trigger_manager_topic_name: "manager_info"
+    default_recording_preset: "basic"
+  hooks_config:
+    software_pstop:
+      type: "TopicValueHook"
+      enabled: true
+      severity_level: 2
+      recording_presets: ["Navception"]
+      trigger_actions: ["WriteSnapshotToDisk", "CreateLogBundle"]
+      monitored_topic:
+        name: "/motion_control_manager/notify_control_unit_state" # Topic to monitor. Gets notified if P-stop is triggered. Have a lock at ControlUnitState.msg for more information.
+      trigger_evaluation_expression: "msg.state < 0 and msg.origin_type == 1 and msg.pstop_cleared == False" # Trigger hook if P-stop was triggered by software (protectiveStopOrigin.SOFTWARE = 1) and the state is either FAILURE (= -2) or EMERGENCY (= -1).
+  actions_config:
+    WriteSnapshotToDisk:
+      service_name: "/anymal_snapshot/triggerSnapshotter"
+    PublishTopic:
+      topic_name: "/snapshot_triggers"
+    CreateLogBundle:
+      service_name: "/trigger_log_bundle"
+      last_n_seconds: 60
+
+stack_launcher:
+  nodes:
+    anymal_snapshot:
+      roslaunch:
+        name: anymal_snapshot
+        node_type: anymal_snapshot_handler
+        output: screen
+        package: anymal_record
+    rosbag_snapshot_trigger_manager:
+      roslaunch:
+        name: rosbag_snapshot_trigger_manager
+        node_type: rosbag_snapshot_trigger_manager_node
+        output: screen
+        package: rosbag_snapshot_trigger_manager
+  stacks:
+    navigation:
+      nodes:
+        anymal_snapshot:
+          enabled: true
+          name: anymal_snapshot
+        rosbag_snapshot_trigger_manager:
+          enabled: true
+          name: rosbag_snapshot_trigger_manager

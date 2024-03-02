@@ -1,0 +1,268 @@
+launch:
+  setup:
+    sim: # For the sim setup, we need a special wrapper for the agents, to parametrize them with the proper anymal name.
+      ads_agent_wrapper_lpc:
+        server: 'http://localhost:11314'
+        loglevel: 'warn'
+        credentials_dir: '/none'
+        pc_name: 'lpc'
+        preauthenticated: true
+      ads_agent_wrapper_npc:
+        server: 'http://localhost:11314'
+        loglevel: 'warn'
+        credentials_dir: '/none'
+        pc_name: 'npc'
+        preauthenticated: true
+      stack_launcher:
+        nodes:
+          ads_agent_lpc:
+            roslaunch:
+              name: ads_agent_wrapper_lpc
+              node_type: ads_agent_wrapper
+              output: screen
+              package: anymal_data_sync_agent
+              respawn: true
+          ads_agent_npc:
+            roslaunch:
+              name: ads_agent_wrapper_npc
+              node_type: ads_agent_wrapper
+              output: screen
+              package: anymal_data_sync_agent
+              respawn: true
+          ads_server_npc:
+            roslaunch:
+              env_args:
+                livekit_endpoint_url:
+                  key: LIVEKIT_ENDPOINT_URL
+                  value: ws://localhost:7880
+    real: # For the real robot setup, just start the agent without wrapper.
+      stack_launcher:
+        nodes:
+          ads_agent_lpc:
+            roslaunch:
+              args: http://npc:11314
+              name: ads_agent_lpc
+              node_type: ads_agentd
+              output: screen
+              package: anymal_data_sync_agent
+              respawn: true
+          ads_agent_npc:
+            roslaunch:
+              args: http://npc:11314
+              name: ads_agent_npc
+              node_type: ads_agentd
+              output: screen
+              package: anymal_data_sync_agent
+              respawn: true
+ads_agent_npc:
+  control_lease: &control_lease
+    clients:
+      acquire_lease: /control_lease/acquire_lease
+      get_control_lease_status: /control_lease/get_control_lease_status
+      release_lease: /control_lease/release_lease
+      request_heartbeat: /control_lease/request_heartbeat
+    subscribers:
+      registry_heartbeat: /control_lease/registry_heartbeat
+      control_lease_status: /control_lease/control_lease_status
+    timeout: 30.0
+    watchdog_frequency: 1.0
+  liveview_sources:
+    wac_front: /wide_angle_camera_front/image_color
+    wac_rear: /wide_angle_camera_rear/image_color
+ads_agent_lpc:
+  control_lease: *control_lease
+  liveview_sources:
+    zoom_camera: /zoom_camera/image_raw
+ads_server_npc:
+  insecure: true
+  ephemeral: true
+  loglevel: 'warn'
+  port: 11314
+  unauthenticated: true
+anymal_state_presenter_api:
+  continuous_publishing_auto_enable: false
+  max_allowed_tf_age: 1.0
+  publish_event_topic: "anymal_state_event"
+  subscribers:
+    actuator_state_topic: "/state_estimator/anymal_state_throttle"
+    inspection_payload_state_topic: "/inspection_payload/joint_states"
+behavior_engine_execute_mission_api: # Absolute names, as these parameters are read by different nodes.
+  monitor: &behavior_engine_execute_mission_monitor
+    subscribers:
+      mission_started_events:
+        queue_size: 10
+        topic: /behavior_engine/execute_mission/mission_started_events
+      mission_updated_events:
+        queue_size: 10
+        topic: /behavior_engine/execute_mission/mission_updated_events
+inspection_presenter:
+  assets_fetching:
+    parameter_key: "/environment/objects"
+  event_interpreters:
+    auditive_inspection_frequency:
+      queue_size: 1
+      topic: "/inspection_manager_ros/inspect_auditive_item/frequency/result"
+    auditive_inspection_simple:
+      queue_size: 1
+      topic: "/inspection_manager_ros/inspect_auditive_item/simple/result"
+    inspection_intelligence:
+      queue_size: 1
+      topic: "/inspection_manager_ros/inspect_inspection_intelligence_object/result"
+    visual_inspection_dial:
+      queue_size: 1
+      topic: "/inspection_manager_ros/inspect_visual_item/dial/result"
+    visual_inspection_simple:
+      queue_size: 1
+      topic: "/inspection_manager_ros/inspect_visual_item/simple/result"
+    visual_inspection_thermal:
+      queue_size: 1
+      topic: "/inspection_manager_ros/inspect_visual_item/thermal/result"
+    visual_inspection_video_recording:
+      queue_size: 1
+      topic: "/inspection_manager_ros/inspect_visual_item/video_recording/result"
+  metadata_retrieval:
+    monitor_mission:
+      <<: *behavior_engine_execute_mission_monitor
+  number_threads_ros_spinner: 2
+  transform_retrieval:
+    coordinate_frames:
+      mission_frame: "map"
+      robot_frame: "base"
+    transform_cache_time: 60.0
+    transform_wait_timeout: 0.1
+gui:
+  toolbar_menu:
+    plugins:
+      rqt_anymal_data_sync:
+        icon_path: :/images/data_sync.svg
+        label: Data Sync
+        location: toolbar
+        name: rqt_anymal_data_sync/AnymalDataSyncPlugin
+        object_name: AnymalDataSyncWidget
+        order: 2
+stack_launcher:
+  nodes:
+    # Note: agents already defined above for the sim/real setup.
+    livekit_bridge_lpc:
+      preprocessed_params:
+        launch_prefix:
+          key: /stack_launcher/nodes/livekit_bridge_lpc/roslaunch/launch_prefix
+          value: '$(rospack find anymal_livekit_environment)/venv/bin/python3 '
+      roslaunch:
+        env_args:
+          silence_livekit_sdk_rust_log:
+            key: RUST_LOG
+            value: error
+        package: livekit_bridge
+        node_type: livekit_bridge.py
+        args: -pc lpc
+        name: livekit_bridge_lpc
+        output: screen
+        respawn: true
+    livekit_bridge_npc:
+      preprocessed_params:
+        launch_prefix:
+          key: /stack_launcher/nodes/livekit_bridge_npc/roslaunch/launch_prefix
+          value: '$(rospack find anymal_livekit_environment)/venv/bin/python3 '
+      roslaunch:
+        env_args:
+          silence_livekit_sdk_rust_log:
+            key: RUST_LOG
+            value: error
+        package: livekit_bridge
+        node_type: livekit_bridge.py
+        args: -pc npc
+        name: livekit_bridge_npc
+        output: screen
+        respawn: true
+    ads_server_npc:
+      roslaunch:
+        env_args:
+          # Required to connect to Livekit
+          livekit_api_key:
+            key: LIVEKIT_API_KEY
+            value: ads-admin
+          livekit_api_secret:
+            key: LIVEKIT_API_SECRET
+            value: livekit-server-secret-for-ads-server
+          livekit_endpoint_url:
+            key: LIVEKIT_ENDPOINT_URL
+            value: ws://anymal-<ANYMAL_NAME>-npc:7880
+        name: ads_server_npc
+        node_type: ads_server_wrapper
+        output: screen
+        package: anymal_data_sync_server
+        respawn: true
+    anymal_livekit_server:
+      roslaunch:
+        name: anymal_livekit_server
+        args: "'/usr/bin/anymal_livekit_server/anymal-livekit-server'"
+        node_type: aliencontrol
+        package: aliencontrol
+        respawn: true
+    anymal_state_presenter_api:
+      roslaunch:
+        name: anymal_state_presenter_api
+        node_type: anymal_state_presentation_node
+        output: screen
+        package: anymal_state_presentation
+        respawn: true
+    inspection_presenter:
+      roslaunch:
+        name: inspection_presenter
+        node_type: inspection_presentation_node
+        output: screen
+        package: inspection_presentation
+  stacks:
+    lpc_background:
+      nodes:
+        ads_agent_lpc:
+          enabled: true
+          name: ads_agent_lpc
+        livekit_bridge_lpc:
+          enabled: true
+          name: livekit_bridge_lpc
+    locomotion:
+      nodes:
+        anymal_state_presenter_api:
+          enabled: true
+          name: anymal_state_presenter_api
+    npc_background:
+      nodes:
+        ads_agent_npc:
+          enabled: true
+          name: ads_agent_npc
+        ads_server_npc:
+          enabled: true
+          name: ads_server_npc
+        livekit_bridge_npc:
+          enabled: true
+          name: livekit_bridge_npc
+        anymal_livekit_server:
+          enabled: true
+          name: anymal_livekit_server
+    inspection:
+      nodes:
+        inspection_presenter:
+          enabled: true
+          name: inspection_presenter
+    simulation_environment:
+      nodes:
+        ads_agent_lpc:
+          enabled: true
+          name: ads_agent_lpc
+        ads_agent_npc:
+          enabled: true
+          name: ads_agent_npc
+        ads_server_npc:
+          enabled: true
+          name: ads_server_npc
+        anymal_livekit_server:
+          enabled: true
+          name: anymal_livekit_server
+        livekit_bridge_lpc:
+          enabled: true
+          name: livekit_bridge_lpc
+        livekit_bridge_npc:
+          enabled: true
+          name: livekit_bridge_npc

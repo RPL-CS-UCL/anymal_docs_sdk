@@ -1,0 +1,17 @@
+anymal_record:
+  log_bundler:
+    output_path: ~/.ros/log_bundles_data
+stack_launcher:
+  nodes:
+    anymal_log_bundler:
+      roslaunch:
+        name: anymal_log_bundler
+        node_type: anymal_log_bundler
+        output: screen
+        package: anymal_record
+  stacks:
+    navigation:
+      nodes:
+        anymal_log_bundler:
+          enabled: true
+          name: anymal_log_bundler

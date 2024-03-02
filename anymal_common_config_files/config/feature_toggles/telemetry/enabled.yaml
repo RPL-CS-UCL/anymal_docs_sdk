@@ -1,0 +1,83 @@
+stack_launcher:
+  nodes:
+    tel_prometheus_anymal_exporter:
+      roslaunch:
+        name: tel_prometheus_anymal_exporter
+        args: "'anymal-prometheus-exporter'"
+        node_type: aliencontrol
+        package: aliencontrol
+    tel_prometheus_node_exporter_lpc:
+      roslaunch: &tel_prometheus_node_exporter
+        name: tel_prometheus_node_exporter_lpc
+        args: "'prometheus-node-exporter
+          --web.listen-address=localhost:9100
+          --web.disable-exporter-metrics
+          --collector.disable-defaults
+          --collector.cpu
+          --collector.cpufreq
+          --collector.diskstats
+          --collector.filefd
+          --collector.filesystem
+          --collector.loadavg
+          --collector.meminfo
+          --collector.netdev
+          --collector.netstat
+          --collector.os
+          --collector.stat
+          --collector.thermal_zone
+          --collector.time
+          --collector.uname
+          --collector.vmstat
+          --collector.netdev.device-include=^(wg0|enp0s31.*)$
+        '"
+        node_type: aliencontrol
+        package: aliencontrol
+    tel_vmagent_lpc:
+      roslaunch: &tel_vmagent
+        name: tel_vmagent_lpc
+        args: "'vmagent --promscrape.config=/etc/vmagent/config/default/config.yaml
+          --httpListenAddr=''
+          --loggerWarnsPerSecondLimit=1
+          --remoteWrite.url=https://telemetry.prod.anybotics.com/metrics/write
+          --remoteWrite.tlsCertFile=/usr/share/ads/credentials/ads-agent.crt
+          --remoteWrite.tlsKeyFile=/usr/share/ads/credentials/ads-agent.pem
+          --remoteWrite.flushInterval=60s
+          --remoteWrite.maxDiskUsagePerURL=5GB'"
+        node_type: aliencontrol
+        package: aliencontrol
+    tel_prometheus_node_exporter_npc:
+      roslaunch:
+        <<: *tel_prometheus_node_exporter
+        name: tel_prometheus_node_exporter_npc
+    tel_vmagent_npc:
+      roslaunch:
+        <<: *tel_vmagent
+        name: tel_vmagent_npc
+        args: "'vmagent --promscrape.config=/etc/vmagent/config/default/with-anymal-exporter-config.yaml
+          --httpListenAddr=''
+          --loggerWarnsPerSecondLimit=1
+          --remoteWrite.url=https://telemetry.prod.anybotics.com/metrics/write
+          --remoteWrite.tlsCertFile=/usr/share/ads/credentials/ads-agent.crt
+          --remoteWrite.tlsKeyFile=/usr/share/ads/credentials/ads-agent.pem
+          --remoteWrite.flushInterval=60s
+          --remoteWrite.maxDiskUsagePerURL=5GB'"
+  stacks:
+    lpc_background:
+      nodes:
+        tel_prometheus_node_exporter:
+          enabled: true
+          name: tel_prometheus_node_exporter_lpc
+        tel_vmagent:
+          enabled: true
+          name: tel_vmagent_lpc
+    npc_background:
+      nodes:
+        tel_prometheus_anymal_exporter:
+          enabled: true
+          name: tel_prometheus_anymal_exporter
+        tel_prometheus_node_exporter:
+          enabled: true
+          name: tel_prometheus_node_exporter_npc
+        tel_vmagent:
+          enabled: true
+          name: tel_vmagent_npc

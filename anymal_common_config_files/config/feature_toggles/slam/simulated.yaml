@@ -1,0 +1,40 @@
+slam:
+  localization:
+    initial_guess:
+      retrieval_method: RosTf
+      retriever_ros_tf:
+        use_world_frame_as_reference: true
+    pose_prior:
+      propagation_method: RosTf
+      propagator_ros_tf:
+        use_world_frame_as_reference: true
+slam_supervisor:
+  supervisors:
+    mission_execution:
+      enabled: false
+    simulated_slam_mission_execution:
+      enabled: true
+stack_launcher:
+  nodes:
+    slam_sim:
+      preprocessed_params:
+        config_files_folder:
+          key: /slam/config_files_folder
+          value: $(rospack find anymal_common)/config/non_ros/perception/slam
+        mapping_load_map_on_launch_file:
+          key: /slam/mapping/load_map_on_launch_file_path
+      roslaunch:
+        name: slam
+        node_type: simulated_pharos_node
+        output: screen
+        package: simulated_pharos
+  stacks:
+    navigation:
+      nodes:
+        slam:
+          enabled: false
+    simulation_environment:
+      nodes:
+        slam_sim:
+          enabled: true
+          name: slam_sim

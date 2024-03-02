@@ -1,0 +1,19 @@
+stack_launcher:
+  stacks:
+    navigation:
+      nodes:
+        reaction_manager:
+          enabled: true
+          name: reaction_manager
+
+waypoints_recording:
+  heuristic_plugins:
+    4_linear_distance_heuristic:
+      type: 'waypoints_recording::LinearDistanceHeuristic'
+      parameters:
+        linear_distance_threshold: 1.0
+    5_angular_distance_heuristic:
+      type: 'waypoints_recording::AngularDistanceHeuristic'
+      parameters:
+        pitch_distance_threshold: 0.79
+        yaw_distance_threshold: 1.57

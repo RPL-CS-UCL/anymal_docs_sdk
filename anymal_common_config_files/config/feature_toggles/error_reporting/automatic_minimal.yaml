@@ -1,0 +1,10 @@
+stack_launcher:
+  stacks:
+    navigation:
+      nodes:
+        sentry_relay:
+          enabled: true
+    opc_background:
+      nodes:
+        sentry_relay:
+          enabled: true
