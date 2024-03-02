@@ -52,7 +52,7 @@ This document will reocrd commends that are usually be used
         </a> 
       </div>     
      
-   - Add these lines in ```~/.bashrc``` in OPC such as  
+   - Add these lines in ```~/.bashrc``` in OPC such as (you can also comment these lines if you use your own ROS)
      <div align="left">
        <a href="">
          <img align="center" src="image/screenshot_client_bash.png" width="40%" alt="screenshot_client_bash">
