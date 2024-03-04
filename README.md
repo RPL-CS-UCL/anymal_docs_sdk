@@ -13,6 +13,7 @@ anymal_docs_sdk
 ### Fast Search Document
 1. [Simple Record of Command](docs/simple_record_command.md)
 2. [Hardware Connection](docs/hardware_connection.md)
+3. [Software Connection](docs/software_connection.md)
 
 ### Development Pipeline
 1. Take the training courses

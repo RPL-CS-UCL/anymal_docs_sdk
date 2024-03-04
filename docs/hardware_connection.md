@@ -31,7 +31,14 @@ This document will reocrd commends that are usually be used
     <img align="center" src="image/anymal_d014_network_connection.png" width="50%" alt="anymal_d014_network_connection">
   </a> 
 </div>
+
 **NOTE:** Connect to the Robot: Green line is connected to the robot. Black line is connected to the PC with internet. 
+
+<div align="center">
+  <a href="">
+    <img align="center" src="image/anymal_d014_payload_inspection_ethernet.png" width="50%" alt="anmal_d014_payload_inspection_ethernet">
+  </a> 
+</div>
 
 ### Common Operations
 1. [Link to share the WIFI network with the robot](https://anymal-research.docs.anymal.com/user_manual/anymal_d100_operators_manual-workforce_app/release-23.12/html/Operators_Manual/Service_and_maintenance/Upgrade_the_software_and_firmware_of_the_Robot/Share_the_internet_connection_from_the_OPC_to_the_Robot.htm), and use ssh to check the connection.

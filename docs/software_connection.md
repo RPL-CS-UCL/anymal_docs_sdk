@@ -52,4 +52,4 @@
 
 ### Disable ROS-specific node
 1. (Not recommended) Modify the parameter and change ```enabled: true``` as ```enabled: false``` (like search ```joy_manager```) in 
-```/home/jjiao/robohike_ws/src/RPL-RoboHike/robot_docs_sdk/anymal_docs_sdk/anymal_common_config_files/config/default.yaml```
+```anymal_docs_sdk/anymal_common_config_files/config/default.yaml```
