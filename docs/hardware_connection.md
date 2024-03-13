@@ -74,15 +74,15 @@ This document will reocrd commends that are usually be used
 3. [Azure Kinect DK](https://learn.microsoft.com/en-us/azure/kinect-dk/hardware-specification)
    - Install Kinect SDK
      ```
-      wget https://packages.microsoft.com/ubuntu/18.04/prod/pool/main/libk/libk4a1.4-dev/libk4a1.4-dev_1.4.1_amd64.deb
-      wget https://packages.microsoft.com/ubuntu/18.04/prod/pool/main/libk/libk4a1.4/libk4a1.4_1.4.1_amd64.deb
-      wget https://packages.microsoft.com/ubuntu/18.04/prod/pool/main/k/k4a-tools/k4a-tools_1.4.1_amd64.deb
-      sudo apt install -y libsoundio1
-      sudo dpkg -i libk4a1.4_1.4.1_amd64.deb
-      sudo dpkg -i libk4a1.4-dev_1.4.1_amd64.deb
-      sudo dpkg -i k4a-tools_1.4.1_amd64.deb
-      git clone https://github.com/microsoft/Azure-Kinect-Sensor-SDK.git
-      sudo cp Azure-Kinect-Sensor-SDK/scripts/99-k4a.rules /etc/udev/rules.d/   
+      wget https://packages.microsoft.com/ubuntu/18.04/prod/pool/main/libk/libk4a1.4-dev/libk4a1.4-dev_1.4.1_amd64.deb &&
+      wget https://packages.microsoft.com/ubuntu/18.04/prod/pool/main/libk/libk4a1.4/libk4a1.4_1.4.1_amd64.deb &&
+      wget https://packages.microsoft.com/ubuntu/18.04/prod/pool/main/k/k4a-tools/k4a-tools_1.4.1_amd64.deb &&
+      sudo apt install -y libsoundio1 &&
+      sudo dpkg -i libk4a1.4_1.4.1_amd64.deb &&
+      sudo dpkg -i libk4a1.4-dev_1.4.1_amd64.deb &&
+      sudo dpkg -i k4a-tools_1.4.1_amd64.deb &&
+      git clone https://github.com/microsoft/Azure-Kinect-Sensor-SDK.git &&
+      sudo cp Azure-Kinect-Sensor-SDK/scripts/99-k4a.rules /etc/udev/rules.d/ &&
      ```
    - Power Supply:
      - USB-C: It consumes up to 5.9 W; specific power consumption is use-case dependent. A passive cable should be less than 1.5m in length. If longer, use an active cable. The cable needs to support at least 1.5A. Otherwise you need to connect an external power supply. The USB certified cable must support both power and data.
