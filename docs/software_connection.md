@@ -29,9 +29,11 @@
   </a> 
 </div>
 
+ANYmal state estimator: based on the [light_weight_filtering](https://bitbucket.org/anybotics/lightweight_filtering) and [two_state_information_filter](https://github.com/anybotics/two_state_information_filter) frameworks. 
+Please check ```anymal-research-software/perception/state_estimation``` for more details.
 ```shell script
 /state_estimator/anymal_state: state of base and joint, using priproc data
-/state_estimator/pose_in_odom: state in the odometry representation
+/state_estimator/pose_in_odom: estimated state that is represented as odometry
 /slam/pose/pose: state in the point cloud map using lidar
 ```
 
