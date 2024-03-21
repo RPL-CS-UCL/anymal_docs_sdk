@@ -92,3 +92,9 @@ This document will reocrd commends that are usually be used
      - ```bash path_to_RPL-Robohike/config_launch_anymal/scripts/run_anymal_sensor_setup.bash```
      - NOTE: ```WFOV_UNBINNED``` for indoor navigation or scanning objects with shorter distance but wider FoV
      - NOTE: ```NFOV_2X2BINNED``` for outdoor navigation tasks with longer distance
+3. [Joystick] Definition of each axis and button
+    <div align="left">
+      <a href="">
+        <img align="center" src="image/joystick_description.png" width="50%" alt="joystick_description">
+      </a> 
+    </div>
