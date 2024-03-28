@@ -98,3 +98,7 @@ This document will reocrd commends that are usually be used
         <img align="center" src="image/joystick_description.png" width="50%" alt="joystick_description">
       </a> 
     </div>
+    EasySMX game controller: ESM-9013 is the colsed mode, with these functions should be adjusted:
+    
+    button
+    axes
