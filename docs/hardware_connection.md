@@ -93,8 +93,16 @@ This document will reocrd commends that are usually be used
      - NOTE: ```WFOV_UNBINNED``` for indoor navigation or scanning objects with shorter distance but wider FoV
      - NOTE: ```NFOV_2X2BINNED``` for outdoor navigation tasks with longer distance
 3. [Joystick] Definition of each axis and button
+    **Joystick-PS3**
     <div align="left">
       <a href="">
-        <img align="center" src="image/joystick_description.png" width="50%" alt="joystick_description">
+        <img align="center" src="image/joystick_ps3_description.png" width="50%" alt="joystick_ps3_description">
+      </a> 
+    </div>
+    
+    **Joystick-ESM-9013**
+    <div align="left">
+      <a href="">
+        <img align="center" src="image/joystick_esm9013_description.png" width="50%" alt="joystick_esm9013_description">
       </a> 
     </div>
