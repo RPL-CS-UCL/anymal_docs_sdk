@@ -26,6 +26,7 @@
     </a> 
   </div>
 
-#### Reference link:
-1. Use matterport3d: [https://drive.google.com/file/d/1xV3L2xW4JtPMZpY8t43aqlXDhraZYLDi/view](https://drive.google.com/file/d/1xV3L2xW4JtPMZpY8t43aqlXDhraZYLDi/view)
-
+### Case 2: Use the matterport3D
+1. Follow this link: 
+[https://github.com/facebookresearch/habitat-sim](https://github.com/facebookresearch/habitat-sim) and 
+[https://drive.google.com/file/d/1xV3L2xW4JtPMZpY8t43aqlXDhraZYLDi/view](https://drive.google.com/file/d/1xV3L2xW4JtPMZpY8t43aqlXDhraZYLDi/view)
