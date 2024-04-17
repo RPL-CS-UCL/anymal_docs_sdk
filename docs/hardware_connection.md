@@ -37,7 +37,14 @@ This document will reocrd commends that are usually be used
 <div align="center">
   <a href="">
     <img align="center" src="image/anymal_d014_payload_inspection_ethernet.png" width="50%" alt="anmal_d014_payload_inspection_ethernet">
-  </a> 
+  </a>
+</div>
+
+Payload Inspection Connection
+<div align="center">
+  <a href="">
+    <img align="center" src="image/anymal_payload_connection.png" width="50%" alt="image/anymal_payload_connection.png">
+  </a>
 </div>
 
 ### Common Operations
