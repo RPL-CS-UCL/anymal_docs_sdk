@@ -32,6 +32,18 @@ This document will reocrd commends that are usually be used
   </a> 
 </div>
 
+<div align="center">
+  <a href="">
+    <img align="center" src="image/hardware_rj45_anymal_ethernet.jpeg" width="50%" alt="hardware_rj45_anymal_ethernet">
+  </a> 
+</div>
+
+<div align="center">
+  <a href="">
+    <img align="center" src="image/hardware_rj45_pin_color.png" width="50%" alt="hardware_rj45_pin_color">
+  </a> 
+</div>
+
 **NOTE:** Connect to the Robot: Green line is connected to the robot. Black line is connected to the PC with internet. 
 
 <div align="center">
