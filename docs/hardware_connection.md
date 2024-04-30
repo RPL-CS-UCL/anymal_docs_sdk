@@ -32,6 +32,14 @@ This document will reocrd commends that are usually be used
   </a> 
 </div>
 
+**NOTE:** Connect to the Robot: Green line is connected to the robot. Black line is connected to the PC with internet. 
+
+<div align="center">
+  <a href="">
+    <img align="center" src="image/anymal_d014_payload_inspection_ethernet.png" width="50%" alt="anmal_d014_payload_inspection_ethernet">
+  </a>
+</div>
+
 <div align="center">
   <a href="">
     <img align="center" src="image/hardware_rj45_anymal_ethernet.jpeg" width="50%" alt="hardware_rj45_anymal_ethernet">
@@ -42,14 +50,6 @@ This document will reocrd commends that are usually be used
   <a href="">
     <img align="center" src="image/hardware_rj45_pin_color.png" width="50%" alt="hardware_rj45_pin_color">
   </a> 
-</div>
-
-**NOTE:** Connect to the Robot: Green line is connected to the robot. Black line is connected to the PC with internet. 
-
-<div align="center">
-  <a href="">
-    <img align="center" src="image/anymal_d014_payload_inspection_ethernet.png" width="50%" alt="anmal_d014_payload_inspection_ethernet">
-  </a>
 </div>
 
 Payload Inspection Connection
