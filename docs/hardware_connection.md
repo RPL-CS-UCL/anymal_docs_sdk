@@ -59,6 +59,11 @@ Payload Inspection Connection
   </a>
 </div>
 
+[Remote Desktop Through IP](https://ubuntu.com/tutorials/access-remote-desktop#3-add-a-connection)
+1. ```Settings -> Screen Share -> Turn on```
+2. Install ```Remmina Remote Desktop```
+3. Connect using IP address through the VNC
+
 ### Common Operations
 1. [Link to share the WIFI network with the robot](https://anymal-research.docs.anymal.com/user_manual/anymal_d100_operators_manual-workforce_app/release-23.12/html/Operators_Manual/Service_and_maintenance/Upgrade_the_software_and_firmware_of_the_Robot/Share_the_internet_connection_from_the_OPC_to_the_Robot.htm), and use ssh to check the connection.
 
