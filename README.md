@@ -16,6 +16,7 @@ anymal_docs_sdk
 3. [Software Connection](docs/software_connection.md)
 4. [Apple VIO Data Collection Installation](docs/apple_lamar.md)
 5. [Setup your own Simulation Environment](docs/setup_simu_environment.md)
+6. [Hardware Purchase List](docs/hardware_purchase_list.md)
 
 ### Development Pipeline
 1. Take the training courses

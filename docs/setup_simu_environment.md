@@ -35,7 +35,7 @@
     * Youtube: [tutorial video](https://www.youtube.com/watch?v=X6Q7dbtXVZQ)
 2. Download the [MapsModelsImporter](https://github.com/eliemichel/MapsModelsImporter?tab=readme-ov-file) and follow the tutorial
     * Click the [MapsModelsImporter download link](https://github.com/eliemichel/MapsModelsImporter/releases)
-    * Steps: ```launch chrome``` - ```launch RenderDoc``` - ```open google map``` - ```press PrtSc``` - ```save capture in RenderDoc``` - ```launch blender and install MapsModelsImporter``` - ```load .rdc``` - ```export models```
+    * Steps: ```launch chrome``` - ```launch RenderDoc``` - ```open google map``` - ```press PrtSc``` - ```save capture in RenderDoc``` - ```launch blender and install MapsModelsImporter``` - ```load .rdc``` - ```export models as obj```
     <div align="center">
       <a href="">
         <img align="center" src="image/environment_blender_model_wotexture.png" width="40%" alt="image/environment_blender_model_wotexture">
@@ -44,3 +44,4 @@
         <img align="center" src="image/environment_blender_model_wtexture.png" width="41%" alt="image/environment_blender_model_wtexture">
       </a>     
     </div>
+3. Launch Meshlab, open ```*obj```, and then save ```*.ply```, ```*.dae```, ```*_pointcloud.ply```
