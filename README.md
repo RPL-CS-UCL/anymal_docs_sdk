@@ -17,6 +17,7 @@ anymal_docs_sdk
 4. [Apple VIO Data Collection Installation](docs/apple_lamar.md)
 5. [Setup your own Simulation Environment](docs/setup_simu_environment.md)
 6. [Hardware Purchase List](docs/hardware_purchase_list.md)
+7. [Run Program on Anymal](docs/run_program_on_anymal.md)
 
 ### Development Pipeline
 1. Take the training courses
