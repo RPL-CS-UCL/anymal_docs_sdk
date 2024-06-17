@@ -59,6 +59,13 @@ Payload Inspection Connection
   </a>
 </div>
 
+Connected the OPC and the LPC via the Payload Inspection Interface
+<div align="center">
+  <a href="">
+    <img align="center" src="image/anymal_d014_opc_lpc_network_payload.png" width="50%" alt="image/anymal_d014_opc_lpc_network_payload.png">
+  </a>
+</div>
+
 [Remote Desktop Through IP](https://ubuntu.com/tutorials/access-remote-desktop#3-add-a-connection)
 1. ```Settings -> Screen Share -> Turn on```
 2. Install ```Remmina Remote Desktop```
