@@ -18,8 +18,9 @@
       * Visualize normla: Render → show normal
     * **Compute mesh:** Remeshing, simplification, reconstruction → surface reconstruction: screened poisson/ **VGG**
       * Save mesh: Export mesh as dae and ply
+3. [Another tutorial of converting pointcloud into mesh](https://gist.github.com/shubhamwagh/0dc3b8173f662d39d4bf6f53d0f4d66b)
 
-3. CloudCompare
+4. CloudCompare
   <div align="center">
     <a href="">
       <img align="center" src="image/setup_simu_start_end_point.png" width="40%" alt="setup_simu_start_end_point">
