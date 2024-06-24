@@ -28,6 +28,12 @@
 
 ### Case 2: Use the matterport3D
 1. Download [havitat-sim](https://github.com/facebookresearch/habitat-sim) and follow this [tutorial](https://drive.google.com/file/d/1xV3L2xW4JtPMZpY8t43aqlXDhraZYLDi/view) for the usage.
+2. Another option for the [installation](https://github.com/jizhang-cmu/cmu_vla_challenge_matterport)
+3. If you meet this issue: ```SystemError: initialization of _internal failed without raising an exception```
+    ```
+    pip uninstall numpy numba
+    pip install numba numpy==1.22 --ignore-installed llvmlite
+    ```
 
 ### Case 3: Import 3D Mesh from the Google Map into Gazebo
 1. Tutorial:
