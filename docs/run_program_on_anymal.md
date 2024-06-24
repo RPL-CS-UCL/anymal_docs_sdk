@@ -14,6 +14,15 @@
   </a> 
 </div>
 
+### Start VNC
+1. (NUC) settings -> sharing -> scene sharing (turn on)
+2. (Another PC) open Remmina Remote Destkop -> create a VNC setting -> click connect
+<div align="center">
+  <a href="">
+    <img align="center" src="image/anymal_d_vnc_setting.png" width="30%" alt="anymal_d_vnc_setting">
+  </a> 
+</div>
+
 ### Start Sensor Setup and Record Data (NUC)
 1. Open a terminal and enter: ```bash /home/jjiao/setup_sensor.sh```
 2. Check the output of RVIZ
