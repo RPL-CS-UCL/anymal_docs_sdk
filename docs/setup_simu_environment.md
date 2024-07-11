@@ -29,7 +29,11 @@
 
 ### Case 2: Use the matterport3D
 1. Download [havitat-sim](https://github.com/facebookresearch/habitat-sim) and follow this [tutorial](https://drive.google.com/file/d/1xV3L2xW4JtPMZpY8t43aqlXDhraZYLDi/view) for the usage.
-2. Another option for the [installation](https://github.com/jizhang-cmu/cmu_vla_challenge_matterport)
+  ```
+  python2 download_map.py --type matterport_mesh -o path_to_matterport
+  python2 download_map.py --task_data habitat -o path_to_matterport
+  ```
+3. Another option for the [installation](https://github.com/jizhang-cmu/cmu_vla_challenge_matterport)
 3. If you meet this issue: ```SystemError: initialization of _internal failed without raising an exception```
     ```
     pip uninstall numpy numba
