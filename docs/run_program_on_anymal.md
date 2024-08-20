@@ -17,7 +17,7 @@
 2. (User PC) open Remmina Remote Destkop -> create a VNC setting -> click connect
 <div align="center">
   <a href="">
-    <img align="center" src="image/anymal_d_vnc_setting.png" width="30%" alt="anymal_d_vnc_setting">
+    <img align="center" src="image/anymal_d_vnc_setting.png" width="40%" alt="anymal_d_vnc_setting">
   </a> 
 </div>
 
