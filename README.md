@@ -1,4 +1,4 @@
-# Anymal Document and SDK Collection
+# ANYmal Document and SDK Collection
 
 ### 1.1. Structure
 ```shell script
