@@ -15,6 +15,7 @@
 ### Start VNC
 1. (NUC/Jetson) settings -> sharing -> scene sharing (turn on)
 2. (User PC) open Remmina Remote Destkop -> create a VNC setting -> click connect
+3. **Note**: if you cannot connect to the NUC, please check the wifi setting of NUC, whether **Anymal_Shared_Network** is connected
 <div align="center">
   <a href="">
     <img align="center" src="image/anymal_d_vnc_setting.png" width="40%" alt="anymal_d_vnc_setting">
@@ -22,30 +23,41 @@
 </div>
 
 ### Start Sensor
-1. Setup sensor on the NUC: 
+1. Setup sensor on the NUC (start Livox, publish TF): 
    ```
    cd ~ && ./run_nuc_sensor_setup.sh
+   
    ```
-2. Setup sensor on the Jetson: 
+
+2. Setup sensor on the Jetson (start Zed camera): 
    ```
    cd ~ && ./run_orin_sensor_setup.sh
    ```
 
-### RUN the CMU Navigtion System on Anymal
-1. Check whether sensor data is ready:
+3. Open RVIZ on the NUC to check whether the zed camera already setup
+
    ```
+   rviz -d config_launch_anymal/rviz_cfg/zed.rviz
+   ```
+
+4. Check whether sensor data is ready:
+
+   ``````
    rostopic hz /livox/imu
+   ``````
+
+### RUN the CMU Navigtion System on Anymal
+
+1. Setup cmu navigation:
    ```
-2. Setup cmu navigation:
-   ```
-   cd ~ && ./run_nuc_anymal_real_navigation_system.sh
+   cd ~ && ./run_nuc_anymal_real_system.sh
    roslaunch config_launch_anymal/launch/cmu_exploration/anymal_real_system.launch
    ```
    A rviz will open and visualize message
-3. Use the [joystick](image/joystick_esm9013_description.png) and click the ```start``` button, you can see message in the terminal
+2. Use the [Game Joystick](image/joystick_esm9013_description.png) and click the ```start``` button, you can see message in the terminal
    ```
    [Navigation Control] Will republish velocity to /motion_reference/command_twist message
    ```
    This means that your joystick is taking the control
-4. Provide a waypoint and enjoy
-5. [Emergency] Use the ANYMal joystick to avoid any danger.
+3. Provide a waypoint and Press ```auto mode``` to let the robot autonomouslymove
+4. [Emergency] Use the ANYMal joystick to avoid any danger, and recover ```auto mode``` by pressing the ```start``` button with the game joystick.
