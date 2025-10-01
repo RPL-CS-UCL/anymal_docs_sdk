@@ -1,5 +1,7 @@
 ## Run Program On Anymal with the CMU Navigation System
 
+This is the basis of running the real-world experiments of [LiteVLoc](https://rpl-cs-ucl.github.io/LiteVLoc/) on the ANYMal.
+
 ### Start Hardware
 1. Connect the bettery with the NUC and Jetson Orin.
 2. Login the **jjiao** account with the password.
